@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ClienteController extends Controller
 {
@@ -47,8 +48,10 @@ class ClienteController extends Controller
         $cliente->correo = $request->correo;
         $cliente->save();
 
+        // Alert::success('Éxito', "El cliente $cliente->nombre $cliente->apellido fue registrado.");
+
         /* Redireccionamiento */
-        return redirect('/cliente');
+        return redirect('/cliente')->with(['user_added' => $cliente]);
     }
 
     /**

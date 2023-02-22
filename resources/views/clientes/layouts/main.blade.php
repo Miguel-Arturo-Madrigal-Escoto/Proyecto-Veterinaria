@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +16,11 @@
 
     <!-- Tailwind -->
     @vite('resources/css/app.css')
+
+    
 </head>
 <body>
+    @include('sweetalert::alert')
     <!-- header -->
 
     <!-- navbar -->
