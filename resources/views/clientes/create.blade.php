@@ -16,28 +16,20 @@
                     <div class="overflow-x-auto">
                         <form action="/cliente" method="POST">
                             @csrf
-                            <x-clientes.create-form-field type="text" field="nombre" text="Nombre(s)" placeholder="Ej: Juan Fulanito" />
-                            <x-clientes.create-form-field type="text" field="apellido" text="Apellido(s)" placeholder="Ej: Perez López" />
-
-                            <div class="mb-6 flex flex-col justify-center m-auto mx-10">
-                                <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 self-start">Género</label>    
-                                <div class="flex items-center mb-4">
-                                    <input checked id="genero-m" type="radio" value="M" name="genero" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
-                                    <label for="genero-m" class="ml-2 text-sm font-medium text-gray-90">Masculino</label>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <input id="genero-f" type="radio" value="F" name="genero" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
-                                    <label for="genero-f" class="ml-2 text-sm font-medium text-gray-900">Femenino</label>
-                                </div>
-
-                                @error('genero')
-                                    <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span class="font-medium">{{ $message }}</span></p>  
-                                @enderror
-                            </div>
+                            <x-helpers.form-field type="text" field="nombre" text="Nombre(s)" placeholder="Ej:Juan Fulanito" />
+                            <x-helpers.form-field type="text" field="apellido" text="Apellido(s)" placeholder="Ej:Perez López" />
                             
-                            <x-clientes.create-form-field type="text" field="telefono" text="Telefono" placeholder="Ej: 3344556677" />
-                            <x-clientes.create-form-field type="email" field="correo" text="Correo" placeholder="Ej: miguel.dev@gmail.com" />
+                            @php 
+                                $radios = [];
+                                /* [id, value, name, text] */
+                                $radios[] = ['genero-m', 'M', 'genero','Masculino'];
+                                $radios[] = ['genero-f', 'F', 'genero','Femenino'];
+
+                            @endphp
+                            <x-helpers.form-radios :radios="$radios" />
+                            
+                            <x-helpers.form-field type="text" field="telefono" text="Telefono" placeholder="Ej:3344556677" />
+                            <x-helpers.form-field type="email" field="correo" text="Correo" placeholder="Ej:miguel.dev@gmail.com" />
 
                             <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                                 <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>

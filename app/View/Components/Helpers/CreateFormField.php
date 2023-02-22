@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Clientes;
+namespace App\View\Components\Helpers;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CreateFormField extends Component
+class FormField extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class CreateFormField extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.clientes.create-form-field');
+        return view('components.helpers.form-field');
     }
 }
