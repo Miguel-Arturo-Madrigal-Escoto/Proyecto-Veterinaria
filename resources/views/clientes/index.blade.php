@@ -1,0 +1,70 @@
+@extends('clientes.layouts.main')
+
+@section('title', 'Clientes')
+
+@section('content')
+
+    <!-- component -->
+    <section class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
+        <div class="flex flex-col justify-center h-full">
+            <!-- Table -->
+            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+                <header class="px-5 py-4 border-b border-gray-100">
+                    <h1 class="font-semibold text-gray-800 text-center">Clientes</h1>
+                </header>
+                <div class="p-3">
+                    <div class="overflow-x-auto">
+                        <table class="table-auto w-full">
+                            <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                                <tr>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Nombre</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Apellido</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Genero</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center">Teléfono</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center">Correo</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-gray-100">
+                                @foreach ($clientes as $cliente)       
+                                    <tr>
+                                        <td class="p-2 whitespace-nowrap">    
+                                            <div class="font-medium text-gray-800">{{ $cliente->nombre }}</div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{ $cliente->apellido }}</div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">
+                                                @if ($cliente->sexo == 'M')
+                                                    Masculino
+                                                @else
+                                                    Femenino
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{ $cliente->telefono }}</div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-left">{{ $cliente->correo }}</div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
