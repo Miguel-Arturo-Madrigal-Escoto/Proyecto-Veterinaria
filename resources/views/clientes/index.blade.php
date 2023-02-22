@@ -45,7 +45,7 @@
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
                                             <div class="text-left">
-                                                @if ($cliente->sexo == 'M')
+                                                @if ($cliente->genero == 'M')
                                                     Masculino
                                                 @else
                                                     Femenino
