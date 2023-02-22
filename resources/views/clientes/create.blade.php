@@ -16,24 +16,8 @@
                     <div class="overflow-x-auto">
                         <form action="/cliente" method="POST">
                             @csrf
-                            <x-clientes.create-form-field type="text" field="nombre" text="Nombre(s)" :placeholder={{ "Ej: Juan Fulanito" }} />
-                            <x-clientes.create-form-field type="text" field="apellido" text="Apellido(s)" :placeholder={{ "Ej: Perez López" }} />
-
-                            {{-- <div class="mb-6 flex flex-col justify-center m-auto mx-10">
-                                <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 self-start">Nombre(s)</label>
-                                <input name="nombre" type="text" id="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block p-2.5" placeholder="Ej: Juan Fulanito" required>
-                                @error('nombre')
-                                    <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span class="font-medium">{{ $message }}</span></p>  
-                                @enderror
-                            </div>
-
-                            <div class="mb-6 flex flex-col justify-center m-auto mx-10">
-                                <label for="apellido" class="block mb-2 text-sm font-medium text-gray-900 self-start">Apellido(s)</label>
-                                <input name="apellido" type="text" id="apellido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block p-2.5" placeholder="Ej: Perez Lopez" required>
-                                @error('apellido')
-                                    <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span class="font-medium">{{ $message }}</span></p>  
-                                @enderror
-                            </div> --}}
+                            <x-clientes.create-form-field type="text" field="nombre" text="Nombre(s)" placeholder="Ej: Juan Fulanito" />
+                            <x-clientes.create-form-field type="text" field="apellido" text="Apellido(s)" placeholder="Ej: Perez López" />
 
                             <div class="mb-6 flex flex-col justify-center m-auto mx-10">
                                 <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 self-start">Género</label>    
@@ -52,24 +36,8 @@
                                 @enderror
                             </div>
                             
-                            <x-clientes.create-form-field type="text" field="telefono" text="Telefono" :placeholder={{ "Ej: 3344556677" }} />
-                            <x-clientes.create-form-field type="email" field="correo" text="Correo" :placeholder={{ "Ej: miguel.dev@gmail.com" }} />
-
-                            {{-- <div class="mb-6 flex flex-col justify-center m-auto mx-10">
-                                <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 self-start">Telefono</label>
-                                <input name="telefono" type="text" id="telefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block p-2.5" placeholder="Ej: 3344556677" required>
-                                @error('telefono')
-                                    <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span class="font-medium">{{ $message }}</span></p>  
-                                @enderror
-                            </div>
-
-                            <div class="mb-6 flex flex-col justify-center m-auto mx-10">
-                                <label for="correo" class="block mb-2 text-sm font-medium text-gray-900 self-start">Correo</label>
-                                <input name="correo" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none block p-2.5" placeholder="Ej: miguel.dev@gmail.com" required>
-                                @error('correo')
-                                    <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span class="font-medium">{{ $message }}</span></p>  
-                                @enderror
-                            </div> --}}
+                            <x-clientes.create-form-field type="text" field="telefono" text="Telefono" placeholder="Ej: 3344556677" />
+                            <x-clientes.create-form-field type="email" field="correo" text="Correo" placeholder="Ej: miguel.dev@gmail.com" />
 
                             <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                                 <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>
