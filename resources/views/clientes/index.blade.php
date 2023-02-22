@@ -18,7 +18,7 @@
                             <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                                 @if (Session::has('user_added'))
                                     @php $message = "El cliente " . Session::get('user_added')->nombre . " " . Session::get('user_added')->apellido . " ha sido registrado." @endphp
-                                    <x-helpers.alert type="question" header="Éxito" :message="$message" />                                    
+                                    <x-helpers.alert type="success" header="Éxito" :message="$message" />                                    
                                 @endif
                                                       
                                 <tr>
