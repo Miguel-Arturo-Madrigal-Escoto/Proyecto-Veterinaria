@@ -5,10 +5,10 @@
 @section('content')
 
     <!-- component -->
-    <section class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
-        <div class="flex flex-col justify-center h-full">
+    <section class="antialiased bg-gray-100 text-gray-600 px-4">
+        <div class="flex flex-col justify-center items-center h-screen">
             <!-- Table -->
-            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+            <div class=" max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200 my-10 w-10/12">
                 <header class="px-5 py-4 border-b border-gray-100">
                     <h1 class="font-semibold text-gray-800 text-center">Clientes</h1>
                 </header>
@@ -18,8 +18,7 @@
                             <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                                 @if (Session::has('user_added'))
                                     @php alert()->success('Éxito', 'El cliente ' . Session::get('user_added')->nombre . ' ' . \Session::get('user_added')->apellido . ' ha sido registrado.' ); @endphp
-                                @endif
-                                
+                                @endif                       
                                 <tr>
                                     <th class="p-2 whitespace-nowrap">
                                         <div class="font-semibold text-left">Nombre</div>
