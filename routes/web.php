@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\MascotaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +19,6 @@ use Illuminate\Support\Facades\Route;
     Ruta resource (post,get,patch,put,delete,etc).
 */
 Route::resource('cliente', ClienteController::class);
+
+Route::resource('mascota', MascotaController::class);
 

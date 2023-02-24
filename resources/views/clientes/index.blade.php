@@ -1,21 +1,21 @@
-@extends('clientes.layouts.main')
+@extends('layouts.main')
 
 @section('title', 'Clientes')
 
 @section('content')
 
     <!-- component -->
-    <section class="antialiased bg-gray-100 text-gray-600 px-4">
+    <section class="antialiased bg-gray-100 text-gray-600 px-">
         <div class="flex flex-col justify-center items-center h-screen">
             <!-- Table -->
-            <div class=" max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200 my-10 w-10/12">
-                <header class="px-5 py-4 border-b border-gray-100">
-                    <h1 class="font-semibold text-gray-800 text-center">Clientes</h1>
+            <div class="max-w-2xl mx-auto bg-white shadow-lg  rounded-md px-5 border border-gray-200 my-10 w-10/12 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white">
+                <header class="px-5 py-4 border-b border-gray-100 dark:border-none">
+                    <h1 class="font-semibold text-gray-800 text-center dark:text-white">Clientes</h1>
                 </header>
                 <div class="p-3">
                     <div class="overflow-x-auto">
                         <table class="table-auto w-full">
-                            <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                            <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                 @if (Session::has('user_added'))
                                     @php $message = "El cliente " . Session::get('user_added')->nombre . " " . Session::get('user_added')->apellido . " ha sido registrado." @endphp
                                     <x-helpers.alert type="success" header="Éxito" :message="$message" />                                    
@@ -39,13 +39,16 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="text-sm divide-y divide-gray-100">
+                            <tbody class="text-sm divide-y divide-gray-100 dark:divide-none">
                                 @foreach ($clientes as $cliente)       
                                     <x-clientes.row-cliente :cliente="$cliente" />
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
+                    <a href="/cliente/create" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3">Registrar cliente</a>
                 </div>
             </div>
         </div>

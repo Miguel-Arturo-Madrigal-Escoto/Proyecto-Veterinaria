@@ -1,8 +1,8 @@
 <div>
     <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
-    <tr>
+    <tr class="font-semibold  text-gray-500 dark:text-gray-300">
         <td class="p-2 whitespace-nowrap">    
-            <div class="font-medium text-gray-800">{{ $cliente->nombre }}</div>
+            <div class="text-left">{{ $cliente->nombre }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
             <div class="text-left">{{ $cliente->apellido }}</div>

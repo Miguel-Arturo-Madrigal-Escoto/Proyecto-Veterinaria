@@ -1,20 +1,20 @@
 
-@extends('clientes.layouts.main')
+@extends('layouts.main')
 
 @section('title', 'Registro de clientes')
 
 @section('content')
     <!-- component -->
-    <section class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
-        <div class="flex flex-col justify-center h-full">
+    <section class="antialiased bg-gray-100 text-gray-600 h-screen px-4 ">
+        <div class="flex flex-col justify-center h-full ">
             <!-- Table -->
-            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                    <h1 class="font-semibold text-gray-800 text-center">Registro de clientes</h1>
+            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-md border border-gray-20 dark:bg-slate-900 dark:border-none">
+                <header class="px-5 py-4 border-b border-gray-100 dark:border-none">
+                    <h1 class="font-semibold text-gray-800 text-center dark:text-white">Registro de clientes</h1>
                 </header>
                 <div class="p-3">
                     <div class="overflow-x-auto">
-                        <form action="/cliente" method="POST">
+                        <form action="/cliente" method="POST" class="">
                             @csrf
                             <x-helpers.form-field type="text" field="nombre" text="Nombre(s)" placeholder="Ej:Juan Fulanito" />
                             <x-helpers.form-field type="text" field="apellido" text="Apellido(s)" placeholder="Ej:Perez López" />
