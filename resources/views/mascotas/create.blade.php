@@ -6,10 +6,10 @@
 @section('content')
 
     <!-- component -->
-    <section class="antialiased bg-gray-100 text-gray-600 h-screen px-4 ">
-        <div class="flex flex-col justify-center h-full">
+    <section class="antialiased bg-gray-100 text-gray-600 px-4">
+        <div class="flex flex-col justify-center items-center">
             <!-- Table -->
-            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200 dark:bg-slate-900 dark:border-none">
+            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200 dark:bg-slate-900 dark:border-none mt-20">
                 <header class="px-5 py-4 border-b border-gray-100 dark:border-none">
                     <h1 class="font-semibold text-gray-800 text-center dark:text-white">Registro de mascotas</h1>
                 </header>
@@ -37,6 +37,7 @@
 
                             <x-helpers.date-picker name="fecha_nac" text="Fecha de nacimiento"   />
 
+                            <x-helpers.color-picker name="color" text="Color" />
 
                             @php 
                                 $radios = [];
@@ -47,8 +48,8 @@
                             @endphp
                             <x-helpers.form-radios :radios="$radios" />
                             
-                            <x-helpers.form-field type="text" field="telefono" text="Telefono" placeholder="Ej:3344556677" />
-                            <x-helpers.form-field type="email" field="correo" text="Correo" placeholder="Ej:miguel.dev@gmail.com" />
+                            {{-- <x-helpers.form-field type="text" field="telefono" text="Telefono" placeholder="Ej:3344556677" /> --}}
+                            {{-- <x-helpers.form-field type="email" field="correo" text="Correo" placeholder="Ej:miguel.dev@gmail.com" /> --}}
 
                             <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                                 <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>

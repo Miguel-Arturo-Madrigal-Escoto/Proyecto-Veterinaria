@@ -5,10 +5,10 @@
 @section('content')
 
     <!-- component -->
-    <section class="antialiased bg-gray-100 text-gray-600 px-">
-        <div class="flex flex-col justify-center items-center h-screen">
+    <section class="antialiased bg-gray-100 text-gray-600 px-4">
+        <div class="flex flex-col justify-center items-center">
             <!-- Table -->
-            <div class="max-w-2xl mx-auto bg-white shadow-lg  rounded-md px-5 border border-gray-200 my-10 w-10/12 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white">
+            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-20 dark:bg-slate-900 dark:border-none px-4">
                 <header class="px-5 py-4 border-b border-gray-100 dark:border-none">
                     <h1 class="font-semibold text-gray-800 text-center dark:text-white">Clientes</h1>
                 </header>

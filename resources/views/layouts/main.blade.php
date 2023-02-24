@@ -20,13 +20,13 @@
     <!-- Tailwind -->
     @vite(['resources/css/app.css','resources/js/app.js'])
 
-    <!-- WireUI -->
+    <!-- WireUI (Libreria + ColorPicker) -->
     <wireui:scripts />
-    <script src="https://unpkg.com/browse/alpinejs@3.9.5/src/alpine.js" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     
     
 </head>
-<body>
+<body class="bg-gray-100">
     @include('sweetalert::alert')
     <!-- header -->
 
