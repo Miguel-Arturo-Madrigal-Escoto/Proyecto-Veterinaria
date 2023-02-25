@@ -23,8 +23,8 @@
                                 $options = [];
 
                                 $options[] = ['perro', 'Perro'];
-                                $options[] = ['gato', 'Tortuga'];
-                                $options[] = ['tortuga', 'Perro'];
+                                $options[] = ['gato', 'Gato'];
+                                $options[] = ['tortuga', 'Tortuga'];
                                 $options[] = ['pez', 'Pez'];
                                 $options[] = ['conejo', 'Conejo'];
                                 $options[] = ['puerco', 'Puerco'];
@@ -40,16 +40,34 @@
                             <x-helpers.color-picker name="color" text="Color" />
 
                             @php 
-                                $radios = [];
+                                $genero = [];
                                 /* [id, value, name, text] */
-                                $radios[] = ['genero-m', 'M', 'genero','Macho'];
-                                $radios[] = ['genero-h', 'H', 'genero','Hembra'];
+                                $genero[] = ['genero-m', 'M', 'genero','Macho'];
+                                $genero[] = ['genero-h', 'H', 'genero','Hembra'];
 
                             @endphp
-                            <x-helpers.form-radios :radios="$radios" />
+                            <x-helpers.form-radios :radios="$genero" />
+
+                            @php 
+                                $esterilizado = [];
+                                /* [id, value, name, text] */
+                                $esterilizado[] = ['esterilizado-si', 1, 'esterilizado', 'Si'];
+                                $esterilizado[] = ['esterilizado-no', 0, 'esterilizado', 'No'];
+
+                            @endphp
+                            <x-helpers.form-radios :radios="$esterilizado" />
+
+                            <x-helpers.form-field type="text" field="peso" text="Peso" placeholder="Ej:10.8" />
                             
-                            {{-- <x-helpers.form-field type="text" field="telefono" text="Telefono" placeholder="Ej:3344556677" /> --}}
-                            {{-- <x-helpers.form-field type="email" field="correo" text="Correo" placeholder="Ej:miguel.dev@gmail.com" /> --}}
+                            <x-helpers.form-file  field="foto" text="Foto" />
+                            
+                            
+                            @foreach ($clientes as $cliente)
+                                @php $arr[] = [$cliente->id, "$cliente->nombre $cliente->apellido: $cliente->correo"]; @endphp
+                            @endforeach
+                            <x-helpers.form-select name="cliente_id" text="Dueño" :options="$arr" />      
+
+                           
 
                             <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                                 <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>

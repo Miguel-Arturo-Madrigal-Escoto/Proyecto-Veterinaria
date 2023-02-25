@@ -21,7 +21,7 @@ return new class extends Migration
             $table->char('genero');
             $table->boolean('esterilizado');
             $table->float('peso');
-            $table->text('foto');
+            $table->text('string');
             $table->unsignedBigInteger('cliente_id');
             $table->timestamps();
         });
