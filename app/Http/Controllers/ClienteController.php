@@ -59,7 +59,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return view('clientes.show', compact('cliente'));
     }
 
     /**

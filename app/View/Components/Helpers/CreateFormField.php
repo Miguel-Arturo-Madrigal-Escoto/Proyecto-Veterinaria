@@ -11,7 +11,7 @@ class FormField extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $field, public string $text, public string $type, public string $placeholder)
+    public function __construct(public string $field, public string $text, public string $type, public string $placeholder, public $value)
     {
         //
     }
