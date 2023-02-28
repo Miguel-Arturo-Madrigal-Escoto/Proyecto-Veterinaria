@@ -18,9 +18,16 @@
                             <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                 @if (Session::has('user_added'))
                                     @php $message = "El cliente " . Session::get('user_added')->nombre . " " . Session::get('user_added')->apellido . " ha sido registrado." @endphp
-                                    <x-helpers.alert type="success" header="Éxito" :message="$message" />                                    
+                                    {{-- @php Session::pull('user_added')  @endphp --}}
+                                    <x-helpers.alert type="success" header="Éxito" :message="$message" />
                                 @endif
-                                                      
+
+                                @if (Session::has('user_updated'))
+                                    @php $message = "El cliente " . Session::get('user_updated')->nombre . " " . Session::get('user_updated')->apellido . " ha sido actualizado." @endphp
+                                    {{-- @php Session::pull('user_updated')  @endphp --}}
+                                    <x-helpers.alert type="success" header="Éxito" :message="$message" />
+                                @endif
+
                                 <tr>
                                     <th class="p-2 whitespace-nowrap">
                                         <div class="font-semibold text-left">Nombre</div>
@@ -43,7 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody class="text-sm divide-y divide-gray-100 dark:divide-none">
-                                @foreach ($clientes as $cliente)       
+                                @foreach ($clientes as $cliente)
                                     <x-clientes.row-cliente :cliente="$cliente" extra="view" />
                                 @endforeach
                             </tbody>
