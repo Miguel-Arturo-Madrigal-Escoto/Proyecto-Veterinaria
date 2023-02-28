@@ -11,7 +11,7 @@ class RowCliente extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $cliente)
+    public function __construct(public $cliente, public $extra)
     {
         //
     }
