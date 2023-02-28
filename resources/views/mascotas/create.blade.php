@@ -17,8 +17,8 @@
                     <div class="overflow-x-auto">
                         <form action="/mascota" method="POST">
                             @csrf
-                            <x-helpers.form-field type="text" field="nombre" text="Nombre" placeholder="Ej:Solovino" />
-                            
+                            <x-helpers.form-field value="None" type="text" field="nombre" text="Nombre" placeholder="Ej:Solovino" />
+
                             @php
                                 $options = [];
 
@@ -33,41 +33,41 @@
                             @endphp
                             <x-helpers.form-select name="especie" text="Especie" :options="$options" />
 
-                            <x-helpers.form-field type="text" field="raza" text="Raza" placeholder="Ej:Chihuahua" />
+                            <x-helpers.form-field value="None" type="text" field="raza" text="Raza" placeholder="Ej:Chihuahua" />
 
                             <x-helpers.date-picker name="fecha_nac" text="Fecha de nacimiento"   />
 
                             <x-helpers.color-picker name="color" text="Color" />
 
-                            @php 
+                            @php
                                 $genero = [];
                                 /* [id, value, name, text] */
-                                $genero[] = ['genero-m', 'M', 'genero','Macho'];
-                                $genero[] = ['genero-h', 'H', 'genero','Hembra'];
+                                $genero[] = ['genero-m', 'M', 'genero','Macho', true];
+                                $genero[] = ['genero-h', 'H', 'genero','Hembra', false];
 
                             @endphp
                             <x-helpers.form-radios :radios="$genero" />
 
-                            @php 
+                            @php
                                 $esterilizado = [];
                                 /* [id, value, name, text] */
-                                $esterilizado[] = ['esterilizado-si', 1, 'esterilizado', 'Si'];
-                                $esterilizado[] = ['esterilizado-no', 0, 'esterilizado', 'No'];
+                                $esterilizado[] = ['esterilizado-si', 1, 'esterilizado', 'Si', false];
+                                $esterilizado[] = ['esterilizado-no', 0, 'esterilizado', 'No', true];
 
                             @endphp
                             <x-helpers.form-radios :radios="$esterilizado" />
 
-                            <x-helpers.form-field type="text" field="peso" text="Peso" placeholder="Ej:10.8" />
-                            
+                            <x-helpers.form-field value="None" type="text" field="peso" text="Peso" placeholder="Ej:10.8" />
+
                             <x-helpers.form-file  field="foto" text="Foto" />
-                            
-                            
+
+
                             @foreach ($clientes as $cliente)
                                 @php $arr[] = [$cliente->id, "$cliente->nombre $cliente->apellido: $cliente->correo"]; @endphp
                             @endforeach
-                            <x-helpers.form-select name="cliente_id" text="Dueño" :options="$arr" />      
+                            <x-helpers.form-select name="cliente_id" text="Dueño" :options="$arr" />
 
-                           
+
 
                             <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                                 <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>
