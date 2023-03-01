@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Mascota;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
@@ -16,7 +17,8 @@ class MascotaController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $mascotas = Mascota::all();
+        return view('mascotas.index', compact('mascotas'));
     }
 
     /**
@@ -36,21 +38,36 @@ class MascotaController extends Controller
         $request->validate([
             'nombre' => ['required', 'string', 'alpha'],
             'especie' => ['required', 'string', Rule::notIn(['Elige una opción']), 'alpha'],
-            'raza' => ['required', 'string', 'alpha'],    
-            'fecha_nac' => ['required', 'string', 'date', 'before_or_equal:today'],    
-            'color' => ['required', 'string'],    
-            'genero' => ['required', 'string', 'size:1', Rule::in(['M', 'H'])],    // char 
-            'esterilizado' => ['required', 'boolean', Rule::in(['1', '0'])],    
-            'peso' => ['required', 'numeric'],     
-            'foto' => ['required', 'string'],   
-            // 'cliente_id' => ['required', Rule::notIn(['Elige una opción']) , 'exists:App\Models\Cliente,id'],   
+            'raza' => ['required', 'string', 'alpha'],
+            'fecha_nac' => ['required', 'string', 'date', 'before_or_equal:today'],
+            'color' => ['required', 'string'],
+            'genero' => ['required', 'string', 'size:1', Rule::in(['M', 'H'])],    // char
+            'esterilizado' => ['required', 'boolean', Rule::in(['1', '0'])],
+            'peso' => ['required', 'numeric'],
+            'foto' => ['required', 'string'],
+            'cliente_id' => ['required', Rule::notIn(['Elige una opción']) , 'exists:App\Models\Cliente,id'],
             // 'cliente_id' => ['required', Rule::notIn(['Elige una opción']) , Rule::exists('clientes')->where(function (Builder $query) {
             //     return $query->where('id', intval($request->cliente_id  ));
             // }),
-            // ],   
+            // ],
         ]);
-        
-        dd($request->all());
+
+        $mascota = new Mascota();
+        $mascota->nombre = $request->nombre;
+        $mascota->especie = $request->especie;
+        $mascota->raza = $request->raza;
+        $mascota->fecha_nac = Carbon::parse($request->fecha_nac)->format('Y-m-d');
+        $mascota->color = $request->color;
+        $mascota->genero = $request->genero;
+        $mascota->esterilizado = $request->esterilizado;
+        $mascota->peso = $request->peso;
+        // $mascota->foto = $request->foto; // pendiente
+        $mascota->cliente_id = $request->cliente_id;
+
+
+        $mascota->save();
+
+        return redirect('/mascota');
     }
 
     /**
@@ -58,7 +75,7 @@ class MascotaController extends Controller
      */
     public function show(Mascota $mascota)
     {
-        //
+        return view('mascotas.show', ['mascota' => $mascota]);
     }
 
     /**

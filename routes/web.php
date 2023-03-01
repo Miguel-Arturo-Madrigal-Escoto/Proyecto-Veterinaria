@@ -18,7 +18,14 @@ use Illuminate\Support\Facades\Route;
 /*
     Ruta resource (post,get,patch,put,delete,etc).
 */
-Route::resource('cliente', ClienteController::class);
 
-Route::resource('mascota', MascotaController::class);
+// Route::resources([
+//     'cliente' => ClienteController::class,
+//     'mascota' => MascotaController::class
+// ]);
+
+Route::resource('cliente', ClienteController::class);
+Route::resource('mascota', MascotaController::class)->parameters([
+    'mascota' => 'mascota'
+]);
 

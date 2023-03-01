@@ -51,8 +51,8 @@
                             @php
                                 $esterilizado = [];
                                 /* [id, value, name, text] */
-                                $esterilizado[] = ['esterilizado-si', 1, 'esterilizado', 'Si', false];
-                                $esterilizado[] = ['esterilizado-no', 0, 'esterilizado', 'No', true];
+                                $esterilizado[] = ['esterilizado-si', 1, 'esterilizado', 'Si', true];
+                                $esterilizado[] = ['esterilizado-no', 0, 'esterilizado', 'No', false];
 
                             @endphp
                             <x-helpers.form-radios :radios="$esterilizado" />

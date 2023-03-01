@@ -23,21 +23,21 @@
     <!-- WireUI (Libreria + ColorPicker) -->
     <wireui:scripts />
     <script src="//unpkg.com/alpinejs" defer></script>
-    
-    
+
+
 </head>
 <body class="bg-gray-100">
     @include('sweetalert::alert')
     <!-- header -->
 
-    
+
 
     <!-- navbar -->
     @php
         $elements    = [];
         $elements[]  = ['Inicio',     '/',        []];
-        $elements[]  = ['Clientes',   '/cliente', [['/', 'Ver'],['/create', 'Registrar']]];
-        $elements[]  = ['Mascotas',   '/mascota', [['/', 'Ver'],['/create', 'Registrar']]];
+        $elements[]  = ['Clientes',   '/cliente', [['/', 'Listado'],['/create', 'Registrar']]];
+        $elements[]  = ['Mascotas',   '/mascota', [['/', 'Listado'],['/create', 'Registrar']]];
     @endphp
 
     <x-helpers.navbar :elements="$elements" />
@@ -64,7 +64,7 @@
 
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-     
+
         // Change the icons inside the button based on previous settings
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             themeToggleLightIcon.classList.remove('hidden');
@@ -100,7 +100,7 @@
                     localStorage.setItem('color-theme', 'dark');
                 }
             }
-            
+
         });
     </script>
 </body>

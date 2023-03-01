@@ -1,0 +1,73 @@
+@extends('layouts.main')
+
+@section('title', 'Mascotas')
+
+@section('content')
+
+    <!-- component -->
+    <section class="antialiased bg-gray-100 text-gray-600 px-4">
+        <div class="flex flex-col justify-center items-center w-full">
+            <!-- Table -->
+            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-20 dark:bg-slate-900 dark:border-none px-2">
+                <header class="px-5 py-4 border-b border-gray-100 dark:border-none">
+                    <h1 class="font-semibold text-gray-800 text-center dark:text-white">Mascotas</h1>
+                </header>
+                <div class="p-3">
+                    <div class="overflow-x-auto">
+                        <table class="table-auto w-full">
+                            <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                {{-- @if (Session::has('user_added'))
+                                    @php $message = "El cliente " . Session::get('user_added')->nombre . " " . Session::get('user_added')->apellido . " ha sido registrado." @endphp
+                                    <x-helpers.alert type="success" header="Éxito" :message="$message" />
+                                @endif
+
+                                @if (Session::has('user_updated'))
+                                    @php $message = "El cliente " . Session::get('user_updated')->nombre . " " . Session::get('user_updated')->apellido . " ha sido actualizado." @endphp
+                                    <x-helpers.alert type="success" header="Éxito" :message="$message" />
+                                @endif  --}}
+
+                                <tr>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Nombre</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Especie</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-left">Raza</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center">Fecha de Nacimiento</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center">Color</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center">Género</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center">Esterilizado</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center">Peso</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div class="font-semibold text-center"></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-gray-100 dark:divide-none">
+                                @foreach ($mascotas as $mascota)
+                                    <x-mascotas.row-mascota :mascota="$mascota" extra="view" />
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
+                    <a href={{ route('mascota.create') }} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3">Registrar mascota</a>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
