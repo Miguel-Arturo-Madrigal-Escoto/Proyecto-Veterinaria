@@ -38,6 +38,11 @@
                         <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Teléfono: </b>{{ $cliente->telefono }}</span>
                         <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Correo: </b>{{ $cliente->correo }}</span>
                     </div>
+                    @if (Session::has('user_updated'))
+                        @php $message = "El cliente " . Session::get('user_updated')->nombre . " " . Session::get('user_updated')->apellido . " ha sido actualizado." @endphp
+                        {{-- @php Session::pull('user_updated')  @endphp --}}
+                        <x-helpers.alert type="success" header="Éxito" :message="$message" />
+                    @endif
                 </div>
 
             </div>

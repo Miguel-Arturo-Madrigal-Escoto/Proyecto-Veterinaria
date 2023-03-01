@@ -49,6 +49,10 @@
                         <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Esterilizado: </b>{{ ($mascota->esterilizado)? 'Si': 'No' }}</span>
                         <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Peso: </b>{{ $mascota->peso }}</span>
                     </div>
+                    @if (Session::has('mascota_updated'))
+                        @php $message = "La mascota " . Session::get('mascota_updated')->nombre . " ha sido actualizada." @endphp
+                        <x-helpers.alert type="success" header="Éxito" :message="$message" />
+                    @endif
                 </div>
 
             </div>

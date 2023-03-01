@@ -16,15 +16,10 @@
                     <div class="overflow-x-auto">
                         <table class="table-auto w-full">
                             <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
-                                {{-- @if (Session::has('user_added'))
-                                    @php $message = "El cliente " . Session::get('user_added')->nombre . " " . Session::get('user_added')->apellido . " ha sido registrado." @endphp
+                                @if (Session::has('mascota_added'))
+                                    @php $message = "La mascota " . Session::get('mascota_added')->nombre . " ha sido registrada." @endphp
                                     <x-helpers.alert type="success" header="Éxito" :message="$message" />
                                 @endif
-
-                                @if (Session::has('user_updated'))
-                                    @php $message = "El cliente " . Session::get('user_updated')->nombre . " " . Session::get('user_updated')->apellido . " ha sido actualizado." @endphp
-                                    <x-helpers.alert type="success" header="Éxito" :message="$message" />
-                                @endif  --}}
 
                                 <tr>
                                     <th class="p-2 whitespace-nowrap">

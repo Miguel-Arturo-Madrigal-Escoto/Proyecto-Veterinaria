@@ -11,7 +11,7 @@ class DatePicker extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $name, public string $text)
+    public function __construct(public string $name, public string $text, public $value)
     {
         //
     }

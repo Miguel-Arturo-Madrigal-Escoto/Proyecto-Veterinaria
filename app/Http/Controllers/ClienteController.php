@@ -90,7 +90,7 @@ class ClienteController extends Controller
         $cliente->correo = $request->correo;
         $cliente->save();
 
-        return redirect('/cliente')->with(['user_updated' => $cliente]);
+        return redirect('/cliente/' . $cliente->id)->with(['user_updated' => $cliente]);
     }
 
     /**

@@ -67,7 +67,7 @@ class MascotaController extends Controller
 
         $mascota->save();
 
-        return redirect('/mascota');
+        return redirect('/mascota')->with(['mascota_added' => $mascota]);
     }
 
     /**
@@ -83,7 +83,10 @@ class MascotaController extends Controller
      */
     public function edit(Mascota $mascota)
     {
-        //
+        $clientes = Cliente::all();
+        $owner  = Cliente::find($mascota->cliente_id);
+
+        return view('mascotas.edit', compact('mascota', 'clientes', 'owner'));
     }
 
     /**
@@ -91,7 +94,7 @@ class MascotaController extends Controller
      */
     public function update(Request $request, Mascota $mascota)
     {
-        //
+        // redirect to mascota show
     }
 
     /**
