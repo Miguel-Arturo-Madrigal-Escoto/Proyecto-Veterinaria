@@ -59,7 +59,7 @@
 
                             <x-helpers.form-field value="None" type="text" field="peso" text="Peso" placeholder="Ej:10.8" />
 
-                            <x-helpers.form-file  field="foto" text="Foto" />
+                            <x-helpers.form-file  value=" " field="foto" text="Foto" />
                             @php $arr = [] @endphp
                             @foreach ($clientes as $cliente)
                                 @php $arr[] = [$cliente->id, "$cliente->nombre $cliente->apellido: $cliente->correo", false]; @endphp

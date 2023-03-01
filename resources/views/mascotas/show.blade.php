@@ -51,7 +51,7 @@
                     </div>
                     @if (Session::has('mascota_updated'))
                         @php $message = "La mascota " . Session::get('mascota_updated')->nombre . " ha sido actualizada." @endphp
-                        <x-helpers.alert type="success" header="Éxito" :message="$message" />
+                        <x-helpers.alert type="info" header="Atención" :message="$message" />
                     @endif
                 </div>
 

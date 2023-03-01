@@ -15,8 +15,10 @@
                 </header>
                 <div class="p-3">
                     <div class="overflow-x-auto">
-                        <form action="/mascota" method="POST">
+                        <form action={{ route('mascota.update', $mascota) }} method="POST">
                             @csrf
+                            @method('PUT')
+
                             <x-helpers.form-field :value="$mascota->nombre" type="text" field="nombre" text="Nombre" placeholder="Ej:Solovino" />
 
                             @php
