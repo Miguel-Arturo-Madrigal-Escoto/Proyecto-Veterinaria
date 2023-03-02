@@ -26,7 +26,7 @@
 
 
 </head>
-<body class="bg-gray-100">
+<body class="bg-white dark:bg-slate-900">
     @include('sweetalert::alert')
     <!-- header -->
 

@@ -6,12 +6,12 @@
 @section('content')
 
     <!-- component -->
-    <section class="antialiased bg-gray-100 text-gray-600 px-4">
+    <section class="antialiased bg-white text-gray-600 px-4 dark:bg-slate-900">
         <div class="flex flex-col justify-center items-center">
             <!-- Table -->
-            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200 dark:bg-slate-900 dark:border-none mt-20">
+            <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-lg border border-gray-200 dark:bg-slate-900 mt-20">
                 <header class="px-5 py-4 border-b border-gray-100 dark:border-none">
-                    <h1 class="font-semibold text-gray-800 text-center dark:text-white">Registro de mascotas</h1>
+                    <h1 class="font-semibold text-gray-800 text-center dark:text-white">Editar mascota</h1>
                 </header>
                 <div class="p-3">
                     <div class="overflow-x-auto">
