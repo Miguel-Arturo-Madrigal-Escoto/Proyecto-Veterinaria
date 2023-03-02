@@ -41,7 +41,7 @@
                     @if (Session::has('user_updated'))
                         @php $message = "El cliente " . Session::get('user_updated')->nombre . " " . Session::get('user_updated')->apellido . " ha sido actualizado." @endphp
                         {{-- @php Session::pull('user_updated')  @endphp --}}
-                        <x-helpers.alert type="show" header="Atención" :message="$message" />
+                        <x-helpers.alert type="info" header="Atención" :message="$message" />
                     @endif
                 </div>
 

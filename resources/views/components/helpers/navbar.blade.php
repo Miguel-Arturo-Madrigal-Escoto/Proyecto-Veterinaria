@@ -35,7 +35,7 @@
                       <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                           @foreach($element[2] as $item)
                               <li>
-                                  <a href={{ $element[1] . $item[0] }} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $item[1] }}</a>
+                                  <a href="{{$element[1].$item[0]}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $item[1] }}</a>
                               </li>
                           @endforeach
                       </ul>
@@ -45,9 +45,9 @@
               
               @else
                   @if (str_replace('/', '', $element[1]) === Request::segment(1))
-                    <a href={{ $element[1] }} class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">{{ $element[0] }}</a>
+                    <a href="{{$element[1]}}" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">{{ $element[0] }}</a>
                   @else
-                    <a href={{ $element[1] }} class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{{ $element[0] }}</a>
+                    <a href="{{$element[1]}}" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{{ $element[0] }}</a>
                   @endif
               @endif
         

@@ -17,7 +17,7 @@
                     <div class="overflow-x-auto">
                         <form action="/mascota" method="POST">
                             @csrf
-                            <x-helpers.form-field value="None" type="text" field="nombre" text="Nombre" placeholder="Ej:Solovino" />
+                            <x-helpers.form-field value="" type="text" field="nombre" text="Nombre" placeholder="Ej: Solovino" />
 
                             @php
                                 $options = [];
@@ -33,11 +33,11 @@
                             @endphp
                             <x-helpers.form-select name="especie" text="Especie" :options="$options" />
 
-                            <x-helpers.form-field value="None" type="text" field="raza" text="Raza" placeholder="Ej:Chihuahua" />
+                            <x-helpers.form-field value="" type="text" field="raza" text="Raza" placeholder="Ej: Chihuahua" />
 
-                            <x-helpers.date-picker value=" " name="fecha_nac" text="Fecha de nacimiento"   />
+                            <x-helpers.date-picker value="" name="fecha_nac" text="Fecha de nacimiento"   />
 
-                            <x-helpers.color-picker value=" " name="color" text="Color" />
+                            <x-helpers.color-picker value="" name="color" text="Color" />
 
                             @php
                                 $genero = [];
@@ -57,9 +57,9 @@
                             @endphp
                             <x-helpers.form-radios :radios="$esterilizado" />
 
-                            <x-helpers.form-field value="None" type="text" field="peso" text="Peso" placeholder="Ej:10.8" />
+                            <x-helpers.form-field value="" type="text" field="peso" text="Peso" placeholder="Ej: 10.8" />
 
-                            <x-helpers.form-file  value=" " field="foto" text="Foto" />
+                            <x-helpers.form-file  value="" field="foto" text="Foto" />
                             @php $arr = [] @endphp
                             @foreach ($clientes as $cliente)
                                 @php $arr[] = [$cliente->id, "$cliente->nombre $cliente->apellido: $cliente->correo", false]; @endphp

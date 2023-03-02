@@ -17,7 +17,7 @@
                         <form action={{ route('cliente.update', $cliente) }} method="POST" class="">
                             @csrf
                             @method('PUT')
-                            <x-helpers.form-field :value="$cliente->nombre" type="text" field="nombre" text="Nombre(s)" placeholder="Ej:Juan Fulanito" />
+                            <x-helpers.form-field :value="$cliente->nombre" type="text" field="nombre" text="Nombre(s)" placeholder="Ej: Juan Fulanito" />
                             <x-helpers.form-field :value="$cliente->apellido" type="text" field="apellido" text="Apellido(s)" placeholder="Ej:Perez López" />
                             
                             @php 
