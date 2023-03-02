@@ -21,7 +21,6 @@
                                     <x-helpers.alert type="success" header="Éxito" :message="$message" />
                                 @endif
 
-
                                 <tr>
                                     <th class="p-2 whitespace-nowrap">
                                         <div class="font-semibold text-left">Nombre</div>

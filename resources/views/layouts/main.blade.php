@@ -55,5 +55,6 @@
 
     <!-- Toggle Dark/Light mode -->
     @vite('resources/js/dark-mode.js')
+    {{-- @vite('resources/js/window-reload.js'); --}}
 </body>
 </html>

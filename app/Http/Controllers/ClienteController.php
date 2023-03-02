@@ -48,8 +48,7 @@ class ClienteController extends Controller
         $cliente->correo = $request->correo;
         $cliente->save();
 
-        // Alert::success('Éxito', "El cliente $cliente->nombre $cliente->apellido fue registrado.");
-
+        // Alert::success('Éxito'   , "El cliente $cliente->nombre $cliente->apellido fue registrado.");
         /* Redireccionamiento */
         return redirect('/cliente')->with(['user_added' => $cliente]);
     }
