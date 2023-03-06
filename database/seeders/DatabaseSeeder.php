@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Cliente;
+use App\Models\Mascota;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,9 +22,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([
-            ClienteSeeder::class,
-            MascotaSeeder::class,
-        ]);
+        // $this->call([
+        //     ClienteSeeder::class,
+        //     MascotaSeeder::class,
+        // ]);
+        Cliente::factory(20)->create();
+        Mascota::factory(20)->create();
     }
 }
