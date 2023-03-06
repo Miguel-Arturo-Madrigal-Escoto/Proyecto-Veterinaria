@@ -2,21 +2,21 @@
     <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
     <tr class="font-semibold  text-gray-500 dark:text-gray-300">
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $cliente->nombre }}</div>
+            <div class="text-center">{{ $cliente->nombre }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $cliente->apellido }}</div>
+            <div class="text-center">{{ $cliente->apellido }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">
+            <div class="text-center">
                 {{ ($cliente->genero == 'M')? 'Masculino': 'Femenino' }}
             </div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $cliente->telefono }}</div>
+            <div class="text-center">{{ $cliente->telefono }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $cliente->correo }}</div>
+            <div class="text-center">{{ $cliente->correo }}</div>
         </td>
         @if ($extra === 'view')
             <td class="p-2 whitespace-nowrap">

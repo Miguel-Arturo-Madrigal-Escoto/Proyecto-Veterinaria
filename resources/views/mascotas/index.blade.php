@@ -25,13 +25,13 @@
 
                                 <tr>
                                     <th class="p-2 whitespace-nowrap">
-                                        <div class="font-semibold text-left">Nombre</div>
+                                        <div class="font-semibold text-center">Nombre</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
-                                        <div class="font-semibold text-left">Especie</div>
+                                        <div class="font-semibold text-center">Especie</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
-                                        <div class="font-semibold text-left">Raza</div>
+                                        <div class="font-semibold text-center">Raza</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
                                         <div class="font-semibold text-center">Fecha de Nacimiento</div>

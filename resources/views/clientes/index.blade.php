@@ -25,13 +25,13 @@
 
                                 <tr>
                                     <th class="p-2 whitespace-nowrap">
-                                        <div class="font-semibold text-left">Nombre</div>
+                                        <div class="font-semibold text-centerp">Nombre</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
-                                        <div class="font-semibold text-left">Apellido</div>
+                                        <div class="font-semibold text-center">Apellido</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
-                                        <div class="font-semibold text-left">Genero</div>
+                                        <div class="font-semibold text-center">Genero</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
                                         <div class="font-semibold text-center">Teléfono</div>

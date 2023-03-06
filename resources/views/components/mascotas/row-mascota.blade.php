@@ -2,33 +2,35 @@
     <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
     <tr class="font-semibold  text-gray-500 dark:text-gray-300">
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $mascota->nombre }}</div>
+            <div class="text-center">{{ $mascota->nombre }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $mascota->especie }}</div>
+            <div class="text-center">{{ $mascota->especie }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $mascota->raza }}</div>
+            <div class="text-center">{{ $mascota->raza }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
             @php $dob = new DateTimeImmutable($mascota->fecha_nac); @endphp
-            <div class="text-left">{{ $dob->format('d-m-Y') }}</div>
+            <div class="text-center">{{ $dob->format('d-m-Y') }}</div>
+        </td>
+        <td class="p-2 whitespace-nowrap" >
+            <div class="text-center text-transparent" style="background-color:{{$mascota->color}};border-radius: 10%; padding: .5rem">
+                {{ $mascota->color }}
+            </div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $mascota->color }}</div>
-        </td>
-        <td class="p-2 whitespace-nowrap">
-            <div class="text-left">
+            <div class="text-center">
                 {{ ($mascota->genero == 'M')? 'Macho': 'Hembra' }}
             </div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">
+            <div class="text-center">
                 {{ ($mascota->esterilizado)? 'Si': 'No' }}
             </div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-left">{{ $mascota->peso }}</div>
+            <div class="text-center">{{ $mascota->peso }}</div>
         </td>
         @if ($extra === 'view')
             <td class="p-2 whitespace-nowrap">
