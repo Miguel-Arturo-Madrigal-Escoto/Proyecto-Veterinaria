@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MascotaController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 //     'cliente' => ClienteController::class,
 //     'mascota' => MascotaController::class
 // ]);
+
+Route::get('/', HomeController::class);
 
 Route::resource('cliente', ClienteController::class);
 Route::resource('mascota', MascotaController::class)->parameters([
