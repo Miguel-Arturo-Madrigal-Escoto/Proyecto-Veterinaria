@@ -29,9 +29,11 @@
                                     {{-- {{ "/cliente/" . $mascota->cliente_id }} --}}
                                     <a href={{ route('cliente.show', $mascota->cliente_id) }} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dueño</a>
                                 </li>
-                                <li>
-                                    <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Eliminar</a>
-                                </li>
+                                <form action={{ route('mascota.destroy', $mascota)  }} method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Eliminar</button>
+                                </form>
                             </ul>
                         </div>
                     </div>

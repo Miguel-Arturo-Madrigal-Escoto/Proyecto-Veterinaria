@@ -23,6 +23,11 @@
                                     <x-helpers.alert type="success" header="Éxito" :message="$message" />
                                 @endif
 
+                                @if (Session::has('mascota_deleted'))
+                                    @php $message = "La mascota " . Session::get('mascota_deleted')->nombre . " ha sido eliminada." @endphp
+                                    <x-helpers.alert type="error" header="Atención" :message="$message" />
+                                @endif
+
                                 <tr>
                                     <th class="p-2 whitespace-nowrap">
                                         <div class="font-semibold text-center">Nombre</div>

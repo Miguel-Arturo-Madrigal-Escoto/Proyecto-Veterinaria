@@ -131,6 +131,8 @@ class MascotaController extends Controller
      */
     public function destroy(Mascota $mascota)
     {
-        //
+        $mascota->delete();
+
+        return redirect('/mascota')->with(['mascota_deleted' => $mascota]);
     }
 }
