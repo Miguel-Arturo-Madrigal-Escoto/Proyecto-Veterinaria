@@ -2,6 +2,8 @@
 
 @section('title', 'Mascotas')
 
+@vite('resources/css/pagination.css')
+
 @section('content')
 
     <!-- component -->
@@ -61,6 +63,11 @@
                 </div>
                 <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                     <a href={{ route('mascota.create') }} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3">Registrar mascota</a>
+                </div>
+
+                <!-- Paginación -->
+                <div class="pagination mb-6 flex flex-col w-full justify-center items-center">
+                    {{ $mascotas->links('pagination::tailwind') }}
                 </div>
             </div>
         </div>
