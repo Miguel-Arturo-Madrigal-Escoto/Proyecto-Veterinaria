@@ -4,6 +4,6 @@
         placeholder="Selecciona un color de la paleta"
         name="color"
         value={{$value}}
-        color-name-as-value
+        {{-- color-name-as-value --}}
     />
 </div>
