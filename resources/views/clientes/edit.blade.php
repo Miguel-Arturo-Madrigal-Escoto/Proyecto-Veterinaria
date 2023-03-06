@@ -17,8 +17,8 @@
                         <form action={{ route('cliente.update', $cliente) }} method="POST" class="">
                             @csrf
                             @method('PUT')
-                            <x-helpers.form-field :value="$cliente->nombre" type="text" field="nombre" text="Nombre(s)" placeholder="Ej: Juan Fulanito" />
-                            <x-helpers.form-field :value="$cliente->apellido" type="text" field="apellido" text="Apellido(s)" placeholder="Ej:Perez López" />
+                            <x-helpers.form-field value="{{old('nombre')??$cliente->nombre}}" type="text" field="nombre" text="Nombre(s)" placeholder="Ej: Juan Fulanito" />
+                            <x-helpers.form-field value="{{old('apellido')??$cliente->apellido}}" type="text" field="apellido" text="Apellido(s)" placeholder="Ej:Perez López" />
                             
                             @php 
                                 $radios = [];
@@ -29,8 +29,8 @@
                             @endphp
                             <x-helpers.form-radios :radios="$radios" />
                             
-                            <x-helpers.form-field :value="$cliente->telefono" type="text" field="telefono" text="Telefono" placeholder="Ej:3344556677" />
-                            <x-helpers.form-field :value="$cliente->correo" type="email" field="correo" text="Correo" placeholder="Ej:miguel.dev@gmail.com" />
+                            <x-helpers.form-field value="{{old('telefono')??$cliente->telefono}}" type="text" field="telefono" text="Telefono" placeholder="Ej:3344556677" />
+                            <x-helpers.form-field value="{{old('correo')??$cliente->correo}}" type="email" field="correo" text="Correo" placeholder="Ej:miguel.dev@gmail.com" />
 
                             <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                                 <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Actualizar</button>
