@@ -25,10 +25,23 @@ use Illuminate\Support\Facades\Route;
 //     'mascota' => MascotaController::class
 // ]);
 
-Route::get('/', HomeController::class);
-
+Route::controller(HomeController::class)->group(function() {
+    Route::get('/',       'index');
+    Route::get('/create', 'create');
+    Route::post('/', 'store');
+});
 Route::resource('cliente', ClienteController::class);
 Route::resource('mascota', MascotaController::class)->parameters([
     'mascota' => 'mascota'
 ]);
 
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

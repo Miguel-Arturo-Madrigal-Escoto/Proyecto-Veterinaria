@@ -21,14 +21,17 @@
                         @php
                         $radios = [];
                         /* [id, value, name, text] */
-                        $radios[] = ['genero-m', 'M', 'genero','Masculino', false];
-                        $radios[] = ['genero-f', 'F', 'genero','Femenino', false];
+                        $radios[] = ['genero-m', 'M', 'genero','Masculino', old('genero') === 'M'];
+                        $radios[] = ['genero-f', 'F', 'genero','Femenino', old('genero') === 'F'];
 
                         @endphp
                         <x-helpers.form-radios :radios="$radios" />
 
                         <x-helpers.form-field value="{{old('telefono')}}" type="text" field="telefono" text="Telefono" placeholder="Ej: 3344556677" />
-                        <x-helpers.form-field value="{{old('email')}}" type="email" field="correo" text="Correo" placeholder="Ej: miguel.dev@gmail.com" />
+                        <x-helpers.form-field value="{{old('correo')}}" type="email" field="correo" text="Correo" placeholder="Ej: miguel.dev@gmail.com" />
+
+                        <x-helpers.form-field value="{{old('password')}}" type="password" field="password" text="Contraseña (temporal)" placeholder="* * * * * *" />
+                        <x-helpers.form-field value="{{old('password_confirmation')}}" type="password" field="password_confirmation" text="Confirma la contraseña" placeholder="* * * * * *" />
 
                         <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                             <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>

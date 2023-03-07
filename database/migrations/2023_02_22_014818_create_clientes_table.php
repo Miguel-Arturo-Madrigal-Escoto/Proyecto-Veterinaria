@@ -18,6 +18,7 @@ return new class extends Migration
             $table->char('genero');
             $table->string('telefono', 10);
             $table->string('correo', 255);
+            $table->string('password', 255);
             $table->timestamps();
         });
     }
