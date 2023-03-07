@@ -52,6 +52,7 @@ class ClienteController extends Controller
         $cliente->telefono = $request->telefono;
         $cliente->correo = $request->correo;
         $cliente->password = Hash::make($request->password);
+        $cliente->foto     = 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
         $cliente->save();
 
         // Alert::success('Éxito'   , "El cliente $cliente->nombre $cliente->apellido fue registrado.");

@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col items-center pb-10">
-                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Imagen del cliente" loading="lazy" />
+                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{$cliente->foto}}" alt="Imagen del cliente" loading="lazy" />
                     <h5 class="my-5 text-xl font-medium text-gray-900 dark:text-white">{{ $cliente->nombre }} {{ $cliente->apellido }}</h5>
                     <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Género: </b>{{ ($cliente->genero === 'M')? 'Masculino': 'Femenino' }}</span>
                     <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Teléfono: </b>{{ $cliente->telefono }}</span>

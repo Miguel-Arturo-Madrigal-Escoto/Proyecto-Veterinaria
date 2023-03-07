@@ -36,7 +36,7 @@
     @php
         $elements    = [];
         $elements[]  = ['Inicio',     '/home',        []];
-        $elements[]  = ['Acceder',    '',        [['/create', 'Crear cuenta']]];
+        $elements[]  = ['Acceder',    '',        [['/create', 'Crear cuenta'], ['/signin', 'Iniciar sesión']]];
         // $elements[]  = ['Clientes',   '/cliente', [['/', 'Listado'],['/create', 'Registrar']]];
         // $elements[]  = ['Mascotas',   '/mascota', [['/', 'Listado'],['/create', 'Registrar']]];
     @endphp

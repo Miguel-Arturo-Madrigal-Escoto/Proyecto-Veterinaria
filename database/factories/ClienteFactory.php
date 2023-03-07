@@ -24,7 +24,8 @@ class ClienteFactory extends Factory
             'genero'   => fake()->randomElement(['M', 'F']),
             'telefono' => fake()->numerify('##########'),
             'correo'   => fake()->email(),
-            'password' => Hash::make(fake()->word())
+            'password' => Hash::make(fake()->word()),
+            'foto'     => fake()->imageUrl()
         ];
     }
 }

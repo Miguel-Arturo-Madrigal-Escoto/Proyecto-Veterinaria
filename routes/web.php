@@ -29,6 +29,8 @@ Route::controller(HomeController::class)->group(function() {
     Route::get('/',       'index');
     Route::get('/create', 'create');
     Route::post('/', 'store');
+    Route::get('/signin', 'signin_view');
+    Route::post('/signin', 'signin_cliente');
 });
 Route::resource('cliente', ClienteController::class);
 Route::resource('mascota', MascotaController::class)->parameters([
