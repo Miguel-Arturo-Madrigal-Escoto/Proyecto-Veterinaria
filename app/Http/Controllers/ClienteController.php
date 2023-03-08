@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClienteRequest;
+use App\Http\Requests\UpdateClienteRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -30,20 +32,8 @@ class ClienteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreClienteRequest $request)
     {
-        /* Validación */
-        $request->validate([
-            'nombre'   => ['required', 'string', 'min:3'],
-            'apellido' => ['required', 'string', 'min:3'],
-            'genero'   => ['required', 'string', 'size:1'],
-            'telefono' => ['required', 'integer', 'digits:10', 'unique:clientes,telefono'],
-            // 'correo'   => ['required', 'email', 'unique:clientes,correo'],
-            'correo' => ['required', 'email','unique:App\Models\Cliente,correo'],
-            'password' => ['required', 'confirmed'],
-            'password_confirmation' => ['required'],
-        ]);
-
         /* Instancia del modelo y guardado */
         $cliente = new Cliente();
         $cliente->nombre = $request->nombre;
@@ -79,17 +69,8 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
-        // dd($request->id);
-        /* Validación */
-        $request->validate([
-            'nombre'   => ['required', 'string', 'min:3'],
-            'apellido' => ['required', 'string', 'min:3'],
-            'genero'   => ['required', 'string', 'size:1'],
-            'telefono' => [ 'required', 'integer', 'digits:10', Rule::unique('clientes', 'telefono')->ignore($cliente->id)],
-            'correo'   => [Rule::unique('clientes', 'correo')->ignore($cliente->id), 'required', 'email' ],
-        ]);
 
         $cliente->nombre = $request->nombre;
         $cliente->apellido = $request->apellido;

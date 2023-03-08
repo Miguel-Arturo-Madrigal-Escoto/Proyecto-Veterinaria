@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SignInClienteRequest;
+use App\Http\Requests\StoreClienteRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,32 +26,15 @@ class HomeController extends Controller
         return view('home.signin');
     }
 
-    public function signin_cliente(Request $request)
+    public function signin_cliente(SignInClienteRequest $request)
     {
-        /* Validación */
-        $request->validate([
-            'correo' => ['required', 'email', Rule::exists('clientes', 'correo')],
-            'password' => ['required'],
-        ]);
 
         // aqui continua el proceso de login del usuario
         dd('login del cliente. Autenticación pasada');
     }
 
-    public function store(Request $request)
+    public function store(StoreClienteRequest $request)
     {
-        /* Validación */
-        $request->validate([
-            'nombre'   => ['required', 'string', 'min:3'],
-            'apellido' => ['required', 'string', 'min:3'],
-            'genero'   => ['required', 'string', 'size:1'],
-            'telefono' => ['required', 'integer', 'digits:10', 'unique:clientes,telefono'],
-            // 'correo'   => ['required', 'email', 'unique:clientes,correo'],
-            'correo' => ['required', 'email','unique:App\Models\Cliente,correo'],
-            'password' => ['required', 'confirmed'],
-            'password_confirmation' => ['required'],
-        ]);
-
         $cliente = new Cliente();
         $cliente->nombre = $request->nombre;
         $cliente->apellido = $request->apellido;

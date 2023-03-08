@@ -23,7 +23,7 @@ class ClienteFactory extends Factory
             'apellido' => fake()->lastName() . ' ' . fake()->lastName(),
             'genero'   => fake()->randomElement(['M', 'F']),
             'telefono' => fake()->numerify('##########'),
-            'correo'   => fake()->email(),
+            'correo'   => fake()->companyEmail(),
             'password' => Hash::make(fake()->word()),
             'foto'     => fake()->imageUrl()
         ];
