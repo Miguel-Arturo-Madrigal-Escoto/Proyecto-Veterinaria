@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMascotaRequest;
+use App\Http\Requests\UpdateMascotaRequest;
 use App\Models\Cliente;
 use App\Models\Mascota;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
-use Illuminate\Database\Query\Builder;
 
 class MascotaController extends Controller
 {
@@ -33,25 +31,8 @@ class MascotaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMascotaRequest $request)
     {
-        $request->validate([
-            'nombre' => ['required', 'string', 'alpha'],
-            'especie' => ['required', 'string', Rule::notIn(['Elige una opción']), 'alpha'],
-            'raza' => ['required', 'string', 'alpha'],
-            'fecha_nac' => ['required', 'string', 'date', 'before_or_equal:today'],
-            'color' => ['required', 'string'],
-            'genero' => ['required', 'string', 'size:1', Rule::in(['M', 'H'])],    // char
-            'esterilizado' => ['required', 'boolean', Rule::in(['1', '0'])],
-            'peso' => ['required', 'numeric'],
-            'foto' => ['required', 'string'],
-            'cliente_id' => ['required', Rule::notIn(['Elige una opción']) , 'exists:App\Models\Cliente,id'],
-            // 'cliente_id' => ['required', Rule::notIn(['Elige una opción']) , Rule::exists('clientes')->where(function (Builder $query) {
-            //     return $query->where('id', intval($request->cliente_id  ));
-            // }),
-            // ],
-        ]);
-
         $mascota = new Mascota();
         $mascota->nombre = $request->nombre;
         $mascota->especie = $request->especie;
@@ -91,25 +72,8 @@ class MascotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mascota $mascota)
+    public function update(UpdateMascotaRequest $request, Mascota $mascota)
     {
-        $request->validate([
-            'nombre' => ['required', 'string', 'alpha'],
-            'especie' => ['required', 'string', Rule::notIn(['Elige una opción']), 'alpha'],
-            'raza' => ['required', 'string', 'alpha'],
-            'fecha_nac' => ['required', 'string', 'date', 'before_or_equal:today'],
-            'color' => ['required', 'string'],
-            'genero' => ['required', 'string', 'size:1', Rule::in(['M', 'H'])],    // char
-            'esterilizado' => ['required', 'boolean', Rule::in(['1', '0'])],
-            'peso' => ['required', 'numeric'],
-            'foto' => ['required', 'string'],
-            'cliente_id' => ['required', Rule::notIn(['Elige una opción']) , 'exists:App\Models\Cliente,id'],
-            // 'cliente_id' => ['required', Rule::notIn(['Elige una opción']) , Rule::exists('clientes')->where(function (Builder $query) {
-            //     return $query->where('id', intval($request->cliente_id  ));
-            // }),
-            // ],
-        ]);
-
         $mascota->nombre = $request->nombre;
         $mascota->especie = $request->especie;
         $mascota->raza = $request->raza;
