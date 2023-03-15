@@ -15,8 +15,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
+        <!-- Navbar -->
+        <x-helpers.navbar />
         <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
             {{ $slot }}
         </div>
     </body>
+    @vite(['resources/js/darkmode.js'])
 </html>

@@ -9,25 +9,40 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
+            <x-helpers.form-field value="{{old('name')}}" type="text" field="name" text="Nombre(s)" placeholder="Ej: Juan" />
 
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            </div>
+            <x-helpers.form-field value="{{old('lastname')}}" type="text" field="lastname" text="Apellido(s)" placeholder="Ej: Perez" />
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
+            @php
+                $radios = [];
+                /* [id, value, name, text] */
+                $radios[] = [
+                    'id' => 'gender-m',
+                    'value' => 'M',
+                    'name' => 'gender',
+                    'label' => 'Genero',
+                    'text' => 'Masculino',
+                    'checked' => old('gender') === 'M'
+                ];
+                $radios[] = [
+                    'id' => 'gender-f',
+                    'value' => 'F',
+                    'name' => 'gender',
+                    'label' => 'Genero',
+                    'text' => 'Femenino',
+                    'checked' => old('gender') === 'F'
+                ];
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
+            @endphp
+            <x-helpers.form-radios :radios="$radios" />
+
+            <x-helpers.form-field value="{{old('phone')}}" type="text" field="phone" text="Telefono" placeholder="Ej: 3365238190" />
+
+            <x-helpers.form-field value="{{old('email')}}" type="email" field="email" text="Correo" placeholder="Ej: juan@dev.com" />
+
+            <x-helpers.form-field value="{{old('password')}}" type="password" field="password" text="Contraseña" placeholder="* * * * * *" />
+
+            <x-helpers.form-field value="{{old('password_confirmation')}}" type="password" field="password_confirmation" text="Confirma la contraseña" placeholder="* * * * * *" />
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
