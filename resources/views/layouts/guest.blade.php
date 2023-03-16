@@ -14,9 +14,33 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="dark:bg-slate-900">
         <!-- Navbar -->
-        <x-helpers.navbar />
+        @php
+            $navlinks = [];
+            $navlinks[] = [
+                'path' => '/',
+                'name' => 'Inicio',
+                'submenu' => []
+            ];
+            $navlinks[] = [
+                'path' => '#',
+                'name' => 'Cuenta',
+                'submenu' => [
+                    [
+                        'path' => route('register'),
+                        'name' => 'Registro'
+                    ],
+                    [
+                        'path' => route('login'),
+                        'name' => 'Inicio de sesión'
+                    ]
+                ]
+            ];
+
+        @endphp
+        <x-guest.navbar :$navlinks />
+
         <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
             {{ $slot }}
         </div>

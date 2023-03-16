@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <img class="w-20 h-20 rounded-full" src="{{asset('img/logo.PNG')}}" alt="Rounded avatar">
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -15,7 +15,7 @@
 
             @php
                 $radios = [];
-                /* [id, value, name, text] */
+
                 $radios[] = [
                     'id' => 'gender-m',
                     'value' => 'M',
@@ -63,11 +63,11 @@
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    {{ __('Ya estás registrado?') }}
                 </a>
 
                 <x-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('Registrarme') }}
                 </x-button>
             </div>
         </form>
