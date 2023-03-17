@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,8 @@ Route::controller(HomeController::class)->group(function() {
     Route::get('/', 'index');
 });
 
+Route::resource('pet', PetController::class);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -27,3 +30,4 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+

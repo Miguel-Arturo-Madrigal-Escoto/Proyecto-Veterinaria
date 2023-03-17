@@ -20,14 +20,19 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-white dark:bg-slate-900">
             {{-- @livewire('navigation-menu') --}}
 
             <!-- Sidebar -->
-            <x-helpers.sidebar />
+            {{-- <x-helpers.sidebar /> --}}
 
-            <!-- Navbar (Usuario / Admin) -->
-            @if (Auth::user()->is_admin)
+            <!-- Guest -->
+            @if (is_null(Auth::user()))
+
+            <!-- Admin -->
+            @elseif (Auth::user()->is_admin)
+
+            <!-- User -->
             @else
                 <x-auth.user-navbar />
             @endif
