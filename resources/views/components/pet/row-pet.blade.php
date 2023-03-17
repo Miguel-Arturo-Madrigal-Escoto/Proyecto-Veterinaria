@@ -5,7 +5,9 @@
             <div class="text-center">{{ $pet->name }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            <div class="text-center">{{ $pet->species }}</div>
+            <div class="text-center flex justify-center items-center">
+                <x-pet.race-pet species="{{$pet->species}}" />
+            </div>
         </td>
         <td class="p-2 whitespace-nowrap">
             <div class="text-center">{{ $pet->race }}</div>

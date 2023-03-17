@@ -19,7 +19,7 @@ Route::controller(HomeController::class)->group(function() {
     Route::get('/', 'index');
 });
 
-Route::resource('pet', PetController::class);
+Route::resource('pet', PetController::class)->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

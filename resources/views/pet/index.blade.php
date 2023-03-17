@@ -7,7 +7,10 @@
 
     <x-helpers.simple-form-boilerplate>
         <x-slot:title>
-            Mis Mascotas
+            <div class="flex flex-row justify-center items-center">
+                <h1>Mis Mascotas</h1>
+                {{-- <x-gmdi-pets-r class="h-8 w-8 ml-4"/> --}}
+            </div>
         </x-slot:title>
         <div class="p-3">
             <div class="overflow-x-auto">

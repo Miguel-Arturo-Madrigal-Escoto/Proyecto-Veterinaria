@@ -20,7 +20,7 @@ class PetFactory extends Factory
         return [
             'name'         => fake()->word(),
             'dob'          => fake()->date(),
-            'species'      => fake()->randomElement(['dog', 'cat', 'turtle', 'fish', 'rabbit', 'pork', 'other']),
+            'species'      => fake()->randomElement(['dog', 'cat', 'turtle', 'fish', 'rabbit', 'pig', 'other']),
             'race'         => fake()->word(),
             'color'        => fake()->hexColor(),
             'gender'       => fake()->randomElement(['M', 'F']),
