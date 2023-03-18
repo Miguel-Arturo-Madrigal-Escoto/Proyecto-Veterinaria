@@ -56,5 +56,8 @@
 
         @livewireScripts
         @vite(['resources/js/sidebar.js', 'resources/js/darkmode.js'])
+
+        <!-- FontAwesome -->
+        <script src="https://kit.fontawesome.com/796b904c46.js" crossorigin="anonymous"></script>
     </body>
 </html>
