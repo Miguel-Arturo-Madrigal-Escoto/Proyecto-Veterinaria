@@ -12,6 +12,10 @@
             <x-fas-fish class="h-8 w-8" />
             @break
 
+        @case('turtle')
+            {{-- <x-fluentui-animal-turtle-16 class="h-8 w-8" /> --}}
+            @break
+
 
 
         @default
