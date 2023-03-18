@@ -9,23 +9,12 @@
         <x-slot:title>
             <div class="flex flex-row justify-center items-center">
                 <h1>Mis Mascotas</h1>
-                {{-- <x-gmdi-pets-r class="h-8 w-8 ml-4"/> --}}
             </div>
         </x-slot:title>
         <div class="p-3">
             <div class="overflow-x-auto">
                 <table class="table-auto w-full">
                     <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
-                        {{-- @if (Session::has('mascota_added'))
-                            @php $message = "La mascota " . Session::get('mascota_added')->nombre . " ha sido registrada." @endphp
-                            <x-helpers.alert type="success" header="Éxito" :message="$message" />
-                        @endif
-
-                        @if (Session::has('mascota_deleted'))
-                            @php $message = "La mascota " . Session::get('mascota_deleted')->nombre . " ha sido eliminada." @endphp
-                            <x-helpers.alert type="error" header="Atención" :message="$message" />
-                        @endif --}}
-
                         <tr>
                             <th class="p-2 whitespace-nowrap">
                                 <div class="font-semibold text-center">Nombre</div>
@@ -62,6 +51,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
+                    <a href={{ route('pet.create') }} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3">Añadir mascota</a>
+                </div>
                 <div class="my-2 ml-4">
                     {{ $pets->links('pagination::tailwind') }}
                 </div>

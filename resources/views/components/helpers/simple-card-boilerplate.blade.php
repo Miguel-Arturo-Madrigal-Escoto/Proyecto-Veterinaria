@@ -1,5 +1,5 @@
 <!-- component -->
-<section class="antialiased bg-white text-gray-600 px-4 dark:bg-slate-900 my-14 mx-auto md:w-6/12 sm:w-11/12">
+<section class="antialiased bg-white text-gray-600 px-4 dark:bg-slate-900 my-14 mx-auto {{$size}}">
     <div class="flex flex-col justify-center items-center w-full">
         <!-- Table -->
         {{-- max-w-2xl --}}

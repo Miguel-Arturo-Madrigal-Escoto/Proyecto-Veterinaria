@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pet;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class PetController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if (Auth::user()->is_admin) $pets = Pet::paginate(10);
-        else $pets = Pet::where('user_id', Auth::user()->id)->paginate(10);
-        return view('pet.index', compact('pets'));
+        //
     }
 
     /**
@@ -37,15 +34,15 @@ class PetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pet $pet)
+    public function show(User $user)
     {
-        return view('pet.show', compact('pet'));
+        dd($user);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pet $pet)
+    public function edit(User $user)
     {
         //
     }
@@ -53,7 +50,7 @@ class PetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pet $pet)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -61,13 +58,8 @@ class PetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pet $pet)
+    public function destroy(User $user)
     {
-        $pet->delete();
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addWarning("La mascota $pet->name ha sido eliminada.");
-        return redirect('/pet');
+        //
     }
 }
