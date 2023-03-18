@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pet;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class PetController extends Controller
 {
@@ -13,7 +13,8 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Pet::paginate(10);
+        if (Auth::user()->is_admin) $pets = Pet::paginate(10);
+        else $pets = Pet::where('user_id', Auth::user()->id)->paginate(10);
         return view('pet.index', compact('pets'));
     }
 

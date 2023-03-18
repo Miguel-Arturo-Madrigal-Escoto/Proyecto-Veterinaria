@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PetController;
+use App\Http\Middleware\AuthCheck;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,12 @@ Route::controller(HomeController::class)->group(function() {
     Route::get('/', 'index');
 });
 
-Route::resource('pet', PetController::class);
+Route::resource('pet', PetController::class)->middleware(AuthCheck::class);
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');

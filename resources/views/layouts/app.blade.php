@@ -27,7 +27,7 @@
             {{-- <x-helpers.sidebar /> --}}
 
             <!-- Guest -->
-            @if (is_null(Auth::user()))
+            @if (!Auth::check())
 
             <!-- Admin -->
             @elseif (Auth::user()->is_admin)

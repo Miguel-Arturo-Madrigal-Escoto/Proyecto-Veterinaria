@@ -26,7 +26,7 @@ class PetFactory extends Factory
             'gender'       => fake()->randomElement(['M', 'F']),
             'sterilized'   => fake()->boolean(),
             'weight'       => fake()->randomFloat(null, 1, 50),
-            'user_id'      => User::factory()
+            'user_id'      => User::all()->random()->id
         ];
     }
 }
