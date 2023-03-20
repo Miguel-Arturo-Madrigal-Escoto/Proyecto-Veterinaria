@@ -44,6 +44,8 @@
         <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
             {{ $slot }}
         </div>
+
+        @wireUiScripts
+        @vite(['resources/js/alpine.js', 'resources/js/darkmode.js'])
     </body>
-    @vite(['resources/js/darkmode.js'])
 </html>

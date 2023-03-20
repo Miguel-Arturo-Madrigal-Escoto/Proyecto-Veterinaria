@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePetRequest;
+use App\Http\Requests\UpdatePetRequest;
 use App\Models\Pet;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,15 +26,32 @@ class PetController extends Controller
      */
     public function create()
     {
-        //
+        return view('pet.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePetRequest $request)
     {
-        //
+        $pet = Pet::create([
+            'name'       => $request->input('name'),
+            'species'    => $request->input('species'),
+            'race'       => $request->input('race'),
+            'dob'        => Carbon::parse($request->input('dob')),
+            'color'      => $request->input('color'),
+            'gender'     => $request->input('gender'),
+            'sterilized' => $request->input('sterilized'),
+            'weight'     => $request->input('weight'),
+            'user_id'    => Auth::user()->id
+        ]);
+
+        notyf()
+            ->position('x', 'center')
+            ->position('y', 'top')
+            ->addSuccess("Mascota $pet->name añadida correctamente");
+
+        return redirect()->route('pet.show', $pet);
     }
 
     /**
@@ -47,15 +67,31 @@ class PetController extends Controller
      */
     public function edit(Pet $pet)
     {
-        //
+        return view('pet.edit', compact('pet'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pet $pet)
+    public function update(UpdatePetRequest $request, Pet $pet)
     {
-        //
+        $pet->name       = $request->input('name');
+        $pet->species    = $request->input('species');
+        $pet->race       = $request->input('race');
+        $pet->dob        = Carbon::parse($request->input('dob'));
+        $pet->color      = $request->input('color');
+        $pet->gender     = $request->input('gender');
+        $pet->sterilized = $request->input('sterilized');
+        $pet->weight     = $request->input('weight');
+
+        $pet->save();
+
+        notyf()
+            ->position('x', 'center')
+            ->position('y', 'top')
+            ->addInfo("Mascota $pet->name actualizada");
+
+        return redirect()->route('pet.show', $pet);
     }
 
     /**
@@ -64,10 +100,12 @@ class PetController extends Controller
     public function destroy(Pet $pet)
     {
         $pet->delete();
+
         notyf()
             ->position('x', 'center')
             ->position('y', 'top')
             ->addWarning("La mascota $pet->name ha sido eliminada.");
+
         return redirect('/pet');
     }
 }

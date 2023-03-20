@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <x-helpers.simple-card-boilerplate size="md:w-5/12 sm:w-11/12">
         <x-slot:title>
@@ -43,7 +38,7 @@
                 @php $dob = new DateTimeImmutable($pet->dob); @endphp
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Fecha de nacimiento: </b>{{ $dob->format('d-m-Y') }}</span>
 
-                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Color: </b>{{ $pet->color }}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Color: </b><span class="text-transparent" style="background-color: {{$pet->color}}; border-radius: 5%;">{{ $pet->color }}</span></span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Género: </b>{{ ($pet->gender === 'M')? 'Macho': 'Hembra' }}</span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Esterilizado: </b>{{ ($pet->sterilized)? 'Si': 'No' }}</span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Peso: </b>{{ $pet->weight }}</span>

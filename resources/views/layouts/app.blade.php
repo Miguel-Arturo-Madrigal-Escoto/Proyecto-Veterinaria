@@ -14,6 +14,8 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+
+
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -26,25 +28,21 @@
             <!-- Sidebar -->
             {{-- <x-helpers.sidebar /> --}}
 
-            <!-- Guest -->
-            @if (!Auth::check())
+            <!-- User is admin (navbar/sidebar) -->
+            @if (Auth::user()->is_admin)
 
-            <!-- Admin -->
-            @elseif (Auth::user()->is_admin)
-
-            <!-- User -->
             @else
                 <x-auth.user-navbar />
             @endif
 
             <!-- Page Heading -->
-            {{-- @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            @if (isset($header))
+                <header>
+                    <div>
                         {{ $header }}
                     </div>
                 </header>
-            @endif --}}
+            @endif
 
             <!-- Page Content -->
             <main>
@@ -59,5 +57,8 @@
 
         <!-- FontAwesome -->
         <script src="https://kit.fontawesome.com/796b904c46.js" crossorigin="anonymous"></script>
+
+        @wireUiScripts
+        @vite('resources/js/alpine.js')
     </body>
 </html>
