@@ -33,6 +33,7 @@
 
             @else
                 <x-auth.user-navbar />
+                <x-auth.user-sidebar />
             @endif
 
             <!-- Page Heading -->

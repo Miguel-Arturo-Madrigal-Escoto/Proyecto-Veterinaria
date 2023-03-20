@@ -35,4 +35,9 @@ class StorePetRequest extends FormRequest
             // 'photo' => ['required', 'string'],
         ];
     }
+
+    public function messages()
+    {
+
+    }
 }
