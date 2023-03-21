@@ -1,4 +1,4 @@
-<x-action-section>
+<x-action-section id="logout-other-browser-session">
     <x-slot name="title">
         {{ __('Browser Sessions') }}
     </x-slot>
