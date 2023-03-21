@@ -10,20 +10,20 @@
     ];
     --}}
 
-    <div class="mb-2 flex flex-col justify-center">
+    <div class="mb-4 flex flex-col justify-center">
         <label for="{{$radios[0]['name']}}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white self-start">{{ $radios[0]['label'] }}</label>
         @foreach ($radios as $radio)
-            <div class="flex items-center mb-4">
+            <div class="flex items-center">
                 @if ($radio['checked'])
-                    <input checked id="{{$radio['id']}}" type="radio" value="{{$radio['value']}}" name="{{$radio['name']}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:model.defer="state.{{$radios[0]['name']}}">
+                    <input checked id="{{$radio['id']}}" type="radio" value="{{$radio['value']}}" name="{{$radio['name']}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 my-2" wire:model.defer="state.{{$radios[0]['name']}}">
                 @else
-                    <input id="{{$radio['id']}}" type="radio" value="{{$radio['value']}}" name="{{$radio['name']}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:model.defer="state.{{$radios[0]['name']}}">
+                    <input id="{{$radio['id']}}" type="radio" value="{{$radio['value']}}" name="{{$radio['name']}}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 my-2" wire:model.defer="state.{{$radios[0]['name']}}">
                 @endif
                 <label for="genero-m" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $radio['text'] }}</label>
             </div>
         @endforeach
 
         @error($radios[0]['name'])
-            <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span class="font-medium">{{ $message }}</span></p>
+            <p id="filled_error_help" class="mb-2 text-xs text-red-600"><span class="font-medium">{{ $message }}</span></p>
         @enderror
     </div>

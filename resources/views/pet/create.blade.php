@@ -66,7 +66,8 @@
 
                     <x-helpers.date-picker value="{{old('dob')??now()}}" name="dob" text="Fecha de nacimiento"   />
 
-                    <x-helpers.color-picker value="" name="color" text="Color" />
+                    <x-helpers.color-picker colorSelected="{{old('color')??'#000000'}}" name="color" text="Color" />
+
 
                     @php
                         $gender = [];

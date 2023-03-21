@@ -1,4 +1,4 @@
-<div class="relative max-w-sm mb-6 flex flex-col justify-center">
+<div class="relative max-w-sm mb-4 flex flex-col justify-center">
     @php $dob = new DateTimeImmutable($value); @endphp
     <label for="{{$name}}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white self-start">{{ $text }}</label>
     <div class="absolute inset-y-12 left-0 flex items-center pl-3 pointer-events-none">

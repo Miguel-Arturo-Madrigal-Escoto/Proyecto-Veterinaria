@@ -11,7 +11,7 @@ class ColorPicker extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $name, public string $text, public $value)
+    public function __construct(public string $text, public string $name, public string $colorSelected)
     {
         //
     }
