@@ -45,7 +45,6 @@
             {{ $slot }}
         </div>
 
-        @wireUiScripts
-        @vite(['resources/js/alpine.js', 'resources/js/darkmode.js'])
+        @vite(['resources/js/darkmode.js'])
     </body>
 </html>

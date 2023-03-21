@@ -14,8 +14,6 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-
-
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -37,13 +35,13 @@
             @endif
 
             <!-- Page Heading -->
-            @if (isset($header))
+            {{-- @if (isset($header))
                 <header>
                     <div>
                         {{ $header }}
                     </div>
                 </header>
-            @endif
+            @endif --}}
 
             <!-- Page Content -->
             <main>
@@ -59,7 +57,5 @@
         <!-- FontAwesome -->
         <script src="https://kit.fontawesome.com/796b904c46.js" crossorigin="anonymous"></script>
 
-        @wireUiScripts
-        @vite('resources/js/alpine.js')
     </body>
 </html>
