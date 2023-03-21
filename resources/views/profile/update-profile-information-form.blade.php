@@ -54,11 +54,11 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-helpers.form-field value="{{old('name')??Auth::user()->name}}" type="text" field="name" text="Nombre" placeholder="" />
+            <x-helpers.form-field value="{{old('name')??Auth::user()->name}}" type="text" field="name" text="Nombre(s)" placeholder="" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <x-helpers.form-field value="{{old('lastname')??Auth::user()->lastname}}" type="text" field="lastname" text="Apellido" placeholder="" />
+            <x-helpers.form-field value="{{old('lastname')??Auth::user()->lastname}}" type="text" field="lastname" text="Apellido(s)" placeholder="" />
         </div>
 
         <!-- Email -->

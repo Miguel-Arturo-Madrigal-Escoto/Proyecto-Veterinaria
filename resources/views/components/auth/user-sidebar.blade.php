@@ -64,7 +64,7 @@
                         'path' => '/user/profile/#two-factor-auth',
                     ];
                     $submenu[] = [
-                        'text' => 'Cerrar sesiones activas',
+                        'text' => 'Cerrar sesiones abiertas',
                         'path' => '/user/profile/#logout-other-browser-session',
                     ];
                     $submenu[] = [
