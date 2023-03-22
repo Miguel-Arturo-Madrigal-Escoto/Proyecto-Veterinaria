@@ -31,8 +31,22 @@
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Fecha: </b>{{ $date->format('d-m-Y') }}</span>
                 <p class="text-sm text-gray-500 dark:text-gray-300 py-2 break-all"><b>Motivo: </b>{{ $appointment->reason }}</p>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Costo: </b>${{ $appointment->cost }}</span>
-                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Estatus: </b>{{ $appointment->status }}</span>
-                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Pagado: </b>{{ $appointment->paid }}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Estatus: </b>
+                    @if ($appointment->status == 0)
+                        Pendiente
+                    @elseif ($appointment->status == 1)
+                        Confirmada
+                    @else
+                        Rechazada
+                    @endif
+                </span>
+                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Pagado: </b>
+                    @if ($appointment->paid)
+                        <i class="fa-solid fa-circle-check text-green-600 fa-lg"></i>
+                    @else
+                        <i class="fa-solid fa-circle-xmark text-red-600 fa-lg"></i>
+                    @endif
+                </span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Mascota: </b>{{ $pet->name }}</span>
 
             </div>

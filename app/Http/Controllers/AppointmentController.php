@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAppointmentRequest;
+use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Pet;
 use Carbon\Carbon;
@@ -35,7 +36,7 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
-        Appointment::create([
+        $appointment = Appointment::create([
             'date'    => Carbon::parse($request->date),
             'reason'  => $request->reason,
             'pet_id'  => $request->pet_id,
@@ -47,7 +48,7 @@ class AppointmentController extends Controller
             ->position('y', 'top')
             ->addInfo("Cita creada correctamente. Por favor espere a que sea confirmada");
 
-        return view('appointment.index');
+        return redirect()->route('appointment.show', $appointment);
     }
 
     /**
@@ -64,15 +65,34 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        $pets = Pet::where('user_id', Auth::user()->id)->get();
+        return view('appointment.edit', compact('appointment', 'pets'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(UpdateAppointmentRequest $request, Appointment $appointment)
     {
-        //
+        // User
+        if (Auth::user()->is_admin){}
+        else {
+            $appointment->date   = Carbon::parse($request->date);
+            $appointment->reason = $request->reason;
+            $appointment->pet_id = $request->pet_id;
+
+            // Al actualizar una cita, el estatus cambia a pendiente
+            $appointment->status = 0;
+
+            $appointment->save();
+
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addSuccess("La cita fue actualizada correctamente");
+
+            return redirect()->route('appointment.show', $appointment);
+        }
     }
 
     /**
@@ -80,6 +100,13 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        $appointment->delete();
+
+        notyf()
+            ->position('x', 'center')
+            ->position('y', 'top')
+            ->addError("La cita ha sido cancelada y eliminada.");
+
+        return redirect()->route('appointment.index');
     }
 }
