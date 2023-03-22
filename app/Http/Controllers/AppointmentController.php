@@ -16,7 +16,9 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return view('appointment.index');
+        if (Auth::user()->is_admin) $appointments = Appointment::paginate(5);
+        else $appointments = Appointment::where('user_id', Auth::user()->id)->paginate(5);
+        return view('appointment.index', compact('appointments'));
     }
 
     /**

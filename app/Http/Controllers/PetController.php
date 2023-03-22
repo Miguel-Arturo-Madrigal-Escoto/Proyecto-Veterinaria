@@ -16,7 +16,7 @@ class PetController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->is_admin) $pets = Pet::paginate(10);
+        if (Auth::user()->is_admin) $pets = Pet::paginate(5);
         else $pets = Pet::where('user_id', Auth::user()->id)->paginate(10);
         return view('pet.index', compact('pets'));
     }
