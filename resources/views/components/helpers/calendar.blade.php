@@ -2,11 +2,11 @@
 <!-- This is an example component -->
 <div>
 
-	<link rel="dns-prefetch" href="//unpkg.com" />
+	{{-- <link rel="dns-prefetch" href="//unpkg.com" />
 	<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
 
 	<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
-	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script> --}}
 
 	<style>
 		[x-cloak] {
@@ -14,13 +14,13 @@
 		}
 	</style>
 
-<div class="antialiased sans-serif h-screen">
+<div class="sans-serif flex justify-center ml-auto sm:w-full">
 	<div x-data="app()" x-init="[initDate(), getNoOfDays()]" x-cloak>
-		<div class="container mx-auto px-4 py-2 md:py-24">
+		<div class="container px-4 py-2 ">
 
-			<!-- <div class="font-bold text-gray-800 text-xl mb-4">
-				Schedule Tasks
-			</div> -->
+			<div class="font-bold text-gray-800 text-xl mb-4">
+				Próximos eventos
+			</div>
 
 			<div class="bg-white rounded-lg shadow overflow-hidden">
 

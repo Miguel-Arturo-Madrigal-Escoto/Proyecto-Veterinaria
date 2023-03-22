@@ -11,5 +11,5 @@
             </div>
         </div>
     </div> --}}
-    <x-helpers.calendar />
+    <x-auth.user-dashboard />
 </x-app-layout>

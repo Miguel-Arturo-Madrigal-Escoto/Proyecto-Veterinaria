@@ -20,7 +20,7 @@
     <body class="font-sans antialiased overflow-x-hidden">
         <x-banner />
 
-        <div class="min-h-screen bg-white dark:bg-slate-900">
+        <div class="min-h-screen bg-white dark:bg-slate-900" x-data="{ hidden: true }">
             {{-- @livewire('navigation-menu') --}}
 
             <!-- Sidebar -->
@@ -52,7 +52,7 @@
         @stack('modals')
 
         @livewireScripts
-        @vite(['resources/js/sidebar.js', 'resources/js/darkmode.js'])
+        @vite(['resources/js/darkmode.js'])
 
         <!-- FontAwesome -->
         <script src="https://kit.fontawesome.com/796b904c46.js" crossorigin="anonymous"></script>
