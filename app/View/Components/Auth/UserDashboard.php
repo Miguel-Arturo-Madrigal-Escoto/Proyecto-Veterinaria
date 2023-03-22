@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Helpers;
+namespace App\View\Components\Auth;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Calendar extends Component
+class UserDashboard extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class Calendar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.helpers.calendar');
+        return view('components.auth.user-dashboard');
     }
 }
