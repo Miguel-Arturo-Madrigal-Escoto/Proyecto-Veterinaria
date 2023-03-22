@@ -55,7 +55,8 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        //
+        $pet = Pet::find($appointment->pet_id);
+        return view('appointment.show', compact('appointment', 'pet'));
     }
 
     /**
