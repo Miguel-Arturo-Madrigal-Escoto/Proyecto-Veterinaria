@@ -30,11 +30,11 @@
                     $submenu = [];
                     $submenu[] = [
                         'text' => 'Consultar',
-                        'path' => '#',
+                        'path' => route('appointment.index')
                     ];
                     $submenu[] = [
                         'text' => 'Agendar',
-                        'path' => '/user/profile#update-profile-info',
+                        'path' => route('appointment.create')
                     ];
                 @endphp
                 <x-helpers.sidebar-item-with-submenu text="Mis citas" :$submenu>

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthCheck;
+use App\Models\Appointment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +23,10 @@ Route::controller(HomeController::class)->group(function() {
     Route::get('/', 'index');
 });
 
-Route::resource('pet', PetController::class)->middleware(AuthCheck::class);
+// 'auth.check' => AuthCheck::class
+Route::resource('pet', PetController::class)->middleware('auth.check');
+Route::resource('appointment', AppointmentController::class)->middleware('auth.check');
+
 Route::resource('user', UserController::class);
 
 Route::middleware([
