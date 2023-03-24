@@ -1,17 +1,17 @@
 <?php
 
-namespace App\View\Components\Auth;
+namespace App\View\Components\Helpers;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class UserDashboard extends Component
+class CardWithImage extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public $appointments, public $pets)
+    public function __construct(public $title, public $image, public $alt)
     {
         //
     }
@@ -21,6 +21,6 @@ class UserDashboard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.auth.user-dashboard');
+        return view('components.helpers.card-with-image');
     }
 }
