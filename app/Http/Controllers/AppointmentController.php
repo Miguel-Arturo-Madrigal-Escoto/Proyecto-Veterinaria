@@ -77,13 +77,26 @@ class AppointmentController extends Controller
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
     {
         // User
-        if (Auth::user()->is_admin){}
+        if (Auth::user()->is_admin){
+            $appointment->cost = $request->cost;
+            $appointment->status = $request->status;
+            $appointment->paid = $request->paid;
+
+            $appointment->save();
+
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addSuccess("La cita fue actualizada correctamente");
+
+            return redirect()->route('appointment.show', $appointment);
+        }
         else {
             $appointment->date   = Carbon::parse($request->date);
             $appointment->reason = $request->reason;
             $appointment->pet_id = $request->pet_id;
 
-            // Al actualizar una cita, el estatus cambia a pendiente
+            // Al actualizar una cita, el estatus cambia a pendiente (por el cliente)
             $appointment->status = 0;
 
             $appointment->save();

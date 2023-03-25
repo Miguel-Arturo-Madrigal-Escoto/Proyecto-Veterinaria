@@ -43,8 +43,8 @@
                         /* [id, value, name, text] */
                         $paid[] = [
                             'id' => 'paid-y',
-                            'value' => 'M',
-                            'name' => 1,
+                            'value' => 1,
+                            'name' => 'paid',
                             'text' => 'Si',
                             'checked' => old('paid')? old('paid') == 1 : $appointment->paid == 1,
                             'label'  => 'Pagado'

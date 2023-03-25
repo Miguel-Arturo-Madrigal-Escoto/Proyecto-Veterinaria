@@ -23,11 +23,20 @@ class UpdateAppointmentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'date'    => ['required', 'date',   'after:today'],
-            'reason'  => ['required', 'string', 'min:20'],
-            'pet_id'  => ['required', 'numeric', Rule::exists('pets', 'id')->where('user_id', Auth::user()->id)]
-        ];
+        if (Auth::user()->is_admin){
+            return [
+                'cost'    => ['required', 'numeric'],
+                'status'  => ['required', Rule::in(['0', '1', '2'])],
+                'paid'  => ['required', 'boolean']
+            ];
+        }
+        else {
+            return [
+                'date'    => ['required', 'date',   'after:today'],
+                'reason'  => ['required', 'string', 'min:20'],
+                'pet_id'  => ['required', 'numeric', Rule::exists('pets', 'id')->where('user_id', Auth::user()->id)]
+            ];
+        }
     }
 
     /**
@@ -37,14 +46,26 @@ class UpdateAppointmentRequest extends FormRequest
      */
     public function messages(): array
     {
-        return [
-            'reason.required'     => 'El motivo de la cita es requerido.',
-            'reason.min'          => 'El motivo de la cita requiere por lo menos 20 caracteres.',
-            'date.required'       => 'La fecha de la cita es requerida.',
-            'date.date'           => 'La fecha de la cita es inválida.',
-            'date.after'          => 'La fecha de la cita debe ser posterior a hoy.',
-            'pet_id.required'     => 'Debe seleccionarse una mascota.',
-            'pet_id.exists'       => 'La mascota seleccionada no existe.',
-        ];
+        if (Auth::user()->is_admin){
+            return [
+                'cost.required'    => 'El campo costo es requerido.',
+                'cost.numeric'    => 'El campo costo debe de ser numérico.',
+                'status.required'  =>  'El campo estatus es requerido.',
+                'status.in'  =>  'El estatus proporcionado es inválido.',
+                'paid.required'  =>  'Es necesario seleccionar un pago.',
+                'paid.boolean'  => 'El pago seleccionado es inválido.'
+            ];
+        }
+        else {
+            return [
+                'reason.required'     => 'El motivo de la cita es requerido.',
+                'reason.min'          => 'El motivo de la cita requiere por lo menos 20 caracteres.',
+                'date.required'       => 'La fecha de la cita es requerida.',
+                'date.date'           => 'La fecha de la cita es inválida.',
+                'date.after'          => 'La fecha de la cita debe ser posterior a hoy.',
+                'pet_id.required'     => 'Debe seleccionarse una mascota.',
+                'pet_id.exists'       => 'La mascota seleccionada no existe.',
+            ];
+        }
     }
 }
