@@ -26,9 +26,9 @@
             <!-- Sidebar -->
             {{-- <x-helpers.sidebar /> --}}
 
-            <!-- User is admin (navbar/sidebar) -->
             @if (Auth::user()->is_admin)
-
+                <x-auth.admin-navbar />
+                <x-auth.admin-sidebar />
             @else
                 <x-auth.user-navbar />
                 <x-auth.user-sidebar />

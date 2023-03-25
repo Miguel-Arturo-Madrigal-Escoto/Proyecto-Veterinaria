@@ -1,5 +1,7 @@
 <x-app-layout>
-    {{-- {{ print_r($appointments) }} --}}
-
-    <x-auth.user-dashboard :$appointments :$pets />
+    @if(Auth::user()->is_admin)
+        <x-auth.admin-dashboard :$appointments :$pets :$clients />
+    @else
+        <x-auth.user-dashboard :$appointments :$pets />
+    @endif
 </x-app-layout>

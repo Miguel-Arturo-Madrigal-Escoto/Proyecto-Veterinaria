@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Pet;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -16,6 +17,8 @@ class DashboardController extends Controller
         // Citas del administrador (todas)
         else
             $appointments = Appointment::where('user_id', Auth::user()->id)->get();
+
+        $clients = User::where('is_admin', false)->get();
 
         $pets = [
             'dog' => Pet::where([
@@ -60,17 +63,17 @@ class DashboardController extends Controller
         $events = [];
         foreach($appointments as $appointment){
             $pet    = Pet::find($appointment->pet_id);
-            // $user   = User::find($appointment->user_id);
+            $user   = User::find($appointment->user_id);
 
             $events[] = [
                 'id'    =>  $appointment->id,
-                'title' => "Cita con $pet->name",
+                'title' => (Auth::user()->is_admin)? "Cita con $user->name, mascota: $pet->name" : "Cita con $pet->name",
                 'start' =>  $appointment->date,
                 'url'   =>  route('appointment.show', $appointment),
                 'status' =>  $appointment->status
             ];
         }
 
-        return view('dashboard', ['appointments' => $events, 'pets' => $pets]);
+        return view('dashboard', ['appointments' => $events, 'pets' => $pets, 'clients' => $clients]);
     }
 }
