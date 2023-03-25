@@ -31,7 +31,7 @@ class UpdatePetRequest extends FormRequest
             'color'      => ['required', 'string', 'regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i'],
             'gender'     => ['required', 'string', 'size:1', Rule::in(['M', 'F'])],
             'sterilized' => ['required', 'boolean', Rule::in(['1', '0'])],
-            'weight'     => ['required', 'numeric'],
+            'weight'     => ['required', 'numeric', 'gt:0'],
             // 'photo' => ['required', 'string'],
         ];
 
@@ -67,6 +67,7 @@ class UpdatePetRequest extends FormRequest
             'sterilized.in' => 'El campo esterilizado no es válido.',
             'weight.required' => 'El campo peso es requerido.',
             'weight.numeric' => 'El campo peso es debe ser numérico.',
+            'weight.gt' => 'El campo peso es debe ser mayor o igual a 0.',
         ];
 
         if (Auth::user()->is_admin){

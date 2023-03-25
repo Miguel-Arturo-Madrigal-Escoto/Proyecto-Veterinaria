@@ -25,7 +25,7 @@ class UpdateAppointmentRequest extends FormRequest
     {
         if (Auth::user()->is_admin){
             return [
-                'cost'    => ['required', 'numeric'],
+                'cost'    => ['required', 'numeric', 'gte:0'],
                 'status'  => ['required', Rule::in(['0', '1', '2'])],
                 'paid'  => ['required', 'boolean']
             ];
@@ -50,6 +50,7 @@ class UpdateAppointmentRequest extends FormRequest
             return [
                 'cost.required'    => 'El campo costo es requerido.',
                 'cost.numeric'    => 'El campo costo debe de ser numérico.',
+                'cost.gte'    => 'El campo costo debe de ser mayor o igual a 0.',
                 'status.required'  =>  'El campo estatus es requerido.',
                 'status.in'  =>  'El estatus proporcionado es inválido.',
                 'paid.required'  =>  'Es necesario seleccionar un pago.',
