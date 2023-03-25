@@ -11,42 +11,47 @@ class DashboardController extends Controller
     public function __invoke()
     {
         // Citas del usuario logeado
-        $appointments = Appointment::where('user_id', Auth::user()->id)->get();
+        if (Auth::user()->is_admin)
+            $appointments = Appointment::all();
+        // Citas del administrador (todas)
+        else
+            $appointments = Appointment::where('user_id', Auth::user()->id)->get();
+
         $pets = [
             'dog' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'dog']
             ])->count(),
             'cat' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'cat']
             ])->count(),
             'bird' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'bird']
             ])->count(),
             'fish' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'fish']
             ])->count(),
             'frog' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'frog']
             ])->count(),
             'pig' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'pig']
             ])->count(),
             'horse' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'horse']
             ])->count(),
             'cow' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'cow']
             ])->count(),
             'other' => Pet::where([
-                ['user_id', Auth::user()->id],
+                (Auth::user()->is_admin)? ['user_id', '>', 0] : ['user_id', Auth::user()->id],
                 ['species', 'other']
             ])->count(),
         ];
