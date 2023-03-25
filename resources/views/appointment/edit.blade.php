@@ -12,21 +12,72 @@
                     @csrf
                     @method('put')
 
-                    <x-helpers.date-picker value="{{old('date')??$appointment->date}}" name="date" text="Fecha"   />
+                    @if(Auth::user()->is_admin)
 
-                    <x-helpers.form-textarea field="reason" text="Motivo" value="{{old('reason')??$appointment->reason}}" />
+                        <x-helpers.form-field value="{{old('cost')??$appointment->cost}}" type="text" field="cost" text="Costo" placeholder="" />
 
-                    @foreach ($pets as $pet)
-                        @php
+                            @php
+                            $options = [];
+
                             $options[] = [
-                                'value'    => $pet->id,
-                                'text'     => $pet->name,
-                                'selected' => old('pet_id')? old('pet_id') == old('pet_id') : $appointment->pet_id == $pet->id
+                                'value'    => 0,
+                                'text'     => 'Pendiente',
+                                'selected' => old('status')? old('status') == 0 : $appointment->status == 0
                             ];
-                        @endphp
-                    @endforeach
+                            $options[] = [
+                                'value'    => 1,
+                                'text'     => 'Confirmada',
+                                'selected' => old('status')? old('status') == 1 : $appointment->status == 1
+                            ];
+                            $options[] = [
+                                'value'    => 2,
+                                'text'     => 'Rechazada',
+                                'selected' => old('status')? old('status') == 2 : $appointment->status == 2
+                            ];
 
-                    <x-helpers.form-select name="pet_id" text="Mascota" :$options />
+                        @endphp
+                        <x-helpers.form-select name="status" text="Estatus" :options="$options" />
+
+                        @php
+                        $paid = [];
+                        /* [id, value, name, text] */
+                        $paid[] = [
+                            'id' => 'paid-y',
+                            'value' => 'M',
+                            'name' => 1,
+                            'text' => 'Si',
+                            'checked' => old('paid')? old('paid') == 1 : $appointment->paid == 1,
+                            'label'  => 'Pagado'
+                        ];
+                        $paid[] = [
+                            'id' => 'paid-n',
+                            'value' => 0,
+                            'name' => 'paid',
+                            'text' => 'No',
+                            'checked' => old('paid')? old('paid') == 0 : $appointment->paid == 0,
+                            'label'  => 'Pagado'
+                        ];
+                    @endphp
+                    <x-helpers.form-radios :radios="$paid" />
+
+                    @else
+                        <x-helpers.date-picker value="{{old('date')??$appointment->date}}" name="date" text="Fecha"   />
+
+                        <x-helpers.form-textarea field="reason" text="Motivo" value="{{old('reason')??$appointment->reason}}" />
+
+                        @foreach ($pets as $pet)
+                            @php
+                                $options[] = [
+                                    'value'    => $pet->id,
+                                    'text'     => $pet->name,
+                                    'selected' => old('pet_id')? old('pet_id') == old('pet_id') : $appointment->pet_id == $pet->id
+                                ];
+                            @endphp
+                        @endforeach
+
+                        <x-helpers.form-select name="pet_id" text="Mascota" :$options />
+
+                    @endif
 
                     <div class="mb-6 mt-12 flex flex-col justify-center m-auto w-1/3">
                         <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>
