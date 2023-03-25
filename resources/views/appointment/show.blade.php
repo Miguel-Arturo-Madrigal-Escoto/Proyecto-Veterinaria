@@ -49,6 +49,10 @@
                 </span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Mascota: </b>{{ $pet->name }}</span>
 
+                @if(Auth::user()->is_admin)
+                    <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Cliente: </b>{{ $user->name . ' ' . $user->lastname }}</span>
+                @endif
+
             </div>
         </div>
     </x-helpers.simple-form-boilerplate>

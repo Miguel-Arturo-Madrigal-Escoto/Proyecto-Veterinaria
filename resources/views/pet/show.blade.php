@@ -42,6 +42,10 @@
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Género: </b>{{ ($pet->gender === 'M')? 'Macho': 'Hembra' }}</span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Esterilizado: </b>{{ ($pet->sterilized)? 'Si': 'No' }}</span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Peso: </b>{{ $pet->weight }}</span>
+            
+                @if(Auth::user()->is_admin)
+                    <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Dueño: </b>{{ $user->name . ' ' . $user->lastname }}</span>
+                @endif
             </div>
         </div>
     </x-helpers.simple-form-boilerplate>

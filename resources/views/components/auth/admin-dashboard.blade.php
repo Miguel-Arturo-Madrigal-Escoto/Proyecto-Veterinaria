@@ -12,7 +12,7 @@
     @endforeach
 
     <div class="flex flex-col justify-center items-center mx-3  my-4 lg:my-14">
-        <h1 class="flex flex-row justify-between items-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl dark:text-white">Bienvenido: {{ Auth::user()->name }}</h1>
+        <h1 class="flex flex-row justify-between items-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl dark:text-white">Bienvenido: {{ Auth::user()->name . ' ' . Auth::user()->lastname }}</h1>
     </div>
 
     <div class="flex flex-row justify-evenly items-center my-4 p-10 flex-wrap">

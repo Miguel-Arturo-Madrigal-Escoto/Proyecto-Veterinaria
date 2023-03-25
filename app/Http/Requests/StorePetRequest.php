@@ -23,7 +23,7 @@ class StorePetRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name'       => ['required', 'string', 'regex:/^[\pL\s\-]+$/u'],
             'species'    => ['required', 'string', Rule::notIn(['Elige una opción']), Rule::in(['dog', 'cat', 'bird', 'fish', 'frog', 'pig', 'horse', 'cow', 'other'])],
             'race'       => ['required', 'string', 'regex:/^[\pL\s\-]+$/u'],
@@ -34,6 +34,12 @@ class StorePetRequest extends FormRequest
             'weight'     => ['required', 'numeric'],
             // 'photo' => ['required', 'string'],
         ];
+
+        if (Auth::user()->is_admin){
+            $rules['user_id'] = ['required', Rule::exists('users', 'id')];
+        }
+
+        return $rules;
     }
 
     /**
@@ -43,7 +49,7 @@ class StorePetRequest extends FormRequest
      */
     public function messages(): array
     {
-        return [
+        $messages = [
             'name.required' => 'El campo nombre es requerido.',
             'name.regex' => 'El campo nombre debe tener únicamente letras.',
             'species.required' => 'El campo especie es requerido.',
@@ -62,5 +68,12 @@ class StorePetRequest extends FormRequest
             'weight.required' => 'El campo peso es requerido.',
             'weight.numeric' => 'El campo peso es debe ser numérico.',
         ];
+
+        if (Auth::user()->is_admin){
+            $messages['user_id.required'] = 'Es necesario proporcionar un cliente.';
+            $messages['user_id.exists'] = 'El cliente proporcionado no esta registrado.';
+        }
+
+        return $messages;
     }
 }

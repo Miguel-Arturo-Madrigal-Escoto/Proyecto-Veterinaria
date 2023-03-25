@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePetRequest;
 use App\Http\Requests\UpdatePetRequest;
 use App\Models\Pet;
-use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +26,8 @@ class PetController extends Controller
      */
     public function create()
     {
-        return view('pet.create');
+        $users = User::all();
+        return view('pet.create', compact('users'));
     }
 
     /**
@@ -59,7 +60,8 @@ class PetController extends Controller
      */
     public function show(Pet $pet)
     {
-        return view('pet.show', compact('pet'));
+        $user = User::find($pet->user_id);
+        return view('pet.show', compact('pet', 'user'));
     }
 
     /**

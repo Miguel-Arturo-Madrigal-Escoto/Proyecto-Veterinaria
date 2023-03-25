@@ -6,6 +6,7 @@ use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Pet;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +58,8 @@ class AppointmentController extends Controller
     public function show(Appointment $appointment)
     {
         $pet = Pet::find($appointment->pet_id);
-        return view('appointment.show', compact('appointment', 'pet'));
+        $user = User::find($appointment->user_id);
+        return view('appointment.show', compact('appointment', 'pet', 'user'));
     }
 
     /**

@@ -3,7 +3,7 @@
     <x-helpers.simple-form-boilerplate>
         <x-slot:title>
             <div class="flex flex-row justify-center items-center">
-                <h1>Mis Mascotas</h1>
+                <h1>{{ (!Auth::user()->is_admin)? 'Mis ' : '' }}Mascotas</h1>
             </div>
         </x-slot:title>
         <div class="p-3">
