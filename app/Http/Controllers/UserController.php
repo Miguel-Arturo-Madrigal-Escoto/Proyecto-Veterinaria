@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        dd($user);
+        return view('user.show', compact('user'));
     }
 
     /**
@@ -62,6 +62,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        notyf()
+            ->position('x', 'center')
+            ->position('y', 'top')
+            ->addWarning("El cliente $user->name $user->lastname ha sido eliminado.");
+
+        return redirect()->route('user.index');
     }
 }
