@@ -27,8 +27,7 @@ Route::controller(HomeController::class)->group(function() {
 // 'auth.check' => AuthCheck::class
 Route::resource('pet', PetController::class)->middleware('auth.check');
 Route::resource('appointment', AppointmentController::class)->middleware('auth.check');
-
-Route::resource('user', UserController::class);
+Route::resource('user', UserController::class)->middleware('auth.check.admin');
 
 Route::middleware([
     'auth:sanctum',

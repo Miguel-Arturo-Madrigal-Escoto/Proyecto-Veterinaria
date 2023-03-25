@@ -12,7 +12,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::where('is_admin', false)->paginate(10);
+
+        return view('user.index', compact('users'));
     }
 
     /**
