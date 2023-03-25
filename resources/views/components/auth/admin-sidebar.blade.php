@@ -53,12 +53,12 @@ x-show="!hidden"
                     $submenu = [];
                     $submenu[] = [
                         'text' => 'Consultar',
-                        'path' => '#',
+                        'path' => route('user.index'),
                     ];
-                    $submenu[] = [
-                        'text' => 'Registrar',
-                        'path' => '#',
-                    ];
+                    // $submenu[] = [
+                    //     'text' => 'Registrar',
+                    //     'path' => '#',
+                    // ];
                 @endphp
                 <x-helpers.sidebar-item-with-submenu text="Clientes" :$submenu>
                     <i class="fa-solid fa-users fa-lg text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
