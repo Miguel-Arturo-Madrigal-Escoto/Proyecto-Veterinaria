@@ -18,11 +18,11 @@
                         {{-- <li>
                             <a href={{ route('pet.edit', $user) }} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Editar</a>
                         </li> --}}
-                        <form action={{ route('user.destroy', $user)  }} method="POST">
+                        {{-- <form action={{ route('user.destroy', $user)  }} method="POST">
                             @csrf
                             @method('delete')
                             <button type="submit" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Eliminar</button>
-                        </form>
+                        </form> --}}
                     </ul>
                 </div>
             </div>

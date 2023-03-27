@@ -15,8 +15,8 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <x-helpers.form-field value="{{old('email')}}" type="email" field="email" text="Email" placeholder="Ej: juan@gmail.com" />
-            <x-helpers.form-field value="{{old('password')}}" type="password" field="password" text="Contraseña" placeholder="* * * * * *" />
+            <x-helpers.form-field-without-errors value="{{old('email')}}" type="email" field="email" text="Email" placeholder="Ej: juan@gmail.com" />
+            <x-helpers.form-field-without-errors  value="{{old('password')}}" type="password" field="password" text="Contraseña" placeholder="* * * * * *" />
 
 
             <div class="block mt-4">

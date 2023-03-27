@@ -26,4 +26,13 @@
         <h2 class="flex flex-row justify-center items-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Ubicación </h2>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.1334227314032!2d-103.39678274880835!3d20.745385586084552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af856a71382f%3A0x9f44b1e5544b0438!2sLomas%20Veterinaria!5e0!3m2!1ses-419!2smx!4v1679369888888!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div> --}}
+    <div class="flex flex-wrap justify-center items-center w-full h-full my-16">
+        <div class="flex flex-row justify-center items-center w-full h-full">
+            <h2 class="flex flex-row justify-center items-center mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-4xl dark:text-white">Nuestra ubicación: </h2>
+        </div>
+        <div class="flex flex-row justify-center items-center w-full h-full mx-6">
+            <img class="absolute left-0 w-6/12 lg:w-3/12" src="{{asset('img/dog-location.png')}}" alt="Perro en la ubicación" loading="lazy">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.1334227314032!2d-103.39678274880835!3d20.745385586084552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af856a71382f%3A0x9f44b1e5544b0438!2sLomas%20Veterinaria!5e0!3m2!1ses-419!2smx!4v1679369888888!5m2!1ses-419!2smx"  height="500" width="100%" class="mx-6" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
 </x-guest-layout>
