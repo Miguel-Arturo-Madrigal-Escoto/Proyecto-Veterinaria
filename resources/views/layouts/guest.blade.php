@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="dark:bg-slate-900">
+    <body class="bg-white dark:bg-slate-900">
         <!-- Navbar -->
         @php
             $navlinks = [];

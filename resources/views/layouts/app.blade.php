@@ -17,7 +17,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased overflow-x-hidden">
+    <body class="font-sans antialiased overflow-x-hidden bg-white dark:bg-slate-900">
         <x-banner />
 
         <div class="min-h-screen bg-white dark:bg-slate-900" x-data="{ hidden: true }">
