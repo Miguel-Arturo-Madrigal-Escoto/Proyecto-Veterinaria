@@ -13,8 +13,20 @@
             <div class="text-center">{{ $pet->race }}</div>
         </td>
         <td class="p-2 whitespace-nowrap">
-            @php $dob = new DateTimeImmutable($pet->dob); @endphp
-            <div class="text-center">{{ $dob->format('d-m-Y') }}</div>
+            @php
+                $ok = true;
+                try {
+                    $dob = new DateTimeImmutable($pet->dob);
+
+                } catch (\Throwable $th) {
+                    $ok = !$ok;
+                }
+            @endphp
+            @if($ok)
+                <div class="text-center">{{ $dob->format('d-m-Y') }}</div>
+            @else
+                <div class="text-center">{{now()}}</div>
+            @endif
         </td>
         <td class="p-2 whitespace-nowrap" >
             <div class="text-center text-transparent mx-auto" style="background-color:{{$pet->color}};border-radius: 10%; padding: .5rem; width: 50%">

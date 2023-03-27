@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="my-6 flex flex-col justify-center m-auto w-2/3">
-                    <a href="{{route('appointment.create')}}" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Registrar cliente</a>
+                    <a href="{{route('user.index')}}" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Ver clientes</a>
                 </div>
             </div>
         </x-helpers.card-with-image>

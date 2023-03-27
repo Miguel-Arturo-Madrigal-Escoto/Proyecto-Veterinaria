@@ -2,8 +2,20 @@
     <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
     <tr class="font-semibold  text-gray-500 dark:text-gray-300">
         <td class="p-2 whitespace-nowrap">
-            @php $date = new DateTimeImmutable($appointment->date); @endphp
-            <div class="text-center">{{ $date->format('d-m-Y') }}</div>
+            @php
+                $ok = true;
+                try {
+                    $date = new DateTimeImmutable($appointment->date);
+
+                } catch (\Throwable $th) {
+                    $ok = !$ok;
+                }
+            @endphp
+            @if($ok)
+                <div class="text-center">{{ $date->format('d-m-Y') }}</div>
+            @else
+                <div class="text-center">{{now()}}</div>
+            @endif
         </td>
         <td class="p-2 whitespace-nowrap" >
             <div class="text-center">
