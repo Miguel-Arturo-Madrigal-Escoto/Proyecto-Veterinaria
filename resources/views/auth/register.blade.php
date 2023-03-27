@@ -4,7 +4,7 @@
             <img class="w-20 h-20 rounded-full" src="{{asset('img/logo.PNG')}}" alt="Rounded avatar">
         </x-slot>
 
-        <x-validation-errors class="mb-4" />
+        {{-- <x-validation-errors class="mb-4" /> --}}
 
         <form method="POST" action="{{ route('register') }}">
             @csrf

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->char('gender');
             $table->string('phone', 10);
             $table->boolean('is_admin')->default(0);
+            $table->softDeletes();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
             // $table->foreignId('current_team_id')->nullable();

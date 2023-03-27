@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('cost')->default(0);
             $table->integer('status')->default(0);
             $table->boolean('paid')->default(false);
+            $table->softDeletes();
             $table->foreignId('pet_id')->constrained('pets');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();

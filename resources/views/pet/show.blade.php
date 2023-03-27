@@ -18,9 +18,9 @@
                         <li>
                             <a href={{ route('pet.edit', $pet) }} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Editar</a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href={{ route('user.show', $pet->user_id) }} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dueño</a>
-                        </li>
+                        </li> --}}
                         <form action={{ route('pet.destroy', $pet)  }} method="POST">
                             @csrf
                             @method('delete')
@@ -40,9 +40,16 @@
 
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Color: </b><span class="text-transparent" style="background-color: {{$pet->color}}; border-radius: 5%;">{{ $pet->color }}</span></span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Género: </b>{{ ($pet->gender === 'M')? 'Macho': 'Hembra' }}</span>
-                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Esterilizado: </b>{{ ($pet->sterilized)? 'Si': 'No' }}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-300 py-2">
+                    <b>Esterilizado:</b>
+                    @if ($pet->sterilized)
+                        <i class="fa-solid fa-circle-check text-green-600 fa-lg"></i>
+                    @else
+                        <i class="fa-solid fa-circle-xmark text-red-600 fa-lg"></i>
+                    @endif
+                </span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Peso: </b>{{ $pet->weight }}</span>
-            
+
                 @if(Auth::user()->is_admin)
                     <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Dueño: </b>{{ $user->name . ' ' . $user->lastname }}</span>
                 @endif

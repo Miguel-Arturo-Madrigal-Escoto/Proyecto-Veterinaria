@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('sterilized');
             $table->float('weight');
             $table->unsignedBigInteger('user_id');
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

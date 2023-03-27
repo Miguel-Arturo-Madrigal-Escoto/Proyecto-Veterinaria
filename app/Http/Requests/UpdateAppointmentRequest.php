@@ -64,7 +64,8 @@ class UpdateAppointmentRequest extends FormRequest
                 'date.required'       => 'La fecha de la cita es requerida.',
                 'date.date'           => 'La fecha de la cita es inválida.',
                 'date.after'          => 'La fecha de la cita debe ser posterior a hoy.',
-                'pet_id.required'     => 'Debe seleccionarse una mascota.',
+                'pet_id.required'     => 'Debe seleccionarse una mascota válida.',
+                'pet_id.numeric'     => 'Debe seleccionarse una mascota válida.',
                 'pet_id.exists'       => 'La mascota seleccionada no existe.',
             ];
         }
