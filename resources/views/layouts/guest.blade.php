@@ -45,6 +45,7 @@
             {{ $slot }}
         </div>
 
+        <x-helpers.footer />
         @vite(['resources/js/darkmode.js'])
     </body>
 </html>
