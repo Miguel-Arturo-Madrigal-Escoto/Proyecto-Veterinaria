@@ -19,7 +19,10 @@ class AppointmentController extends Controller
     public function index()
     {
         if (Auth::user()->is_admin) $appointments = Appointment::paginate(5);
-        else $appointments = Appointment::where('user_id', Auth::user()->id)->paginate(5);
+        // else $appointments = Appointment::where('user_id', Auth::user()->id)->paginate(5);
+
+        // 1 - Many relationship (User -> Appointments)
+        else $appointments = User::find(Auth::user()->id)->appointments()->paginate(5);
         return view('appointment.index', compact('appointments'));
     }
 
@@ -28,7 +31,10 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        $pets = Pet::where('user_id', Auth::user()->id)->get();
+        // $pets = Pet::where('user_id', Auth::user()->id)->get();
+
+        // 1 - Many relationship (User -> Pets)
+        $pets = User::find(Auth::user()->id)->pets()->get();
         return view('appointment.create', compact('pets'));
     }
 
@@ -57,8 +63,14 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        $pet = Pet::find($appointment->pet_id);
-        $user = User::find($appointment->user_id);
+        // $pet = Pet::find($appointment->pet_id);
+        // $user = User::find($appointment->user_id);
+
+        // 1 - Many relationship (Appointment -> Pet)
+        $pet = $appointment->pet;
+        // 1 - Many relationship (Appointment -> User)
+        $user = $appointment->user;
+
         return view('appointment.show', compact('appointment', 'pet', 'user'));
     }
 
@@ -67,7 +79,10 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        $pets = Pet::where('user_id', Auth::user()->id)->get();
+        // $pets = Pet::where('user_id', Auth::user()->id)->get();
+
+        // 1 - Many relationship (User -> Pets)
+        $pets = User::find(Auth::user()->id)->pets()->get();
         return view('appointment.edit', compact('appointment', 'pets'));
     }
 

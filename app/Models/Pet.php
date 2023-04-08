@@ -27,4 +27,18 @@ class Pet extends Model
         'weight',
         'user_id'
     ];
+
+    /*
+        Many - 1 relationship (Pet -> User): Inversa (belongsTo)
+    */
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    /*
+        1 - Many relationship (Pet -> Appointments): hasMany
+    */
+    public function appointments(){
+        return $this->hasMany(Appointment::class);
+    }
 }

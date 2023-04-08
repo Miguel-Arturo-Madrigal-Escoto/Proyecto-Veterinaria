@@ -21,4 +21,18 @@ class Appointment extends Model
         'pet_id',
         'user_id'
     ];
+
+    /*
+        Many - 1 relationship (Appointment -> Pet): Inversa (belongsTo)
+    */
+    public function pet(){
+        return $this->belongsTo(Pet::class);
+    }
+
+    /*
+        Many - 1 relationship (Appointment -> User): Inversa (belongsTo)
+    */
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

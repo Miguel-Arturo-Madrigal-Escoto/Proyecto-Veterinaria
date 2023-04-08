@@ -18,7 +18,10 @@ class PetController extends Controller
     public function index()
     {
         if (Auth::user()->is_admin) $pets = Pet::paginate(5);
-        else $pets = Pet::where('user_id', Auth::user()->id)->paginate(10);
+        // else $pets = Pet::where('user_id', Auth::user()->id)->paginate(10);
+
+        // 1 - Many relationship (User -> Pets)
+        else $pets = User::find(Auth::user()->id)->pets()->paginate(5);
         return view('pet.index', compact('pets'));
     }
 
@@ -61,7 +64,10 @@ class PetController extends Controller
      */
     public function show(Pet $pet)
     {
-        $user = User::find($pet->user_id);
+        // $user = User::find($pet->user_id);
+
+        // 1 - Many relationship (User -> Pets)
+        $user = $pet->user;
         return view('pet.show', compact('pet', 'user'));
     }
 
