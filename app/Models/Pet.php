@@ -41,4 +41,12 @@ class Pet extends Model
     public function appointments(){
         return $this->hasMany(Appointment::class);
     }
+
+    /*
+        Many - Many relationship (Pet <-> Vaccines): belongsToMany
+    */
+    public function vaccines(){
+        return $this->belongsToMany(Vaccine::class);
+    }
+
 }

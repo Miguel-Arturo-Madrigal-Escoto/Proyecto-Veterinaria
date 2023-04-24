@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssociatePetVaccineRequest;
 use App\Http\Requests\StorePetRequest;
 use App\Http\Requests\UpdatePetRequest;
 use App\Models\Pet;
 use App\Models\User;
+use App\Models\Vaccine;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -117,4 +119,33 @@ class PetController extends Controller
 
         return redirect('/pet');
     }
+
+    /**
+     * Custom: apply vaccine to pet
+     */
+    public function applyVaccineIndex(){
+        $pets     = Pet::all();
+        $vaccines = Vaccine::all();
+
+        return view('vaccine.apply-vaccine', compact('pets', 'vaccines'));
+    }
+
+    /**
+     * Custom: assign vaccine to pet into pivot table
+     */
+    public function applyVaccineStore(AssociatePetVaccineRequest $request){
+        $pet = Pet::find($request->pet_id);
+
+        // Insert Many to Many row to pivot table with additional fields on: []
+        $pet->vaccines()->attach($request->vaccine_ids, ['date' => now()]);
+
+        notyf()
+            ->position('x', 'center')
+            ->position('y', 'top')
+            ->addInfo("Se han aplicado " . count($request->vaccine_ids) . " vacuna(s) a la mascota $pet->name");
+
+        // redirect to
+        return redirect()->route('vaccine.index');
+    }
+
 }

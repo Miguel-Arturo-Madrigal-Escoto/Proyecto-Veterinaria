@@ -42,6 +42,14 @@
                     </svg>
                     <div class="text-sm font-medium text-gray-900 dark:text-white">Clientes</div>
                 </a>
+
+                <a href="{{route('vaccine.index')}}" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600">
+                    <svg class="mx-auto mb-1 text-gray-500 w-7 h-7 dark:text-gray-400" fill="currentColor"
+                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11.25l1.5 1.5.75-.75V8.758l2.276-.61a3 3 0 10-3.675-3.675l-.61 2.277H12l-.75.75 1.5 1.5M15 11.25l-8.47 8.47c-.34.34-.8.53-1.28.53s-.94.19-1.28.53l-.97.97-.75-.75.97-.97c.34-.34.53-.8.53-1.28s.19-.94.53-1.28L12.75 9M15 11.25L12.75 9"></path>
+                    </svg>
+                    <div class="text-sm font-medium text-gray-900 dark:text-white">Vacunas</div>
+                </a>
             </div>
         </div>
     </x-slot:dropdown_menu>

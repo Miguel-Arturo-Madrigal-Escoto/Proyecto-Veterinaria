@@ -65,6 +65,29 @@ x-show="!hidden"
                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></i>
                 </x-helpers.sidebar-item-with-submenu>
 
+
+                @php
+                    $submenu = [];
+                    $submenu[] = [
+                        'text' => 'Consultar',
+                        'path' => route('vaccine.index'),
+                    ];
+                    $submenu[] = [
+                        'text' => 'Añadir',
+                        'path' => route('vaccine.create'),
+                    ];
+                    $submenu[] = [
+                        'text' => 'Aplicar',
+                        'path' => route('apply-vaccine.index'),
+                    ];
+                @endphp
+
+                <x-helpers.sidebar-item-with-submenu text="Vacunas" :$submenu>
+                    <i class="fa-solid fa-syringe fa-lg text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></i>
+                </x-helpers.sidebar-item-with-submenu>
+
+
                 @php
                     $submenu = [];
                     $submenu[] = [
@@ -101,6 +124,8 @@ x-show="!hidden"
                     <i class="fa-solid fa-lock fa-lg text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></i>
                 </x-helpers.sidebar-item-with-submenu>
+
+
 
             </ul>
         </div>
