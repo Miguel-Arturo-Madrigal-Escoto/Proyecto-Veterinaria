@@ -88,6 +88,10 @@ class VaccineController extends Controller
         return redirect()->route('vaccine.index');
     }
 
+    public function appliedVaccinesIndex(){
+        $pets = Pet::all();
 
+        return view('vaccine.applied-vaccines', compact('pets'));
+    }
 
 }

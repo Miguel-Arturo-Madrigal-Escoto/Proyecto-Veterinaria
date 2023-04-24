@@ -36,6 +36,10 @@ Route::controller(PetController::class)->group(function() {
     Route::post('apply-vaccine', 'applyVaccineStore')->name('apply-vaccine.store');
 })->middleware('auth.check.admin');
 
+Route::controller(VaccineController::class)->group(function() {
+    Route::get('applied-vaccines', 'appliedVaccinesIndex')->name('applied-vaccines.index');
+})->middleware('auth.check.admin');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

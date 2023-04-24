@@ -80,6 +80,10 @@ x-show="!hidden"
                         'text' => 'Aplicar',
                         'path' => route('apply-vaccine.index'),
                     ];
+                    $submenu[] = [
+                        'text' => 'Historial',
+                        'path' => route('applied-vaccines.index'),
+                    ];
                 @endphp
 
                 <x-helpers.sidebar-item-with-submenu text="Vacunas" :$submenu>

@@ -37,12 +37,7 @@
                         @endphp
                     @endforeach
 
-                    @php
-                        print_r($ids)
-                    @endphp
-
                     <x-helpers.form-multiple-select name="vaccine_ids[]" text="Vacuna(s)" :$options />
-
 
                     <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                         <button type="submit" class="text-white dark:text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Enviar</button>
