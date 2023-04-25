@@ -9,6 +9,7 @@ use App\Models\Pet;
 use App\Models\User;
 use App\Models\Vaccine;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,11 +67,23 @@ class PetController extends Controller
      */
     public function show(Pet $pet)
     {
-        // $user = User::find($pet->user_id);
+        // Policies
+        // $this->authorize('view', $pet);
+        $response = Gate::inspect('view', $pet);
 
-        // 1 - Many relationship (User -> Pets)
-        $user = $pet->user;
-        return view('pet.show', compact('pet', 'user'));
+        if ($response->allowed()){
+            // 1 - Many relationship (User -> Pets)
+            $user = $pet->user;
+            return view('pet.show', compact('pet', 'user'));
+
+        } else {
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addError($response->message());
+            abort($response->status());
+        }
+
     }
 
     /**

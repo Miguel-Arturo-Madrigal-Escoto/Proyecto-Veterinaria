@@ -46,7 +46,7 @@ class Pet extends Model
         Many - Many relationship (Pet <-> Vaccines): belongsToMany
     */
     public function vaccines(){
-        return $this->belongsToMany(Vaccine::class);
+        return $this->belongsToMany(Vaccine::class)->withPivot(['date']);
     }
 
 }

@@ -1,7 +1,9 @@
 <div>
     <x-slot:title>
         <div class="flex flex-row justify-center items-center">
-            <h1>Vacunas de la mascota {{ $pet->name }}</h1>
+            <h1 class="flex justify-center items-center">
+                <span>{{ $pet->name }}</span>&nbsp;&nbsp;&nbsp;<x-pet.species-pet species="{{$pet->species}}" />
+            </h1>
         </div>
     </x-slot:title>
     <div class="p-3">
@@ -13,14 +15,17 @@
                             <div class="font-semibold text-center">Título</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-center">Descripción</div>
+                            <div class="font-semibold text-center">Fecha de aplicación</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-center">Hora</div>
                         </th>
                     </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100 dark:divide-none">
                     @php $extra = []; @endphp
                     @foreach ($pet->vaccines as $vaccine)
-                        <x-vaccine.row-vaccine :$vaccine :$extra />
+                        <x-vaccine.row-vaccine-pet :$vaccine />
                     @endforeach
                 </tbody>
             </table>
