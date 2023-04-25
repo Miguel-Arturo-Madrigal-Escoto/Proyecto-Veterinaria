@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <x-helpers.simple-card-boilerplate size="md:w-5/12 sm:w-11/12">
         <x-slot:title>
             <div class="flex flex-row justify-center items-center">

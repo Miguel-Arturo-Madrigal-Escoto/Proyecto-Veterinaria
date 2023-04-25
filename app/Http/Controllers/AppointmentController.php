@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AppointmentController extends Controller
 {
@@ -18,7 +19,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->is_admin) $appointments = Appointment::paginate(5);
+        if (Gate::forUser(Auth::user())->allows('show-all-appointments')) $appointments = Appointment::paginate(5);
         // else $appointments = Appointment::where('user_id', Auth::user()->id)->paginate(5);
 
         // 1 - Many relationship (User -> Appointments)
@@ -34,7 +35,10 @@ class AppointmentController extends Controller
         // $pets = Pet::where('user_id', Auth::user()->id)->get();
 
         // 1 - Many relationship (User -> Pets)
-        $pets = User::find(Auth::user()->id)->pets()->get();
+        if (Gate::allows('retrieve-all-pets'))
+            $pets = Pet::all();
+        else
+            $pets = User::find(Auth::user()->id)->pets()->get();
         return view('appointment.create', compact('pets'));
     }
 
@@ -43,11 +47,13 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
+        $user = Pet::find($request->pet_id)->user;
+
         $appointment = Appointment::create([
             'date'    => Carbon::parse($request->date),
             'reason'  => $request->reason,
             'pet_id'  => $request->pet_id,
-            'user_id' => Auth::user()->id
+            'user_id' => $user->id
         ]);
 
         notyf()
@@ -66,12 +72,24 @@ class AppointmentController extends Controller
         // $pet = Pet::find($appointment->pet_id);
         // $user = User::find($appointment->user_id);
 
-        // 1 - Many relationship (Appointment -> Pet)
-        $pet = $appointment->pet;
-        // 1 - Many relationship (Appointment -> User)
-        $user = $appointment->user;
+        $response = Gate::inspect('show-appointment', $appointment);
 
-        return view('appointment.show', compact('appointment', 'pet', 'user'));
+        if ($response->allowed()){
+            // 1 - Many relationship (Appointment -> Pet)
+            $pet = $appointment->pet;
+            // 1 - Many relationship (Appointment -> User)
+            $user = $appointment->user;
+
+            return view('appointment.show', compact('appointment', 'pet', 'user'));
+        }
+        else {
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addError($response->message());
+            abort($response->status());
+        }
+
     }
 
     /**
@@ -81,9 +99,20 @@ class AppointmentController extends Controller
     {
         // $pets = Pet::where('user_id', Auth::user()->id)->get();
 
-        // 1 - Many relationship (User -> Pets)
-        $pets = User::find(Auth::user()->id)->pets()->get();
-        return view('appointment.edit', compact('appointment', 'pets'));
+        $response = Gate::inspect('update-appointment', $appointment);
+
+        if ($response->allowed()){
+            $pets = User::find(Auth::user()->id)->pets()->get();
+            return view('appointment.edit', compact('appointment', 'pets'));
+        }
+        else {
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addError($response->message());
+            abort($response->status());
+        }
+
     }
 
     /**
@@ -130,13 +159,25 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        $appointment->delete();
+        $response = Gate::inspect('delete-appointment', $appointment);
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addError("La cita ha sido cancelada y eliminada.");
+        if ($response->allowed()){
+            $appointment->delete();
 
-        return redirect()->route('appointment.index');
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addError("La cita ha sido cancelada y eliminada.");
+
+            return redirect()->route('appointment.index');
+        }
+        else {
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addError($response->message());
+            abort($response->status());
+        }
+
     }
 }

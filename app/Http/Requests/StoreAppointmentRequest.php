@@ -26,7 +26,7 @@ class StoreAppointmentRequest extends FormRequest
         return [
             'date'    => ['required', 'date',   'after:today'],
             'reason'  => ['required', 'string', 'min:20'],
-            'pet_id'  => ['required', 'numeric', Rule::exists('pets', 'id')->where('user_id', Auth::user()->id)]
+            'pet_id'  => ['required', 'numeric', Rule::exists('pets', 'id')]
         ];
     }
 
@@ -44,7 +44,7 @@ class StoreAppointmentRequest extends FormRequest
             'date.date'           => 'La fecha de la cita es inválida.',
             'date.after'          => 'La fecha de la cita debe ser posterior a hoy.',
             'pet_id.required'     => 'Debe seleccionarse una mascota válida.',
-            'pet_id.numeric'     => 'Debe seleccionarse una mascota válida.',
+            'pet_id.numeric'      => 'Debe seleccionarse una mascota válida.',
             'pet_id.exists'       => 'La mascota seleccionada no existe.',
         ];
     }

@@ -91,7 +91,20 @@ class PetController extends Controller
      */
     public function edit(Pet $pet)
     {
-        return view('pet.edit', compact('pet'));
+        // Policies
+        $response = Gate::inspect('update', $pet);
+
+        if ($response->allowed()){
+            return view('pet.edit', compact('pet'));
+        }
+        else {
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addError($response->message());
+            abort($response->status());
+        }
+
     }
 
     /**
@@ -99,23 +112,35 @@ class PetController extends Controller
      */
     public function update(UpdatePetRequest $request, Pet $pet)
     {
-        $pet->name       = $request->input('name');
-        $pet->species    = $request->input('species');
-        $pet->race       = $request->input('race');
-        $pet->dob        = Carbon::parse($request->input('dob'));
-        $pet->color      = $request->input('color');
-        $pet->gender     = $request->input('gender');
-        $pet->sterilized = $request->input('sterilized');
-        $pet->weight     = $request->input('weight');
+        $response = Gate::inspect('update', $pet);
 
-        $pet->save();
+        if ($response->allowed()){
+            $pet->name       = $request->input('name');
+            $pet->species    = $request->input('species');
+            $pet->race       = $request->input('race');
+            $pet->dob        = Carbon::parse($request->input('dob'));
+            $pet->color      = $request->input('color');
+            $pet->gender     = $request->input('gender');
+            $pet->sterilized = $request->input('sterilized');
+            $pet->weight     = $request->input('weight');
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addInfo("Mascota $pet->name actualizada");
+            $pet->save();
 
-        return redirect()->route('pet.show', $pet);
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addInfo("Mascota $pet->name actualizada");
+
+            return redirect()->route('pet.show', $pet);
+        }
+        else {
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addError($response->message());
+            abort($response->status());
+        }
+
     }
 
     /**
@@ -123,14 +148,25 @@ class PetController extends Controller
      */
     public function destroy(Pet $pet)
     {
-        $pet->delete();
+        $response = Gate::inspect('delete', $pet);
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addWarning("La mascota $pet->name ha sido eliminada.");
+        if ($response->allowed()){
+            $pet->delete();
 
-        return redirect('/pet');
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addWarning("La mascota $pet->name ha sido eliminada.");
+
+            return redirect('/pet');
+        }
+        else {
+            notyf()
+                ->position('x', 'center')
+                ->position('y', 'top')
+                ->addError($response->message());
+            abort($response->status());
+        }
     }
 
     /**

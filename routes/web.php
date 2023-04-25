@@ -28,8 +28,12 @@ Route::controller(HomeController::class)->group(function() {
 // 'auth.check' => AuthCheck::class
 Route::resource('pet', PetController::class)->middleware('auth.check');
 Route::resource('appointment', AppointmentController::class)->middleware('auth.check');
-Route::resource('user', UserController::class)->middleware('auth.check.admin');
 Route::resource('vaccine', VaccineController::class)->middleware('auth.check.admin');
+
+Route::controller(UserController::class)->group(function() {
+    Route::get('user', 'index')->name('user.index')->middleware('can:show-users');
+    Route::get('user/{user}', 'show')->name('user.show')->middleware('can:show-users');
+});
 
 Route::controller(PetController::class)->group(function() {
     Route::get('apply-vaccine', 'applyVaccineIndex')->name('apply-vaccine.index');

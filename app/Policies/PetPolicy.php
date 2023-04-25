@@ -36,17 +36,17 @@ class PetPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Pet $pet)
+    public function update(User $user, Pet $pet) : Response
     {
-        //
+        return ($user->id === $pet->user_id || $user->is_admin) ? Response::allow() : Response::denyWithStatus(403, 'No puedes actualizar esta mascota');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Pet $pet)
+    public function delete(User $user, Pet $pet) : Response
     {
-        //
+        return ($user->id === $pet->user_id || $user->is_admin) ? Response::allow() : Response::denyWithStatus(403, 'No puedes eliminar esta mascota');
     }
 
     /**
