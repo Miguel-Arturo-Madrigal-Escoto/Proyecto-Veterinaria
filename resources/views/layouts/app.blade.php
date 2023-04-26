@@ -26,13 +26,13 @@
             <!-- Sidebar -->
             {{-- <x-helpers.sidebar /> --}}
 
-            @if (Auth::user()->is_admin)
+            @can('show-admin-navigation')
                 <x-auth.admin-navbar />
                 <x-auth.admin-sidebar />
             @else
                 <x-auth.user-navbar />
                 <x-auth.user-sidebar />
-            @endif
+            @endcan
 
             <!-- Page Heading -->
             {{-- @if (isset($header))

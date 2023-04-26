@@ -38,7 +38,8 @@ Route::controller(UserController::class)->group(function() {
 Route::controller(PetController::class)->group(function() {
     Route::get('apply-vaccine', 'applyVaccineIndex')->name('apply-vaccine.index');
     Route::post('apply-vaccine', 'applyVaccineStore')->name('apply-vaccine.store');
-})->middleware('auth.check.admin');
+});
+
 
 Route::controller(VaccineController::class)->group(function() {
     Route::get('applied-vaccines', 'appliedVaccinesIndex')->name('applied-vaccines.index');

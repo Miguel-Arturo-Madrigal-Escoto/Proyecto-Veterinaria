@@ -104,6 +104,7 @@ class PetController extends Controller
      */
     public function update(UpdatePetRequest $request, Pet $pet)
     {
+        // Policies
         $response = Gate::inspect('update', $pet);
 
         if ($response->allowed()){
@@ -132,6 +133,7 @@ class PetController extends Controller
      */
     public function destroy(Pet $pet)
     {
+        // Policies
         $response = Gate::inspect('delete', $pet);
 
         if ($response->allowed()){

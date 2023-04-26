@@ -1,7 +1,7 @@
 <x-app-layout>
-    @if(Auth::user()->is_admin)
+    @can('show-admin-dashboard')
         <x-auth.admin-dashboard :$appointments :$pets :$clients />
     @else
         <x-auth.user-dashboard :$appointments :$pets />
-    @endif
+    @endcan
 </x-app-layout>
