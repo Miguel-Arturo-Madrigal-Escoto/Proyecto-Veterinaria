@@ -9,6 +9,9 @@ use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isNull;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -35,6 +38,14 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('show-admin-navigation', function (User $user){
             return $user->is_admin;
+        });
+
+        Gate::define('edit-appointment-as-admin', function (User $user){
+            return $user->is_admin;
+        });
+
+        Gate::define('show-errors-as-authenticated', function (User $user){
+            return !is_null($user);
         });
 
         // Users
