@@ -10,11 +10,17 @@ use App\Models\User;
 use App\Models\Vaccine;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class PetController extends Controller
 {
+    /*
+        Controller for alerts
+    */
+    use AlertController;
+
     /**
      * Display a listing of the resource.
      */
@@ -54,10 +60,7 @@ class PetController extends Controller
             'user_id'    => Auth::user()->id
         ]);
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addSuccess("Mascota $pet->name añadida correctamente");
+        $this->__alert__('success', "Mascota $pet->name añadida correctamente");
 
         return redirect()->route('pet.show', $pet);
     }
@@ -75,15 +78,10 @@ class PetController extends Controller
             // 1 - Many relationship (User -> Pets)
             $user = $pet->user;
             return view('pet.show', compact('pet', 'user'));
-
-        } else {
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addError($response->message());
-            abort($response->status());
         }
 
+        $this->__alert__('error', $response->message());
+        abort($response->status());
     }
 
     /**
@@ -94,17 +92,11 @@ class PetController extends Controller
         // Policies
         $response = Gate::inspect('update', $pet);
 
-        if ($response->allowed()){
+        if ($response->allowed())
             return view('pet.edit', compact('pet'));
-        }
-        else {
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addError($response->message());
-            abort($response->status());
-        }
 
+        $this->__alert__('error', $response->message());
+        abort($response->status());
     }
 
     /**
@@ -126,21 +118,13 @@ class PetController extends Controller
 
             $pet->save();
 
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addInfo("Mascota $pet->name actualizada");
+            $this->__alert__('info', "Mascota $pet->name actualizada");
 
             return redirect()->route('pet.show', $pet);
         }
-        else {
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addError($response->message());
-            abort($response->status());
-        }
 
+        $this->__alert__('error', $response->message());
+        abort($response->status());
     }
 
     /**
@@ -153,20 +137,12 @@ class PetController extends Controller
         if ($response->allowed()){
             $pet->delete();
 
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addWarning("La mascota $pet->name ha sido eliminada.");
+            $this->__alert__('warning', "La mascota $pet->name ha sido eliminada.");
 
             return redirect('/pet');
         }
-        else {
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addError($response->message());
-            abort($response->status());
-        }
+        $this->__alert__('error', $response->message());
+        abort($response->status());
     }
 
     /**
@@ -188,13 +164,12 @@ class PetController extends Controller
         // Insert Many to Many row to pivot table with additional fields on: []
         $pet->vaccines()->attach($request->vaccine_ids, ['date' => now()]);
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addInfo("Se han aplicado " . count($request->vaccine_ids) . " vacuna(s) a la mascota $pet->name");
+        $this->__alert__('info', "Se han aplicado " . count($request->vaccine_ids) . " vacuna(s) a la mascota $pet->name");
 
         // redirect to
         return redirect()->route('vaccine.index');
     }
+
+
 
 }

@@ -8,12 +8,17 @@ use App\Models\Appointment;
 use App\Models\Pet;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
+    /*
+        Controller for alerts
+    */
+    use AlertController;
+
     /**
      * Display a listing of the resource.
      */
@@ -56,10 +61,7 @@ class AppointmentController extends Controller
             'user_id' => $user->id
         ]);
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addInfo("Cita creada correctamente. Por favor espere a que sea confirmada");
+        $this->__alert__('info', "Cita creada correctamente. Por favor espere a que sea confirmada");
 
         return redirect()->route('appointment.show', $appointment);
     }
@@ -82,14 +84,9 @@ class AppointmentController extends Controller
 
             return view('appointment.show', compact('appointment', 'pet', 'user'));
         }
-        else {
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addError($response->message());
-            abort($response->status());
-        }
 
+        $this->__alert__('error', $response->message());
+        abort($response->status());
     }
 
     /**
@@ -105,14 +102,9 @@ class AppointmentController extends Controller
             $pets = User::find(Auth::user()->id)->pets()->get();
             return view('appointment.edit', compact('appointment', 'pets'));
         }
-        else {
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addError($response->message());
-            abort($response->status());
-        }
 
+        $this->__alert__('error', $response->message());
+        abort($response->status());
     }
 
     /**
@@ -128,10 +120,7 @@ class AppointmentController extends Controller
 
             $appointment->save();
 
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addSuccess("La cita fue actualizada correctamente");
+            $this->__alert__('success', "La cita fue actualizada correctamente");
 
             return redirect()->route('appointment.show', $appointment);
         }
@@ -145,10 +134,7 @@ class AppointmentController extends Controller
 
             $appointment->save();
 
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addSuccess("La cita fue actualizada correctamente");
+            $this->__alert__('success', "La cita fue actualizada correctamente");
 
             return redirect()->route('appointment.show', $appointment);
         }
@@ -164,20 +150,12 @@ class AppointmentController extends Controller
         if ($response->allowed()){
             $appointment->delete();
 
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addError("La cita ha sido cancelada y eliminada.");
+            $this->__alert__('error', "La cita ha sido cancelada y eliminada.");
 
             return redirect()->route('appointment.index');
         }
-        else {
-            notyf()
-                ->position('x', 'center')
-                ->position('y', 'top')
-                ->addError($response->message());
-            abort($response->status());
-        }
+        $this->__alert__('error', $response->message());
+        abort($response->status());
 
     }
 }

@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class VaccineController extends Controller
 {
+    /*
+        Controller for alerts
+    */
+    use AlertController;
+
     /**
      * Display a listing of the resource.
      */
@@ -34,10 +39,7 @@ class VaccineController extends Controller
     {
         $vaccine = Vaccine::create($request->all());
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addSuccess("La vacuna $vaccine->title ha sido agregada.");
+        $this->__alert__('success', "La vacuna $vaccine->title ha sido agregada.");
 
         return redirect()->route('vaccine.index');
     }
@@ -65,10 +67,7 @@ class VaccineController extends Controller
     {
         $vaccine->update($request->all());
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addInfo("La vacuna $vaccine->title ha sido actualizada.");
+        $this->__alert__('info', "La vacuna $vaccine->title ha sido actualizada.");
 
         return redirect()->route('vaccine.index');
     }
@@ -80,10 +79,7 @@ class VaccineController extends Controller
     {
         $vaccine->delete();
 
-        notyf()
-            ->position('x', 'center')
-            ->position('y', 'top')
-            ->addWarning("La vacuna $vaccine->title ha sido eliminada.");
+        $this->__alert__('warning', "La vacuna $vaccine->title ha sido eliminada.");
 
         return redirect()->route('vaccine.index');
     }
