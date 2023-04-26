@@ -6,7 +6,10 @@ use App\Http\Requests\StoreVaccineRequest;
 use App\Http\Requests\UpdateVaccineRequest;
 use App\Models\Pet;
 use App\Models\Vaccine;
+use App\Policies\VaccinePolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VaccineController extends Controller
 {
@@ -15,13 +18,22 @@ class VaccineController extends Controller
     */
     use AlertController;
 
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $vaccines = Vaccine::paginate(5);
-        return view('vaccine.index', compact('vaccines'));
+        // Policy
+        $response = Gate::inspect('viewAny', Vaccine::class);
+
+        if ($response->allowed()) {
+            $vaccines = Vaccine::paginate(5);
+            return view('vaccine.index', compact('vaccines'));
+        }
+
+        $this->__alert__('error', $response->message());
+        abort($response->status());
     }
 
     /**
@@ -29,6 +41,14 @@ class VaccineController extends Controller
      */
     public function create()
     {
+        // Policy
+        $response = Gate::inspect('viewAny', Vaccine::class);
+
+        if ($response->denied()) {
+            $this->__alert__('error', $response->message());
+            abort($response->status());
+        }
+
         return view('vaccine.create');
     }
 
@@ -37,6 +57,14 @@ class VaccineController extends Controller
      */
     public function store(StoreVaccineRequest $request)
     {
+        // Policy
+        $response = Gate::inspect('viewAny', Vaccine::class);
+
+        if ($response->denied()) {
+            $this->__alert__('error', $response->message());
+            abort($response->status());
+        }
+
         $vaccine = Vaccine::create($request->all());
 
         $this->__alert__('success', "La vacuna $vaccine->title ha sido agregada.");
@@ -49,7 +77,9 @@ class VaccineController extends Controller
      */
     public function show(Vaccine $vaccine)
     {
-        return redirect()->route('vaccine.index');
+        // Policy
+        $response = Gate::inspect('view', $vaccine);
+        abort($response->status());
     }
 
     /**
@@ -57,6 +87,14 @@ class VaccineController extends Controller
      */
     public function edit(Vaccine $vaccine)
     {
+        // Policy
+        $response = Gate::inspect('update', $vaccine);
+
+        if ($response->denied()) {
+            $this->__alert__('error', $response->message());
+            abort($response->status());
+        }
+
         return view('vaccine.edit', compact('vaccine'));
     }
 
@@ -65,6 +103,14 @@ class VaccineController extends Controller
      */
     public function update(UpdateVaccineRequest $request, Vaccine $vaccine)
     {
+        // Policy
+        $response = Gate::inspect('update', $vaccine);
+
+        if ($response->denied()) {
+            $this->__alert__('error', $response->message());
+            abort($response->status());
+        }
+
         $vaccine->update($request->all());
 
         $this->__alert__('info', "La vacuna $vaccine->title ha sido actualizada.");
@@ -77,6 +123,14 @@ class VaccineController extends Controller
      */
     public function destroy(Vaccine $vaccine)
     {
+        // Policy
+        $response = Gate::inspect('destroy', $vaccine);
+
+        if ($response->denied()) {
+            $this->__alert__('error', $response->message());
+            abort($response->status());
+        }
+
         $vaccine->delete();
 
         $this->__alert__('warning', "La vacuna $vaccine->title ha sido eliminada.");
@@ -85,6 +139,14 @@ class VaccineController extends Controller
     }
 
     public function appliedVaccinesIndex(){
+        // Policy
+        $response = Gate::inspect('create');
+
+        if ($response->denied()) {
+            $this->__alert__('error', $response->message());
+            abort($response->status());
+        }
+
         $pets = Pet::all();
 
         return view('vaccine.applied-vaccines', compact('pets'));

@@ -28,7 +28,7 @@ Route::controller(HomeController::class)->group(function() {
 // 'auth.check' => AuthCheck::class
 Route::resource('pet', PetController::class)->middleware('auth.check');
 Route::resource('appointment', AppointmentController::class)->middleware('auth.check');
-Route::resource('vaccine', VaccineController::class)->middleware('auth.check.admin');
+Route::resource('vaccine', VaccineController::class)->middleware('auth.check');
 
 Route::controller(UserController::class)->group(function() {
     Route::get('user', 'index')->name('user.index')->middleware('can:show-users');
@@ -38,12 +38,12 @@ Route::controller(UserController::class)->group(function() {
 Route::controller(PetController::class)->group(function() {
     Route::get('apply-vaccine', 'applyVaccineIndex')->name('apply-vaccine.index');
     Route::post('apply-vaccine', 'applyVaccineStore')->name('apply-vaccine.store');
-});
+})->middleware('auth.check');
 
 
 Route::controller(VaccineController::class)->group(function() {
     Route::get('applied-vaccines', 'appliedVaccinesIndex')->name('applied-vaccines.index');
-})->middleware('auth.check.admin');
+})->middleware('auth.check');
 
 Route::middleware([
     'auth:sanctum',

@@ -2,16 +2,16 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
-
 use App\Models\Appointment;
+use App\Models\Pet;
 use App\Models\User;
+use App\Models\Vaccine;
+use App\Policies\PetPolicy;
+use App\Policies\VaccinePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
 
-use function PHPUnit\Framework\isNull;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,7 +21,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        'App\Models\Pet' => 'App\Policies\PetPolicy',
+        Vaccine::class => VaccinePolicy::class,
+        Pet::class => PetPolicy::class,
     ];
 
     /**
@@ -30,6 +31,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+
+        Gate::guessPolicyNamesUsing(function (string $modelClass) {
+            return 'App\\Http\\Policies\\' . class_basename($modelClass) . 'Policy';
+        });
 
         // - Gates
         Gate::define('show-admin-dashboard', function (User $user){

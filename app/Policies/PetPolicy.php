@@ -8,13 +8,6 @@ use Illuminate\Auth\Access\Response;
 
 class PetPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
 
     /**
      * Determine whether the user can view the model.

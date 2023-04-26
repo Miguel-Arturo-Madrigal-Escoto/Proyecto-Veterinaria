@@ -151,6 +151,14 @@ class PetController extends Controller
      * Custom: apply vaccine to pet
      */
     public function applyVaccineIndex(){
+        // Policy
+        $response = Gate::inspect('viewAny');
+
+        if ($response->denied()) {
+            $this->__alert__('error', $response->message());
+            abort($response->status());
+        }
+
         $pets     = Pet::all();
         $vaccines = Vaccine::all();
 
