@@ -79,6 +79,13 @@ class AuthServiceProvider extends ServiceProvider
             return ($user->is_admin || $user->id === $appointment->user_id)? Response::allow() : Response::denyWithStatus(403, 'No es posible eliminar esta cita');
         });
 
+        Gate::define('add-user-to-pet', function(User $user){
+            return $user->is_admin;
+        });
+
+        Gate::define('admin-user-pet', function(User $user){
+            return $user->is_admin;
+        });
 
     }
 }

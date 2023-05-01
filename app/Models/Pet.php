@@ -49,4 +49,11 @@ class Pet extends Model
         return $this->belongsToMany(Vaccine::class)->withPivot(['date']);
     }
 
+    /*
+        1 to 1 relationship (Pet -> PetPhoto)
+    */
+    public function photo(){
+        return $this->hasOne(PetPhoto::class);
+    }
+
 }

@@ -8,8 +8,10 @@
         </x-slot:title>
         <div class="md:p-14 sm:p-6">
             <div class="overflow-x-auto overflow-y-hidden">
-                <form action="/pet" method="POST">
+                <form action="/pet" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('POST')
+
                     <x-helpers.form-field value="{{old('name')}}" type="text" field="name" text="Nombre" placeholder="Ej: Solovino" />
 
                     @php
@@ -116,9 +118,10 @@
                     <x-helpers.form-field value="{{old('weight')}}" type="text" field="weight" text="Peso" placeholder="Ej: 10.8" />
 
                     {{-- <x-helpers.form-file  value="{{old('photo')}}" field="photo" text="Foto" /> --}}
+                    <x-helpers.form-file field="file" text="Foto" />
 
 
-                    @if (Auth::user()->is_admin)
+                    @can ('add-user-to-pet')
                         @php $options = []; @endphp
                         @foreach($users as $user)
                             @php
@@ -131,7 +134,7 @@
                         @endforeach
 
                         <x-helpers.form-select name="user_id" text="Cliente" :options="$options" />
-                    @endif
+                    @endcan
 
 
                     <div class="mb-6 flex flex-col justify-center m-auto w-1/3">

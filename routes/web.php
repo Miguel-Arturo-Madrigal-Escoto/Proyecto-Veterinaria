@@ -6,8 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VaccineController;
-use App\Http\Middleware\AuthCheck;
-use App\Models\Appointment;
+use App\Http\Controllers\PetPhotoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +43,7 @@ Route::controller(PetController::class)->group(function() {
 Route::controller(VaccineController::class)->group(function() {
     Route::get('applied-vaccines', 'appliedVaccinesIndex')->name('applied-vaccines.index');
 })->middleware('auth.check');
+
 
 Route::middleware([
     'auth:sanctum',

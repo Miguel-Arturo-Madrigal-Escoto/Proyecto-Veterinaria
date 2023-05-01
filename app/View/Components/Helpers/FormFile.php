@@ -11,7 +11,7 @@ class FormFile extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $text, public $field, public $value)
+    public function __construct(public $text, public $field)
     {
         //
     }

@@ -12,7 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class PetController extends Controller
 {
@@ -57,10 +57,17 @@ class PetController extends Controller
             'gender'     => $request->input('gender'),
             'sterilized' => $request->input('sterilized'),
             'weight'     => $request->input('weight'),
-            'user_id'    => Auth::user()->id
+            'user_id'    => Auth::user()->is_admin ? $request->user_id : Auth::user()->id
         ]);
 
-        $this->__alert__('success', "Mascota $pet->name añadida correctamente");
+        if ($request->hasFile('file') && $request->file('file')->isValid()){
+            // store pet photo
+            PetPhotoController::store($request->file, $pet->id);
+            $this->__alert__('success', "Mascota $pet->name añadida correctamente");
+        }
+        else {
+            $this->__alert__('error', 'Error al guardar la imagen');
+        }
 
         return redirect()->route('pet.show', $pet);
     }
@@ -76,7 +83,7 @@ class PetController extends Controller
 
         if ($response->allowed()){
             // 1 - Many relationship (User -> Pets)
-            $user = $pet->user;
+            $user  = $pet->user;
             return view('pet.show', compact('pet', 'user'));
         }
 

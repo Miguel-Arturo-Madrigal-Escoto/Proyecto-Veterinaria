@@ -30,7 +30,10 @@
                 </div>
             </div>
             <div class="flex flex-col items-center pb-10">
-                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Imagen del usuario" loading="lazy" />
+                @php
+                    $photo = $pet->photo;
+                @endphp
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src={{asset("storage/$photo->hash")}} alt="Imagen de la mascota" loading="lazy" />
                 <h5 class="my-5 text-xl font-medium text-gray-900 dark:text-white">{{ $pet->name }}</h5>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Especie: </b>{{ $pet->species }}</span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Raza: </b>{{ $pet->race }}</span>
@@ -50,9 +53,9 @@
                 </span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Peso: </b>{{ $pet->weight }}</span>
 
-                @if(Auth::user()->is_admin)
+                @can('admin-user-pet')
                     <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Dueño: </b>{{ $user->name . ' ' . $user->lastname }}</span>
-                @endif
+                @endcan
             </div>
         </div>
     </x-helpers.simple-form-boilerplate>
