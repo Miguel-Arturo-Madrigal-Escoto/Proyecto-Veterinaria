@@ -25,6 +25,7 @@ class StoreAppointmentRequest extends FormRequest
     {
         return [
             'date'    => ['required', 'date',   'after:today'],
+            'hour'    => ['required', 'date_format:h:i A'],
             'reason'  => ['required', 'string', 'min:20'],
             'pet_id'  => ['required', 'numeric', Rule::exists('pets', 'id')]
         ];
@@ -42,6 +43,8 @@ class StoreAppointmentRequest extends FormRequest
             'reason.min'          => 'El motivo de la cita requiere por lo menos 20 caracteres.',
             'date.required'       => 'La fecha de la cita es requerida.',
             'date.date'           => 'La fecha de la cita es inválida.',
+            'hour.required'       => 'La hora de la cita es requerida.',
+            'hour.date_format'    => 'El formato de la hora es inválido.',
             'date.after'          => 'La fecha de la cita debe ser posterior a hoy.',
             'pet_id.required'     => 'Debe seleccionarse una mascota válida.',
             'pet_id.numeric'      => 'Debe seleccionarse una mascota válida.',

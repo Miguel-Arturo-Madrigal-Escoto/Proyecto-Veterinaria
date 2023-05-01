@@ -33,6 +33,7 @@ class UpdateAppointmentRequest extends FormRequest
         else {
             return [
                 'date'    => ['required', 'date',   'after:today'],
+                'hour'    => ['required', 'date_format:h:i A'],
                 'reason'  => ['required', 'string', 'min:20'],
                 'pet_id'  => ['required', 'numeric', Rule::exists('pets', 'id')->where('user_id', Auth::user()->id)]
             ];
@@ -54,7 +55,7 @@ class UpdateAppointmentRequest extends FormRequest
                 'status.required'  =>  'El campo estatus es requerido.',
                 'status.in'  =>  'El estatus proporcionado es inválido.',
                 'paid.required'  =>  'Es necesario seleccionar un pago.',
-                'paid.boolean'  => 'El pago seleccionado es inválido.'
+                'paid.boolean'  => 'El pago seleccionado es inválido.',
             ];
         }
         else {
@@ -64,8 +65,10 @@ class UpdateAppointmentRequest extends FormRequest
                 'date.required'       => 'La fecha de la cita es requerida.',
                 'date.date'           => 'La fecha de la cita es inválida.',
                 'date.after'          => 'La fecha de la cita debe ser posterior a hoy.',
+                'hour.required'       => 'La hora de la cita es requerida.',
+                'hour.date_format'    => 'El formato de la hora es inválido.',
                 'pet_id.required'     => 'Debe seleccionarse una mascota válida.',
-                'pet_id.numeric'     => 'Debe seleccionarse una mascota válida.',
+                'pet_id.numeric'      => 'Debe seleccionarse una mascota válida.',
                 'pet_id.exists'       => 'La mascota seleccionada no existe.',
             ];
         }
