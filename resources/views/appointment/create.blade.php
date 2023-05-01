@@ -15,6 +15,9 @@
 
                     <x-helpers.form-textarea field="reason" text="Motivo" value="{{old('reason')}}" />
 
+                    @php
+                        $options = [];
+                    @endphp
                     @foreach ($pets as $pet)
                         @php
                             $options[] = [
@@ -24,6 +27,8 @@
                             ];
                         @endphp
                     @endforeach
+
+                    <x-helpers.hour-picker field="hour" text="Hora: " />
 
                     <x-helpers.form-select name="pet_id" text="Mascota" :$options />
 

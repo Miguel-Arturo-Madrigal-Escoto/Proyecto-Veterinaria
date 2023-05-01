@@ -28,6 +28,7 @@
             <div class="flex flex-col items-start pb-10">
                 @php $date = new DateTimeImmutable($appointment->date); @endphp
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Fecha: </b>{{ $date->format('d-m-Y') }}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Hora: </b>{{ $date->format('H:i') }}</span>
                 <p class="text-sm text-gray-500 dark:text-gray-300 py-2 break-all"><b>Motivo: </b>{{ $appointment->reason }}</p>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Costo: </b>${{ $appointment->cost }}</span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Estatus: </b>

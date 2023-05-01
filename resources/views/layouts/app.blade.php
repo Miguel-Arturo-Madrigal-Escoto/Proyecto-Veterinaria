@@ -12,7 +12,10 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- https://tailwind-elements.com/docs/standard/getting-started/quick-start/ -->
 
         <!-- Styles -->
         @livewireStyles
@@ -59,5 +62,7 @@
         <!-- FontAwesome -->
         <script src="https://kit.fontawesome.com/796b904c46.js" crossorigin="anonymous"></script>
 
+        <!-- TW Elements (clock) -->
+        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
     </body>
 </html>

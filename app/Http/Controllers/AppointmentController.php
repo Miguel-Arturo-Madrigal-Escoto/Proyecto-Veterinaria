@@ -52,10 +52,14 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
+        $hours = Carbon::parse($request->hour)->format('H');
+        $minutes = Carbon::parse($request->hour)->format('i');
+        $appointment_date = Carbon::parse($request->date)->addHours($hours)->addMinutes($minutes);
+
         $user = Pet::find($request->pet_id)->user;
 
         $appointment = Appointment::create([
-            'date'    => Carbon::parse($request->date),
+            'date'    => $appointment_date,
             'reason'  => $request->reason,
             'pet_id'  => $request->pet_id,
             'user_id' => $user->id
