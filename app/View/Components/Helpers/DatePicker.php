@@ -3,6 +3,7 @@
 namespace App\View\Components\Helpers;
 
 use Closure;
+use DateTimeImmutable;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -13,7 +14,11 @@ class DatePicker extends Component
      */
     public function __construct(public string $name, public string $text, public $value)
     {
-        //
+        try {
+            $this->value = new DateTimeImmutable($this->value);
+        } catch (\Throwable $th) {
+            $this->value = now();
+        }
     }
 
     /**
