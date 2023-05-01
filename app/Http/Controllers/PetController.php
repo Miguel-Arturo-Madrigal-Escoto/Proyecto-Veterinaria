@@ -123,10 +123,15 @@ class PetController extends Controller
             $pet->gender     = $request->input('gender');
             $pet->sterilized = $request->input('sterilized');
             $pet->weight     = $request->input('weight');
-
             $pet->save();
 
-            $this->__alert__('info', "Mascota $pet->name actualizada");
+            if ($request->hasFile('file') && $request->file('file')->isValid()){
+                // update pet photo
+                PetPhotoController::update($request->file, $pet->id);
+                $this->__alert__('info', "Imagen actualizada para $pet->name");
+            }
+
+            $this->__alert__('success', "Mascota $pet->name actualizada");
 
             return redirect()->route('pet.show', $pet);
         }

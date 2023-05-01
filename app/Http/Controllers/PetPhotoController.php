@@ -62,16 +62,45 @@ class PetPhotoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PetPhoto $petPhoto)
+    public static function update(UploadedFile $f, $id)
     {
-        //
+        // check if the pet already has a photo
+        $pet_photo = PetPhoto::where('pet_id', $id);
+
+        // if pet already has photo
+        if ($pet_photo->count() > 0){
+            // get the current photo (get first row of possible multiple retrieval)
+            $file = $pet_photo->first();
+
+            // TODO: remove the current photo from local storage
+            // sRSvTkwRNW5doqvIXOVEGaXEDrrXPcer7Y0ec7IC
+            PetPhotoController::destroy($file->hash);
+
+            // store the current photo (get the path)
+            $path = $f->store('pet_photos', 'public');
+
+            // update the model in the db
+            $file->update([
+                'hash'        => $path,
+                'name'        => $f->getClientOriginalName(),
+                'extension'   => $f->guessExtension(),
+                'mime'        => $f->getMimeType(),
+                'pet_id'      => $id
+            ]);
+        }
+        // if pet doesn't have photo
+        else {
+            // so, store the photo with the existing method (only store, not database update)
+            PetPhotoController::store($f, $id);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PetPhoto $petPhoto)
+    public static function destroy(string $path)
     {
-        //
+        // delete photo from local storage
+        Storage::disk('public')->delete($path);
     }
 }

@@ -8,7 +8,7 @@
         </x-slot:title>
         <div class="md:p-14 sm:p-6">
             <div class="overflow-x-auto overflow-y-hidden">
-                <form action={{route('pet.update', $pet)}} method="POST">
+                <form action={{route('pet.update', $pet)}} method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <x-helpers.form-field value="{{old('name')??$pet->name}}" type="text" field="name" text="Nombre" placeholder="Ej: Solovino" />
@@ -115,7 +115,7 @@
 
                     <x-helpers.form-field value="{{old('weight')??$pet->weight}}" type="text" field="weight" text="Peso" placeholder="Ej: 10.8" />
 
-                    {{-- <x-helpers.form-file  value="{{old('photo')}}" field="photo" text="Foto" /> --}}
+                    <x-helpers.form-file field="file" text="Foto" />
 
                     <div class="mb-6 flex flex-col justify-center m-auto w-1/3">
                         <button type="submit" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-non font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>

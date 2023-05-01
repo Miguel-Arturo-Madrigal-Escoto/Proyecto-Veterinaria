@@ -35,9 +35,9 @@ class UpdatePetRequest extends FormRequest
             // 'photo' => ['required', 'string'],
         ];
 
-        if (Auth::user()->is_admin){
-            $rules['user_id'] = ['required', Rule::exists('users', 'id')];
-        }
+        // if (Auth::user()->is_admin){
+        //     $rules['user_id'] = ['required', Rule::exists('users', 'id')];
+        // }
 
         return $rules;
     }
@@ -70,10 +70,10 @@ class UpdatePetRequest extends FormRequest
             'weight.gt' => 'El campo peso es debe ser mayor o igual a 0.',
         ];
 
-        if (Auth::user()->is_admin){
-            $messages['user_id.required'] = 'Es necesario proporcionar un cliente.';
-            $messages['user_id.exists'] = 'El cliente proporcionado no esta registrado.';
-        }
+        // if (Auth::user()->is_admin){
+        //     $messages['user_id.required'] = 'Es necesario proporcionar un cliente.';
+        //     $messages['user_id.exists'] = 'El cliente proporcionado no esta registrado.';
+        // }
 
         return $messages;
     }

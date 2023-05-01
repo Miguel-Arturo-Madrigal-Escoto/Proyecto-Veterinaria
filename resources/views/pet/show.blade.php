@@ -33,7 +33,11 @@
                 @php
                     $photo = $pet->photo;
                 @endphp
-                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src={{asset("storage/$photo->hash")}} alt="Imagen de la mascota" loading="lazy" />
+                @if(!is_null($photo))
+                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src={{asset("storage/$photo->hash")}} alt="Imagen de la mascota" loading="lazy" />
+                @else
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png" alt="Imagen de la mascota" loading="lazy" />
+                @endif
                 <h5 class="my-5 text-xl font-medium text-gray-900 dark:text-white">{{ $pet->name }}</h5>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Especie: </b>{{ $pet->species }}</span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Raza: </b>{{ $pet->race }}</span>
