@@ -164,7 +164,7 @@ class PetController extends Controller
      */
     public function applyVaccineIndex(){
         // Policy
-        $response = Gate::inspect('viewAny');
+        $response = Gate::inspect('viewAny', Vaccine::class);
 
         if ($response->denied()) {
             $this->__alert__('error', $response->message());
@@ -181,6 +181,13 @@ class PetController extends Controller
      * Custom: assign vaccine to pet into pivot table
      */
     public function applyVaccineStore(AssociatePetVaccineRequest $request){
+        $response = Gate::inspect('viewAny', Vaccine::class);
+
+        if ($response->denied()) {
+            $this->__alert__('error', $response->message());
+            abort($response->status());
+        }
+
         $pet = Pet::find($request->pet_id);
 
         // Insert Many to Many row to pivot table with additional fields on: []
