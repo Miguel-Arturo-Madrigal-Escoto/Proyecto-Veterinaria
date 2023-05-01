@@ -11,7 +11,8 @@ use App\Policies\VaccinePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\Response;
-
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+
+        // register own account verification email
+        VerifyEmail::toMailUsing(function ($notifiable, $url){
+            $mail = new MailMessage;
+            $mail->subject('Bienvenido!');
+            $mail->markdown('emails.verify-email', ['url' => $url]);
+            return $mail;
+        });
 
         Gate::guessPolicyNamesUsing(function (string $modelClass) {
             return 'App\\Http\\Policies\\' . class_basename($modelClass) . 'Policy';

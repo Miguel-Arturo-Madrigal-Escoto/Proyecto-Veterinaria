@@ -7,6 +7,8 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PetPhotoController;
+use App\Mail\TestMailable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Route::get('verify-email', function(){
+//     return view('emails.verify-email', ['url' => 'https:://localhost:8000']);
+// });
+
+// Route::get('send-test-email', function(){
+//     // Create email
+//     $email = new TestMailable();
+
+//     // send email
+//     Mail::to('miguel@gmail.com')->send($email);
+
+//     return 'email sent';
+// });
 
 Route::controller(HomeController::class)->group(function() {
     Route::get('/', 'index');

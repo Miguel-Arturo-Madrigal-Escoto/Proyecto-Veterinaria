@@ -1,5 +1,5 @@
 
-<footer class="bg-white dark:bg-gray-900 w-full mt-16">
+<footer class="bg-white dark:bg-gray-900 w-full">
     <div class="mx-auto w-full container p-4 sm:p-6">
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
