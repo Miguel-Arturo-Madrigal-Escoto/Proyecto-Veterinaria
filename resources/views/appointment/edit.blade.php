@@ -60,6 +60,11 @@
                         <x-helpers.form-radios :radios="$paid" />
 
                         @else
+                            @php
+                                $date = new DateTimeImmutable($appointment->date);
+                            @endphp
+                            <x-helpers.hour-picker field="hour" text="Hora: " value="{{old('hour')??$date->format('H:i')}}" />
+
                             <x-helpers.date-picker value="{{old('date')??$appointment->date}}" name="date" text="Fecha"   />
 
                             <x-helpers.form-textarea field="reason" text="Motivo" value="{{old('reason')??$appointment->reason}}" />

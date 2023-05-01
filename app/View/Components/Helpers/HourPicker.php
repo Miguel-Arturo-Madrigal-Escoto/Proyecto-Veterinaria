@@ -11,7 +11,7 @@ class HourPicker extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $field, public $text)
+    public function __construct(public $field, public $text, public $value)
     {
         //
     }

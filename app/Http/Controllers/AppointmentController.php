@@ -129,7 +129,11 @@ class AppointmentController extends Controller
             return redirect()->route('appointment.show', $appointment);
         }
         else {
-            $appointment->date   = Carbon::parse($request->date);
+            $hours               = Carbon::parse($request->hour)->format('H');
+            $minutes             = Carbon::parse($request->hour)->format('i');
+            $appointment_date    = Carbon::parse($request->date)->addHours($hours)->addMinutes($minutes);
+
+            $appointment->date   = $appointment_date;
             $appointment->reason = $request->reason;
             $appointment->pet_id = $request->pet_id;
 

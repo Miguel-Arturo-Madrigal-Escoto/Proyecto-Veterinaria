@@ -28,7 +28,7 @@
                         @endphp
                     @endforeach
 
-                    <x-helpers.hour-picker field="hour" text="Hora: " />
+                    <x-helpers.hour-picker field="hour" text="Hora: " value="{{old('hour')}}" />
 
                     <x-helpers.form-select name="pet_id" text="Mascota" :$options />
 
