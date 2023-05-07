@@ -6,6 +6,7 @@ use App\Http\Requests\AssociatePetVaccineRequest;
 use App\Http\Requests\StorePetRequest;
 use App\Http\Requests\UpdatePetRequest;
 use App\Models\Pet;
+use App\Models\PetPhoto;
 use App\Models\User;
 use App\Models\Vaccine;
 use Carbon\Carbon;
@@ -150,6 +151,15 @@ class PetController extends Controller
 
         if ($response->allowed()){
             $pet->delete();
+
+            // check if the pet has a photo
+            $pet_photo = PetPhoto::where('pet_id', $pet->id);
+
+            if ($pet_photo->count() > 0){
+                // get the current photo (get first row of possible multiple retrieval)
+                $pet_photo = $pet_photo->first();
+                PetPhotoController::destroy($pet_photo->hash);
+            }
 
             $this->__alert__('warning', "La mascota $pet->name ha sido eliminada.");
 

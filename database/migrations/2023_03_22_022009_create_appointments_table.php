@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('status')->default(0);
             $table->boolean('paid')->default(false);
             $table->softDeletes();
-            $table->foreignId('pet_id')->constrained('pets');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('pet_id')->constrained('pets')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

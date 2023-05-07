@@ -32,7 +32,7 @@ class StorePetRequest extends FormRequest
             'gender'     => ['required', 'string', 'size:1', Rule::in(['M', 'F'])],
             'sterilized' => ['required', 'boolean', Rule::in(['1', '0'])],
             'weight'     => ['required', 'numeric', 'gt:0'],
-            // 'photo' => ['required', 'string'],
+            'file'       => ['nullable', 'image'],
         ];
 
         if (Auth::user()->is_admin){
@@ -68,6 +68,7 @@ class StorePetRequest extends FormRequest
             'weight.required' => 'El campo peso es requerido.',
             'weight.numeric' => 'El campo peso es debe ser numérico.',
             'weight.gt' => 'El campo peso es debe ser mayor o igual a 0.',
+            'file.image' => 'El archivo debe ser una imágen válida'
         ];
 
         if (Auth::user()->is_admin){

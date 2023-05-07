@@ -11,12 +11,13 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        // Citas del usuario logeado
-        if (Auth::user()->is_admin)
-            $appointments = Appointment::all();
-        // Citas del administrador (todas)
-        else
-            $appointments = Appointment::where('user_id', Auth::user()->id)->get();
+        // -> Approach with Eager Loading to fetch user and pet of each appointment
+
+        if (Auth::user()->is_admin) // Citas del administrador (todas)
+            $appointments = Appointment::with(['pet', 'user'])->get();
+
+        else // Citas del usuario logeado
+            $appointments = Appointment::where('user_id', Auth::user()->id)->with(['pet', 'user'])->get();
 
         $clients = User::where('is_admin', false)->get();
 
@@ -62,12 +63,19 @@ class DashboardController extends Controller
         // Full Calendar Events
         $events = [];
         foreach($appointments as $appointment){
-            $pet    = Pet::find($appointment->pet_id);
-            $user   = User::find($appointment->user_id);
+            // -> Approach without Eager Loading
+            // $pet    = Pet::find($appointment->pet_id); N queries
+            // $user   = User::find($appointment->user_id); N queries
+            // So, 2N + 1 queries
+
+            // -> Approach with Eager Loading
+            $user = $appointment->user;
+            $pet = $appointment->pet;
+            // So, only 1 query since used with(['pet','user']) to prefetch $user and $pet
 
             $events[] = [
                 'id'    =>  $appointment->id,
-                'title' => (Auth::user()->is_admin)? "Cita con $user->name, mascota: $pet->name" : "Cita con $pet->name",
+                'title' =>  "Cita con $user->name, mascota: $pet->name",
                 'start' =>  $appointment->date,
                 'url'   =>  route('appointment.show', $appointment),
                 'status' =>  $appointment->status
