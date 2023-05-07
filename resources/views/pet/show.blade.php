@@ -21,7 +21,7 @@
                         {{-- <li>
                             <a href={{ route('user.show', $user) }} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dueño</a>
                         </li> --}}
-                        <form action={{ route('pet.destroy', $pet)  }} method="POST">
+                        <form id="form-delete" action={{ route('pet.destroy', $pet)  }} method="POST" data-confirm-delete>
                             @csrf
                             @method('delete')
                             <button type="submit" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Eliminar</button>
@@ -36,9 +36,9 @@
                 @if(!is_null($photo))
                     <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src={{asset("storage/$photo->hash")}} alt="Imagen de la mascota" loading="lazy" />
                 @else
-                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png" alt="Imagen de la mascota" loading="lazy" />
+                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png" alt="Imagen de la mascota" loading="lazy" />
                 @endif
-                <h5 class="my-5 text-xl font-medium text-gray-900 dark:text-white">{{ $pet->name }}</h5>
+                {{-- <h5 class="my-5 text-xl font-medium text-gray-900 dark:text-white">{{ $pet->name }}</h5> --}}
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Especie: </b>{{ $pet->species }}</span>
                 <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Raza: </b>{{ $pet->race }}</span>
 
@@ -62,5 +62,9 @@
                 @endcan
             </div>
         </div>
+        <x-vaccine.pet-vaccines :$pet/>
     </x-helpers.simple-form-boilerplate>
+
+
+    @vite(['resources/js/swal-confirmation.js'])
 </x-app-layout>

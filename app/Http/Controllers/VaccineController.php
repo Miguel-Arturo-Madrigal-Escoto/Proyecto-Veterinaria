@@ -124,7 +124,7 @@ class VaccineController extends Controller
     public function destroy(Vaccine $vaccine)
     {
         // Policy
-        $response = Gate::inspect('destroy', $vaccine);
+        $response = Gate::inspect('delete', $vaccine);
 
         if ($response->denied()) {
             $this->__alert__('error', $response->message());

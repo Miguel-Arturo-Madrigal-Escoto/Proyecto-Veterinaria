@@ -12,7 +12,7 @@
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                     <tr>
                         <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-center">Título</div>
+                            <div class="font-semibold text-center">Título vacuna</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-center">Fecha de aplicación</div>

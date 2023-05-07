@@ -17,7 +17,7 @@
                         <li>
                             <a href={{ route('appointment.edit', $appointment) }} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Editar</a>
                         </li>
-                        <form action={{ route('appointment.destroy', $appointment)  }} method="POST">
+                        <form id="form-delete" action={{ route('appointment.destroy', $appointment)  }} method="POST">
                             @csrf
                             @method('delete')
                             <button type="submit" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cancelar cita</button>
@@ -47,7 +47,10 @@
                         <i class="fa-solid fa-circle-xmark text-red-600 fa-lg"></i>
                     @endif
                 </span>
-                <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Mascota: </b>{{ $pet->name }}</span>
+
+                @if (!is_null($appointment->pet))
+                    <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Mascota: </b>{{ $appointment->pet->name }}</span>
+                @endif
 
                 @if(Auth::user()->is_admin)
                     <span class="text-sm text-gray-500 dark:text-gray-300 py-2"><b>Cliente: </b>{{ $user->name . ' ' . $user->lastname }}</span>
@@ -56,4 +59,5 @@
             </div>
         </div>
     </x-helpers.simple-form-boilerplate>
+    @vite(['resources/js/swal-confirmation.js'])
 </x-app-layout>

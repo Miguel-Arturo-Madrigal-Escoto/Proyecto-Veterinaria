@@ -196,7 +196,7 @@ class PetController extends Controller
         $this->__alert__('info', "Se han aplicado " . count($request->vaccine_ids) . " vacuna(s) a la mascota $pet->name");
 
         // redirect to
-        return redirect()->route('vaccine.index');
+        return redirect()->route('pet.show', $request->pet_id);
     }
 
 

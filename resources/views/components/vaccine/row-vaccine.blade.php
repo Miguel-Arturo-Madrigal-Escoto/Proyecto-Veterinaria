@@ -25,13 +25,36 @@
         @endif
 
         @if (in_array('delete', $extra))
-            <form action={{ route('vaccine.destroy', $vaccine) }} method="POST">
+            <form id="form-delete-{{$vaccine->id}}" action={{ route('vaccine.destroy', $vaccine) }} method="POST">
                 @csrf
                 @method('DELETE')
                 <td class="p-2 whitespace-nowrap">
-                    <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
+                    <button onclick="onFormSubmit('form-delete-{{$vaccine->id}}')" type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
                 </td>
             </form>
         @endif
     </tr>
+    <script>
+        function onFormSubmit(id) {
+            const formDelete = document.getElementById(id);
+
+            formDelete.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: 'Este proceso no es reversible',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar!'
+                }).then((result) => {
+                    if (result.isConfirmed) formDelete.submit();
+                })
+
+            })
+
+        }
+    </script>
 </div>

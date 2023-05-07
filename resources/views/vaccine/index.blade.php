@@ -42,6 +42,4 @@
             </div>
         </div>
     </x-helpers.simple-form-boilerplate>
-
-
 </x-app-layout>

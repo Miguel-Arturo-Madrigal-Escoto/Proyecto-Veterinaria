@@ -23,8 +23,8 @@ class UpdateVaccineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => ['required'],
-            'description' => ['required']
+            'title'       => ['required', 'min:5'],
+            'description' => ['required', 'min:20']
         ];
     }
 
@@ -36,7 +36,9 @@ class UpdateVaccineRequest extends FormRequest
     public function messages(): array {
         return [
             'title.required'       => 'El título de la vacuna es requerido.',
-            'description.required' => 'La descripción de la vacuna es necesaria'
+            'title.min'       => 'El título debe tener al menos 5 caracteres.',
+            'description.required' => 'La descripción de la vacuna es necesaria',
+            'description.min'       => 'La descripción debe tener al menos 2o caracteres.',
         ];
     }
 }

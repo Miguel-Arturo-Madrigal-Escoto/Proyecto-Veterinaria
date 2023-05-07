@@ -28,4 +28,12 @@ class AssociatePetVaccineRequest extends FormRequest
             'vaccine_ids'    => ['required', Rule::exists('vaccines', 'id')],
         ];
     }
+
+    public function messages() : array
+    {
+        return [
+            'pet_id.exists'       => 'Es necesario seleccionar una mascota.',
+            'vaccine_ids.required'    => 'Se debe de seleccionar al menos una vacuna.',
+        ];
+    }
 }

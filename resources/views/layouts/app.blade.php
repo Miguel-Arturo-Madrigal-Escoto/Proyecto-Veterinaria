@@ -19,6 +19,10 @@
 
         <!-- Styles -->
         @livewireStyles
+
+        <!-- Sweet Alert -->
+        <script defer src="//cdn.jsdelivr.net/npm/sweetalert2@10">
+        </script>
     </head>
     <body class="font-sans antialiased overflow-x-hidden bg-white dark:bg-slate-900">
         <x-banner />
@@ -64,5 +68,7 @@
 
         <!-- TW Elements (clock) -->
         <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+
+
     </body>
 </html>

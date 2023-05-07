@@ -18,7 +18,7 @@
             @endif
         @endforeach
     </select>
-    @error($name)
+    @error($name || 'vaccine_ids')
         <p id="filled_error_help" class="mb-2 text-xs text-red-600"><span class="font-medium">{{ $message }}</span></p>
     @enderror
 </div>

@@ -13,7 +13,8 @@ class FormMultipleSelect extends Component
      */
     public function __construct(public $name, public $text, public $options)
     {
-        //
+        // from selects with a name as an array
+        // $this->name = str_replace('[]', '', $this->name);
     }
 
     /**
