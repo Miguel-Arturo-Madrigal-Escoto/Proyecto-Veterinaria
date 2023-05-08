@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
+use App\Mail\AppointmentCancelled;
+use App\Mail\TestMailable;
 use App\Models\Appointment;
 use App\Models\Pet;
 use App\Models\User;
@@ -11,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentController extends Controller
 {
@@ -18,6 +21,11 @@ class AppointmentController extends Controller
         Controller for alerts
     */
     use AlertController;
+
+    /*
+        Controller for PDFs
+    */
+    use PDFController;
 
     /**
      * Display a listing of the resource.
@@ -116,15 +124,37 @@ class AppointmentController extends Controller
      */
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
     {
+        // dd('a');
         // User
         if (Auth::user()->is_admin){
             $appointment->cost = $request->cost;
             $appointment->status = $request->status;
             $appointment->paid = $request->paid;
 
+            // if appointment is confirmed, then generate the pdf
+            $sent = false;
+            if ($request->status == '1'){
+                $data = [
+                    'appointment' => $appointment
+                ];
+                $this->generateAppointmentReport($data);
+                $sent = true;
+                $this->__alert__('info', "Cita actualizada correctamente. Se ha enviado la confirmación de la cita al cliente por correo electrónico.");
+            }
+            else {
+                // send cancelled appointment email
+                $mail = new AppointmentCancelled($appointment);
+                Mail::to($appointment->user->email)->send($mail);
+
+                $sent = true;
+
+                $this->__alert__('warning', "Cita actualizada correctamente. La cita se ha rechazado y notificado al cliente por correo electrónico.");
+                $this->__alert__('info', "Si se trata de un error, favor de actualizar el estatus de la cita");
+            }
+
             $appointment->save();
 
-            $this->__alert__('success', "La cita fue actualizada correctamente");
+            if (!$sent) $this->__alert__('success', "Cita actualizada correctamente.");
 
             return redirect()->route('appointment.show', $appointment);
         }

@@ -5,13 +5,12 @@ namespace App\Mail;
 use App\Models\Appointment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class AppointmentConfirmation extends Mailable
+class AppointmentCancelled extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +18,6 @@ class AppointmentConfirmation extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-        public $pdf,
         public Appointment $appointment
     )
     {
@@ -32,7 +30,7 @@ class AppointmentConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Confirmación de cita',
+            subject: 'Cita rechazada',
         );
     }
 
@@ -42,7 +40,7 @@ class AppointmentConfirmation extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.appointment-confirmation',
+            markdown: 'emails.appointment-cancelled',
         );
     }
 
@@ -53,11 +51,6 @@ class AppointmentConfirmation extends Mailable
      */
     public function attachments(): array
     {
-        return [
-            Attachment::fromData(
-                fn () => $this->pdf,
-                "cita" . $this->appointment->id . '-' . $this->appointment->user->id . '-' . $this->appointment->pet->id .'.pdf'
-            )->withMime('application/pdf')
-        ];
+        return [];
     }
 }
