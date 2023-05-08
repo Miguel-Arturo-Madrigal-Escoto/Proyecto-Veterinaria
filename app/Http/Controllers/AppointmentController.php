@@ -141,7 +141,7 @@ class AppointmentController extends Controller
                 $sent = true;
                 $this->__alert__('info', "Cita actualizada correctamente. Se ha enviado la confirmación de la cita al cliente por correo electrónico.");
             }
-            else {
+            else if ($request->status == '2'){
                 // send cancelled appointment email
                 $mail = new AppointmentCancelled($appointment);
                 Mail::to($appointment->user->email)->send($mail);
