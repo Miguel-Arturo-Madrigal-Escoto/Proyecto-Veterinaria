@@ -32,7 +32,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'gender',
         'email',
         'password',
-        'phone'
+        'phone',
+        'github_id'
     ];
 
     /**

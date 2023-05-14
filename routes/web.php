@@ -7,6 +7,7 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\PetPhotoController;
+use App\Http\Controllers\SocialMediaController;
 use App\Mail\TestMailable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,11 @@ Route::controller(VaccineController::class)->group(function() {
     Route::get('applied-vaccines', 'appliedVaccinesIndex')->name('applied-vaccines.index')->middleware(['auth.check', 'verified']);
 });
 
+// Routes for google auth
+Route::controller(SocialMediaController::class)->group(function() {
+    Route::get('auth/github', 'redirectToGithub')->name('auth.github');
+    Route::get('auth/github/callback', 'callbackFromGithub')->name('auth.github.callback');
+});
 
 Route::middleware([
     'auth:sanctum',
