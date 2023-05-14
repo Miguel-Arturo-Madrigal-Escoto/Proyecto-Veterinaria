@@ -33,6 +33,11 @@
                                     'text'     => 'Rechazada',
                                     'selected' => old('status')? old('status') == 2 : $appointment->status == 2
                                 ];
+                                $options[] = [
+                                    'value'    => 3,
+                                    'text'     => 'Finalizada',
+                                    'selected' => old('status')? old('status') == 3 : $appointment->status == 3
+                                ];
 
                             @endphp
                             <x-helpers.form-select name="status" text="Estatus" :options="$options" />

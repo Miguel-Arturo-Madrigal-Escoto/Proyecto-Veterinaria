@@ -26,7 +26,7 @@ class UpdateAppointmentRequest extends FormRequest
         if (Auth::user()->is_admin){
             return [
                 'cost'    => ['required', 'numeric', 'gte:0'],
-                'status'  => ['required', Rule::in(['0', '1', '2'])],
+                'status'  => ['required', Rule::in(['0', '1', '2', '3'])],
                 'paid'  => ['required', 'boolean']
             ];
         }

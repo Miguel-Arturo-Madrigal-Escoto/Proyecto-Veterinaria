@@ -11,6 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        /* status
+            0: pendiente
+            1: confirmada
+            2: cancelada
+            3: finalizada
+        */
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->timestamp('date');

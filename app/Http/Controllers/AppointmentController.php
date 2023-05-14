@@ -109,6 +109,12 @@ class AppointmentController extends Controller
         // $pets = Pet::where('user_id', Auth::user()->id)->get();
 
         $response = Gate::inspect('update-appointment', $appointment);
+        $authorized = Gate::inspect('edit-appointment-not-finished', $appointment);
+
+        if ($authorized->denied()){
+            $this->__alert__('error', 'No puedes editar una cita concluida');
+            abort(403);
+        }
 
         if ($response->allowed()){
             $pets = User::find(Auth::user()->id)->pets()->get();
@@ -124,8 +130,14 @@ class AppointmentController extends Controller
      */
     public function update(UpdateAppointmentRequest $request, Appointment $appointment)
     {
-        // dd('a');
-        // User
+        // edit only if the appointment is not marked as finished
+        $response = Gate::inspect('edit-appointment-not-finished', $appointment);
+
+        if ($response->denied()){
+            $this->__alert__('error', 'No puedes editar una cita concluida');
+            abort(403);
+        }
+
         if (Auth::user()->is_admin){
             $appointment->cost = $request->cost;
             $appointment->status = $request->status;

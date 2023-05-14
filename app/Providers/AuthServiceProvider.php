@@ -68,6 +68,12 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Appointments
+
+        // should not edit the appointment if is finished
+        Gate::define('edit-appointment-not-finished', function(User $user, Appointment $appointment){
+            return $appointment->status != 3;
+        });
+
         Gate::define('show-all-appointments', function (User $user) {
             return $user->is_admin;
         });

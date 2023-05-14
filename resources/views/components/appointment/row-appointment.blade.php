@@ -23,8 +23,10 @@
                     Pendiente
                 @elseif ($appointment->status == 1)
                     Confirmada
-                @else
+                @elseif ($appointment->status == 2)
                     Rechazada
+                @else
+                    Finalizada
                 @endif
             </div>
         </td>
