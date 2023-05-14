@@ -201,6 +201,7 @@ class PetController extends Controller
         $pet = Pet::find($request->pet_id);
 
         // Insert Many to Many row to pivot table with additional fields on: []
+        // aditional field extra requirement
         $pet->vaccines()->attach($request->vaccine_ids, ['date' => now()]);
 
         $this->__alert__('info', "Se han aplicado " . count($request->vaccine_ids) . " vacuna(s) a la mascota $pet->name");

@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->foreignId('pet_id')->constrained()->onDelete('cascade');
             $table->foreignId('vaccine_id')->constrained()->onDelete('cascade');
+            // aditional field extra requirement
             $table->timestamp('date');
 
             $table->timestamps();

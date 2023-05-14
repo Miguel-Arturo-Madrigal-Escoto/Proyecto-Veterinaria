@@ -36,6 +36,9 @@
                                 <div class="font-semibold text-center">Peso</div>
                             </th>
                             <th class="p-2 whitespace-nowrap">
+                                <div class="font-semibold text-center">Imagen</div>
+                            </th>
+                            <th class="p-2 whitespace-nowrap">
                                 <div class="font-semibold text-center"></div>
                             </th>
                         </tr>

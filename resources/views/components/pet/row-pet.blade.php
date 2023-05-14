@@ -50,6 +50,18 @@
         <td class="p-2 whitespace-nowrap">
             <div class="text-center">{{ $pet->weight }}</div>
         </td>
+        <td class="p-2 whitespace-nowrap">
+            <div class="text-center flex justify-center items-center">
+                @php
+                    $photo = $pet->photo;
+                @endphp
+                @if (!is_null($photo))
+                    <img class="w-10 h-10 rounded-full" src="storage/{{$photo->hash}}" alt="Rounded avatar">
+                @else
+                    <img class="w-10 h-10 mb-3 rounded-full shadow-lg" src="https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png" alt="Imagen de la mascota" loading="lazy" />
+                @endif
+            </div>
+        </td>
         @if ($extra === 'view')
             <td class="p-2 whitespace-nowrap">
                 <a href={{ route('pet.show', $pet) }}>
