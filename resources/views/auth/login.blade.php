@@ -38,5 +38,6 @@
                 </x-button>
             </div>
         </form>
+        <x-auth.facebook-login-button />
     </x-authentication-card>
 </x-guest-layout>
