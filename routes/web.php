@@ -65,6 +65,10 @@ Route::controller(VaccineController::class)->group(function() {
 Route::controller(SocialMediaController::class)->group(function() {
     Route::get('auth/github', 'redirectToGithub')->name('auth.github');
     Route::get('auth/github/callback', 'callbackFromGithub')->name('auth.github.callback');
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'callbackFromGoogle')->name('auth.google.callback');
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'callbackFromFacebook')->name('auth.facebook.callback');
 });
 
 Route::middleware([

@@ -16,7 +16,8 @@
         "livewire/livewire": "^2.11",
         "php-flasher/flasher-laravel": "^1.13",
         "php-flasher/flasher-notyf-laravel": "^1.13",
-        "realrashid/sweet-alert": "^7.0"
+        "realrashid/sweet-alert": "^7.0",
+        "socialiteproviders/google": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

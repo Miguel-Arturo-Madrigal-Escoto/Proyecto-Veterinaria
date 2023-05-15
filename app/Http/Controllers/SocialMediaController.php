@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class SocialMediaController extends Controller
 {
     //
+    use AlertController;
 
     public function redirectToGithub(){
         return Socialite::driver('github')->redirect();
@@ -22,9 +23,12 @@ class SocialMediaController extends Controller
         try {
             //code...
             // retrieve github user
-            $github_user = Socialite::driver('github')->stateless()->user();
+            $github_user = Socialite::driver('github')->user();
 
-            $user = User::where('github_id', $github_user->id)->orWhere('email', $github_user->email)->first();
+            $user = User::where([
+                ['github_id', $github_user->id],
+                ['email', $github_user->email],
+            ])->first();
 
             // so, user doesn't exists, create it
             if (is_null($user)){
@@ -44,9 +48,86 @@ class SocialMediaController extends Controller
             return redirect('dashboard');
 
         } catch (\Throwable $th) {
-            dd($th);
+            $this->__alert__('error', 'No es posible iniciar sesión con Github.');
         }
 
+    }
+
+    public function redirectToGoogle(){
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callbackFromGoogle(){
+        try {
+            //code...
+            // retrieve google user
+            $google_user = Socialite::driver('google')->user();
+
+            $user = User::where([
+                ['google_id', $google_user->id],
+                ['email', $google_user->email],
+            ])->first();
+
+
+            // so, user doesn't exists, create it
+            if (is_null($user)){
+                $user = new User();
+                $user->name = $google_user->user['given_name'];
+                $user->lastname = $google_user->user['family_name'];
+                $user->email = $google_user->email;
+                $user->gender = '';
+                $user->phone = '';
+                $user->google_id = $google_user->id;
+                $user->password  = Hash::make(md5('5N0VYat0NJKWNlnd8OlH'));
+                $user->email_verified_at  = now();
+                $user->save();
+            }
+
+            // log the user in
+            Auth::login($user);
+            return redirect('dashboard');
+
+        } catch (\Throwable $th) {
+            $this->__alert__('error', 'No es posible iniciar sesión con Google.');
+        }
+    }
+
+    public function redirectToFacebook(){
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function callbackFromFacebook(){
+        try {
+            //code...
+            // retrieve facebook user
+            $facebook_user = Socialite::driver('facebook')->user();
+
+            $user = User::where([
+                ['google_id', $facebook_user->id],
+                ['email', $facebook_user->email],
+            ])->first();
+
+
+            // so, user doesn't exists, create it
+            if (is_null($user)){
+                $user = new User();
+                $user->name = $facebook_user->name;
+                $user->lastname = '';
+                $user->email = $facebook_user->email;
+                $user->gender = '';
+                $user->phone = '';
+                $user->google_id = $facebook_user->id;
+                $user->password  = Hash::make(md5('5N0VYat0NJKWNlnd8OlH'));
+                $user->email_verified_at  = now();
+                $user->save();
+            }
+
+            // log the user in
+            Auth::login($user);
+            return redirect('dashboard');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
 }

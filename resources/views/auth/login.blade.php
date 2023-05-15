@@ -38,6 +38,10 @@
                 </x-button>
             </div>
         </form>
-        <x-auth.facebook-login-button />
+        <div class="my-4">
+            <x-auth.google-login-button />
+            <x-auth.github-login-button />
+            <x-auth.facebook-login-button />
+        </div>
     </x-authentication-card>
 </x-guest-layout>
