@@ -1,5 +1,5 @@
 <div class="my-4">
-    <a href="{{route('auth.google')}}" class="flex items-center justify-center w-full px-4 py-2 mt-2 space-x-3 text-sm text-center bg-blue-500 text-white transition-colors duration-200 transform border-none rounded-lg dark:text-white hover:bg-blue-600 dark:hover:bg-blue-700">
+    <a href="{{route('auth.google')}}" class="flex items-center justify-center w-full px-4 py-2 mt-2 space-x-3 text-sm text-center bg-red-500 text-white transition-colors duration-200 transform border-none rounded-lg dark:text-white hover:bg-red-600 dark:hover:bg-red-700">
         <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-5 w-5"

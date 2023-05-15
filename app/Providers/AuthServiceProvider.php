@@ -102,5 +102,18 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin;
         });
 
+        // social networks connected
+        Gate::define('show-github', function(User $user){
+            return !is_null($user->github_id);
+        });
+
+        Gate::define('show-facebook', function(User $user){
+            return !is_null($user->facebook_id);
+        });
+
+        Gate::define('show-google', function(User $user){
+            return !is_null($user->google_id);
+        });
+
     }
 }

@@ -52,6 +52,10 @@
             </div>
         @endif
 
+        <div class="col-span-6 sm:col-span-4">
+            <p>* Favor de actualizar sus datos si tiene información faltante.</p>
+        </div>
+
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-helpers.form-field value="{{old('name')??Auth::user()->name}}" type="text" field="name" text="Nombre(s)" placeholder="" />
