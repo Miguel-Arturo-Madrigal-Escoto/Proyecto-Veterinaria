@@ -26,7 +26,6 @@ class SocialMediaController extends Controller
             $github_user = Socialite::driver('github')->user();
 
             $user = User::where([
-                ['github_id', $github_user->id],
                 ['email', $github_user->email],
             ])->first();
 
@@ -43,6 +42,12 @@ class SocialMediaController extends Controller
                 $user->email_verified_at  = now();
                 $user->save();
             }
+            else {
+                // user exists, set the provider id
+                $user->github_id = $github_user->id;
+                $user->save();
+            }
+
             // log the user in
             Auth::login($user);
             return redirect('dashboard');
@@ -64,12 +69,11 @@ class SocialMediaController extends Controller
             $google_user = Socialite::driver('google')->user();
 
             $user = User::where([
-                ['google_id', $google_user->id],
                 ['email', $google_user->email],
             ])->first();
 
 
-            // so, user doesn't exists, create it
+            // so, user (with that email) doesn't exists, create it
             if (is_null($user)){
                 $user = new User();
                 $user->name = $google_user->user['given_name'];
@@ -80,6 +84,11 @@ class SocialMediaController extends Controller
                 $user->google_id = $google_user->id;
                 $user->password  = Hash::make(md5('5N0VYat0NJKWNlnd8OlH'));
                 $user->email_verified_at  = now();
+                $user->save();
+            }
+            else {
+                // user exists, set the provider id
+                $user->google_id = $google_user->id;
                 $user->save();
             }
 
@@ -103,7 +112,6 @@ class SocialMediaController extends Controller
             $facebook_user = Socialite::driver('facebook')->user();
 
             $user = User::where([
-                ['google_id', $facebook_user->id],
                 ['email', $facebook_user->email],
             ])->first();
 
@@ -116,17 +124,22 @@ class SocialMediaController extends Controller
                 $user->email = $facebook_user->email;
                 $user->gender = '';
                 $user->phone = '';
-                $user->google_id = $facebook_user->id;
+                $user->facebook_id = $facebook_user->id;
                 $user->password  = Hash::make(md5('5N0VYat0NJKWNlnd8OlH'));
                 $user->email_verified_at  = now();
                 $user->save();
             }
-
+            else {
+                // user exists, set the provider id
+                $user->facebook_id = $facebook_user->id;
+                $user->save();
+            }
             // log the user in
             Auth::login($user);
             return redirect('dashboard');
+
         } catch (\Throwable $th) {
-            //throw $th;
+            $this->__alert__('error', 'No es posible iniciar sesión con Facebook.');
         }
     }
 
