@@ -29,6 +29,13 @@ class Pet extends Model
         'user_id'
     ];
 
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['user', 'vaccines'];
+
     /*
         Defining Accessors (get) and Muttators (set)
         Capitalize first letter of a pet's name
