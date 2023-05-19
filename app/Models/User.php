@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -67,6 +68,28 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /*
+        Defining Accessors (get) and Muttators (set)
+        Upper Camel Case for the name
+    */
+    protected function name(): Attribute {
+        return Attribute::make(
+            get: fn (string $value) => ucwords($value),
+            set: fn (string $value) => ucwords($value),
+        );
+    }
+
+    /*
+        Defining Accessors (get) and Muttators (set)
+        Upper Camel Case for the lastname
+    */
+    protected function lastname(): Attribute {
+        return Attribute::make(
+            get: fn (string $value) => ucwords($value),
+            set: fn (string $value) => ucwords($value),
+        );
+    }
 
     /*
         1 - Many relationship (User -> Pets): hasMany

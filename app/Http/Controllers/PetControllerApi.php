@@ -24,7 +24,7 @@ class PetControllerApi extends Controller
     {
 
         try {
-            $pets = Pet::paginate($request->query('per_page', 1), ['id', 'dob', 'species', 'race', 'color', 'gender', 'sterilized', 'weight'], 'page', $request->query('page', 1));
+            $pets = Pet::paginate($request->query('per_page', 1), ['id', 'name', 'dob', 'species', 'race', 'color', 'gender', 'sterilized', 'weight'], 'page', $request->query('page', 1));
             return response()->json($pets);
         } catch (Throwable $e) {
             return response()->json([
@@ -71,7 +71,7 @@ class PetControllerApi extends Controller
     {
         try {
             # request->route('pet') -> id
-            $pet = Pet::find($request->route('pet'), ['id', 'dob', 'species', 'race', 'color', 'gender', 'sterilized', 'weight']);
+            $pet = Pet::find($request->route('pet'), ['id', 'name', 'dob', 'species', 'race', 'color', 'gender', 'sterilized', 'weight']);
 
             if ($pet){
                 return response()->json($pet, 201);

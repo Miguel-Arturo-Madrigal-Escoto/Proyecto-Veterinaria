@@ -33,7 +33,7 @@ class StorePetApiRequest extends FormRequest
             'gender'     => ['required', 'string', 'size:1', Rule::in(['M', 'F'])],
             'sterilized' => ['required', 'boolean', Rule::in(['1', '0'])],
             'weight'     => ['required', 'numeric', 'gt:0'],
-            'user_id'    => ['required', 'numeric', Rule::exists('users')]
+            'user_id'    => ['required', 'numeric', Rule::exists('users', 'id')]
         ];
 
         return $rules;
