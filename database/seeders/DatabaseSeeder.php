@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
     {
         /* Seeders */
         $this->call([
-            UserSeeder::class
+            UserSeeder::class,
+            VaccineSeeder::class
         ]);
 
         /* Factories */
