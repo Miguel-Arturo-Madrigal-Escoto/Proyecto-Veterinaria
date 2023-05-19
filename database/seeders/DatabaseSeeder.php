@@ -17,10 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+
         /* Seeders */
         $this->call([
             UserSeeder::class,
-            VaccineSeeder::class
+            VaccineSeeder::class,
+            PurgeStorageLinkSeeder::class
         ]);
 
         /* Factories */
