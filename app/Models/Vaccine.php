@@ -22,13 +22,6 @@ class Vaccine extends Model
         'description'
     ];
 
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var array
-     */
-    protected $with = ['pets'];
-
     /*
         Defining Accessors (get) and Muttators (set)
         Capitalize first letter of a vaccine's title

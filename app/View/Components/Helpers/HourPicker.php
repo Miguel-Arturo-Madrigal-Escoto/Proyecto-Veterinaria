@@ -15,8 +15,9 @@ class HourPicker extends Component
     public function __construct(public $field, public $text, public $value)
     {
         // check if it has the format: 12:00 AM/PM
-        $d = DateTime::createFromFormat('h:i A', $this->value);
-        $this->value = ($d && $d->format('h:i A') === $this->value)? $this->value : '12:00 PM';
+
+        //$d = DateTime::createFromFormat('h:i A', $this->value);
+        //$this->value = ($d && $d->format('h:i A') === $this->value)? $this->value : '12:00 PM';
     }
 
     /**

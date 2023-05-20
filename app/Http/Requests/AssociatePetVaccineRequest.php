@@ -24,8 +24,8 @@ class AssociatePetVaccineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pet_id'         => ['required', Rule::exists('pets', 'id')],
-            'vaccine_ids'    => ['required', Rule::exists('vaccines', 'id')],
+            'pet_id'         => ['required'],
+            'vaccine_ids'    => ['required'],
         ];
     }
 

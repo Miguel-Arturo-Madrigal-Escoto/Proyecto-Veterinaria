@@ -142,10 +142,10 @@ class VaccineController extends Controller
         // Policy
         $response = Gate::inspect('create');
 
-        if ($response->denied()) {
-            $this->__alert__('error', $response->message());
-            abort($response->status());
-        }
+        // if ($response->denied()) {
+        //     $this->__alert__('error', $response->message());
+        //     abort($response->status());
+        // }
 
         $pets = Pet::all();
 

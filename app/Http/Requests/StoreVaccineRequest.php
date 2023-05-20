@@ -23,8 +23,8 @@ class StoreVaccineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => ['required'],
-            'description' => ['required']
+            'title'       => ['required', 'min:5'],
+            'description' => ['required', 'min:20']
         ];
     }
 

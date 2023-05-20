@@ -23,7 +23,7 @@ class SocialMediaController extends Controller
         try {
             //code...
             // retrieve github user
-            $github_user = Socialite::driver('github')->user();
+            $github_user = Socialite::driver('github')->stateless()->user();
 
             $user = User::where([
                 ['email', $github_user->email],
@@ -50,7 +50,7 @@ class SocialMediaController extends Controller
 
             // log the user in
             Auth::login($user);
-            return redirect('dashboard');
+            return redirect()->route('dashboard');
 
         } catch (\Throwable $th) {
             $this->__alert__('error', 'No es posible iniciar sesión con Github.');
@@ -66,7 +66,7 @@ class SocialMediaController extends Controller
         try {
             //code...
             // retrieve google user
-            $google_user = Socialite::driver('google')->user();
+            $google_user = Socialite::driver('google')->stateless()->user();
 
             $user = User::where([
                 ['email', $google_user->email],
@@ -94,7 +94,7 @@ class SocialMediaController extends Controller
 
             // log the user in
             Auth::login($user);
-            return redirect('dashboard');
+            return redirect()->route('dashboard');
 
         } catch (\Throwable $th) {
             $this->__alert__('error', 'No es posible iniciar sesión con Google.');
@@ -109,7 +109,7 @@ class SocialMediaController extends Controller
         try {
             //code...
             // retrieve facebook user
-            $facebook_user = Socialite::driver('facebook')->user();
+            $facebook_user = Socialite::driver('facebook')->stateless()->user();
 
             $user = User::where([
                 ['email', $facebook_user->email],
@@ -136,7 +136,7 @@ class SocialMediaController extends Controller
             }
             // log the user in
             Auth::login($user);
-            return redirect('dashboard');
+            return redirect()->route('dashboard');
 
         } catch (\Throwable $th) {
             $this->__alert__('error', 'No es posible iniciar sesión con Facebook.');
